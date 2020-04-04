@@ -34,6 +34,8 @@ export default class ServicesComponent extends React.Component {
   serviceShow() {
     if (this.state.selectedService !== '') {
       return <ServiceDescriptionComponent service={this.state.selectedService} />;
+    } else {
+      return null;
     }
   }
 
