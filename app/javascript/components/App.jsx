@@ -7,8 +7,9 @@ import HeaderComponent from './header/HeaderComponent';
 import FooterComponent from './footer/FooterComponent';
 
 import HomePageComponent from './home_page/HomePageComponent';
-import ServicesComponent from "./services/ServicesComponent";
-import RoomsComponent from "./rooms/RoomsComponent";
+import ServicesComponent from './services/ServicesComponent';
+import RoomsComponent from './rooms/RoomsComponent';
+import RoomComponent from './room/RoomComponent';
 
 import configureStore from '../configureStore';
 
@@ -24,6 +25,7 @@ export default class App extends React.Component {
             <Route exact path='/' render={ () => <HomePageComponent /> } />
             <Route exact path='/services' render={ () => <ServicesComponent /> } />
             <Route exact path='/rooms' render={ () => <RoomsComponent /> } />
+            <Route exact path='/room' render={ () => <RoomComponent /> } />
           </Switch>
           <FooterComponent />
         </BrowserRouter>

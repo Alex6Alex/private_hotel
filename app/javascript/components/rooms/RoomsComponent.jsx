@@ -64,7 +64,7 @@ export default class RoomsComponent extends React.Component {
         <div className='room-image'>
           <img src={ room.image } alt='room photo'/>
         </div>
-        <a className='room-name' href='/'>{ room.name }</a>
+        <Link className='room-name' to='room'>{ room.name }</Link>
         <div className='room-description'>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           <p>Aperiam asperiores cum eligendi explicabo harum impedit incidunt ipsa, maiores minus, molestiae nam odit porro provident, quaerat quam quas rerum sequi totam.</p>
