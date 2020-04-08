@@ -53,19 +53,6 @@
         grid-area: room-description;
         text-align: justify;
       }
-
-      .link-button {
-        grid-area: book-button;
-        display: block;
-        margin: 0 auto;
-        background-image: linear-gradient(#00087f, #1b407f, #00087f);
-        padding: 10px 40px;
-        border-radius: 7px;
-        color: #fff;
-        text-transform: uppercase;
-        text-decoration: none;
-        font-size: 10pt;
-      }
     }
   }
 }

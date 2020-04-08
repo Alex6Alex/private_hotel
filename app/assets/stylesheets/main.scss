@@ -1,14 +1,34 @@
 body {
   margin: 0;
-  display: grid;
-  align-self: stretch;
-  justify-content: stretch;
-  align-content: stretch;
+  height: 100vh;
   font-family: 'Open Sans', sans-serif;
   color: #303030;
   background-color: #f2fffc;
 
+  & > div {
+    height: inherit;
+    display: grid;
+    justify-content: stretch;
+    align-content: stretch;
+  }
+
   h2 {
     text-align: center;
+  }
+
+  // TODO: rewrite to correct button
+  .link-button {
+    grid-area: book-button;
+    display: block;
+    width: 150px;
+    text-align: center;
+    margin: 0 auto;
+    background-image: linear-gradient(#00087f, #1b407f, #00087f);
+    padding: 10px 40px;
+    border-radius: 7px;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 10pt;
   }
 }
