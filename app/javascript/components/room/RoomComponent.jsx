@@ -1,9 +1,15 @@
 import React from 'react'
 import SliderComponent from "../home_page/SliderComponent";
+import { connect } from 'react-redux';
 
-export default class RoomComponent extends React.Component {
+import { fetchRoom } from '../../actions/rooms_actions';
+
+class RoomComponent extends React.Component {
   componentDidMount() {
-    document.title = 'Номер | Гостевой дом «Авия»'
+    document.title = 'Номер | Гостевой дом «Авия»';
+
+    const { fetchRoom, roomId } = this.props;
+    fetchRoom(roomId);
   }
 
   render() {
@@ -23,9 +29,12 @@ export default class RoomComponent extends React.Component {
   renderRoomDescription() {
     return(
       <div className='room-description'>
-        <h2>Стандарт двухместный</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-        <p>Aspernatur aut consequuntur delectus eum harum in ipsa ipsam, ipsum, minima modi natus nisi nobis perferendis perspiciatis quae recusandae similique sit totam!</p>
+        <h2>{ this.props.room.name }</h2>
+        {
+          this.props.room.description.split("\n").map((paragraph, index) =>
+            <p key={ index }>{ paragraph }</p>
+          )
+        }
       </div>
     )
   }
@@ -35,10 +44,14 @@ export default class RoomComponent extends React.Component {
       <div className='room-short-info'>
         <h3>Информация о номере</h3>
         <div className='information'>
-          <p className='information-title'>Вместимость номера</p><p>3 человека</p>
-          <p className='information-title'>Площадь номера</p><p>18 m2</p>
-          <p className='information-title'>Количество номеров</p><p>5</p>
-          <p className='information-title'>Стоимость за сутки</p><p>1000 RUB</p>
+          <p className='information-title'>Вместимость номера</p>
+          <p>{ this.props.room.person_capacity } человека</p>
+          <p className='information-title'>Площадь номера</p>
+          <p>{ this.props.room.room_area } m2</p>
+          <p className='information-title'>Количество номеров</p>
+          <p>{ this.props.room.count_of_rooms }</p>
+          <p className='information-title'>Стоимость за сутки</p>
+          <p>{ this.props.room.day_price } { this.props.room.currency }</p>
         </div>
       </div>
     )
@@ -58,3 +71,13 @@ export default class RoomComponent extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return { room: state.hotelRoomsReducer.room, roomId: ownProps.roomId };
+};
+
+const mapDispatchToProps = {
+  fetchRoom
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomComponent);

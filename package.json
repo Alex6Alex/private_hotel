@@ -7,6 +7,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
+    "@tinymce/tinymce-react": "^3.5.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-polyfill": "^6.26.0",
     "channels": "0.0.4",
@@ -20,6 +21,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "tinymce": "^5.2.1",
     "turbolinks": "^5.2.0",
     "yarn": "^1.22.4"
   },

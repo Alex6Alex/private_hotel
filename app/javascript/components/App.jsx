@@ -13,19 +13,22 @@ import RoomComponent from './room/RoomComponent';
 
 import configureStore from '../configureStore';
 
-const store = configureStore();
-
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={ configureStore() }>
         <BrowserRouter>
           <HeaderComponent />
           <Switch>
-            <Route exact path='/' render={ () => <HomePageComponent /> } />
-            <Route exact path='/services' render={ () => <ServicesComponent /> } />
-            <Route exact path='/rooms' render={ () => <RoomsComponent /> } />
-            <Route exact path='/room' render={ () => <RoomComponent /> } />
+            <Route exact path='/' component={ HomePageComponent } />
+            <Route exact path='/services' component={ ServicesComponent } />
+            <Route exact path='/rooms' component={ RoomsComponent } />
+            <Route path='/rooms/:id' render={
+              ({ match }) => {
+                const { id } = match.params;
+                return <RoomComponent roomId={ id }/>
+              }}
+            />
           </Switch>
           <FooterComponent />
         </BrowserRouter>

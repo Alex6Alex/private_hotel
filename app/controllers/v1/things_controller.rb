@@ -1,12 +1,24 @@
 module V1
   class ThingsController < ApplicationController
-    def index
+    def contacts
       render(
         json: {
-          things: [
+          contacts: [
             {
-              name: 'some_thing',
-              guid: '123456'
+              name: 'Организация конференций',
+              phone: '+79781234556',
+              email: 'organization@mail.ru'
+            },
+            {
+              name: 'Бронирование номеров',
+              phone: '+79781234567',
+              email: 'book@mail.ru',
+              priority: true
+            },
+            {
+              name: 'Кафе',
+              phone: '+79781234578',
+              email: 'cafee@mail.ru'
             }
           ]
         }

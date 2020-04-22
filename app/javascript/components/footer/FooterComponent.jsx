@@ -1,14 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux';
 
-export default class FooterComponent extends React.Component {
+import { fetchContacts } from '../../actions/contacts_actions';
+
+class FooterComponent extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    this.contacts = [
-      { name: 'организация конференций', phone: '+79781234556', email: 'somw_email@mail.com' },
-      { name: 'бронирование номеров', phone: '+79781234556', email: 'somw_email@mail.com' },
-      { name: 'кафе', phone: '+79781234556', email: 'somw_email@mail.com' }
-    ]
+  componentDidMount() {
+    this.props.fetchContacts();
   }
 
   render() {
@@ -26,7 +27,7 @@ export default class FooterComponent extends React.Component {
     return(
       <div className='footer-contacts'>
         {
-          this.contacts.map((contact, index) => {
+          this.props.contacts.map((contact, index) => {
             return(
               <div className='footer-contact' key={ index }>
                 <h3>{ contact.name }</h3>
@@ -45,3 +46,13 @@ export default class FooterComponent extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return { contacts: state.contactsReducer.contacts }
+};
+
+const mapDispatchToProps = {
+  fetchContacts
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FooterComponent);

@@ -1,13 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class HeaderComponent extends React.Component {
+import { fetchContacts } from '../../actions/contacts_actions';
+
+class HeaderComponent extends React.Component {
   constructor(props) {
     super(props);
 
     this.menuItems = [
       { name: 'главная', link: '/', sub_items: [
-          { name: 'схема проезда', link: '#how_to_find' }
+          { name: 'схема проезда', link: '/#how_to_find' }
         ]
       },
       { name: 'отель', link: '/', sub_items: [
@@ -50,6 +53,9 @@ export default class HeaderComponent extends React.Component {
   }
 
   renderContactPhone() {
+    const contact = this.props.contacts.find(contact => contact.priority);
+    const phone = contact !== undefined ? contact.phone : null;
+
     return(
       <div className='phone'>
         <a className='direct-call' href='https://wa.me/79101510855'>
@@ -61,7 +67,9 @@ export default class HeaderComponent extends React.Component {
         <a className='direct-call' href='https://wa.me/79101510855'>
           <img alt='whatsapp' src='images/whats_icon.png'/>
         </a>
-        <span className='number'>+7(978)123-45-67</span>
+        {/*<span className='number'>+7(978)123-45-67</span>*/}
+        {/*// TODO: use formats for phone*/}
+        <span className='number'>{ phone }</span>
       </div>
     );
   }
@@ -99,3 +107,13 @@ export default class HeaderComponent extends React.Component {
     )
   }
 }
+// TODO: use one loading for footer and header
+const mapStateToProps = (state) => {
+   return { contacts: state.contactsReducer.contacts }
+};
+
+const mapDispatchToProps = {
+  fetchContacts
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent);

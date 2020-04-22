@@ -1,32 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class RoomsComponent extends React.Component {
-  constructor(props) {
-    super(props);
+import { fetchRooms } from '../../actions/rooms_actions';
 
-    this.rooms = [
-      {
-        name: 'Стандарт двухместный',
-        image: 'images/Hotel1.jpg'
-      },
-      {
-        name: 'Стандарт трехместный',
-        image: 'images/Hotel2.jpg'
-      },
-      {
-        name: 'Люкс двухместный',
-        image: 'images/Hotel3.jpg'
-      },
-      {
-        name: 'Люкс трехместный',
-        image: 'images/Hotel4.jpg'
-      }
-    ];
-  }
-
+class RoomsComponent extends React.Component {
   componentDidMount() {
-    document.title = 'Номера | Гостевой дом «Авия»'
+    document.title = 'Номера | Гостевой дом «Авия»';
+
+    this.props.fetchRooms();
   }
 
   render() {
@@ -53,25 +35,38 @@ export default class RoomsComponent extends React.Component {
   renderRooms() {
     return(
       <div className='rooms'>
-        { this.rooms.map((room, index) => this.renderRoom(index, room)) }
+        { this.props.rooms.map((room) => this.renderRoom(room)) }
       </div>
     )
   }
 
-  renderRoom(roomIndex, room) {
+  renderRoom(room) {
     return(
-      <div key={ roomIndex } className='room'>
+      <div key={ room.id } className='room'>
         <div className='room-image'>
-          <img src={ room.image } alt='room photo'/>
+          <img src={ room.image_links[0] } alt='room photo'/>
         </div>
-        <Link className='room-name' to='room'>{ room.name }</Link>
+        <Link className='room-name' to={ `/rooms/${room.id}` }>{ room.name }</Link>
         <div className='room-description'>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          <p>Aperiam asperiores cum eligendi explicabo harum impedit incidunt ipsa, maiores minus, molestiae nam odit porro provident, quaerat quam quas rerum sequi totam.</p>
-          <p>Цена за сутки: 1000 <i className='fa fa-rub' aria-hidden='true'/></p>
+          {
+            room.description.split("\n").map((paragraph, index) =>
+              <p key={ index }>{ paragraph }</p>
+            )
+          }
+          <p>Цена за сутки: { room.day_price } { room.currency }</p>
         </div>
         <a href='/' className='link-button'>Забронировать</a>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return { rooms: state.hotelRoomsReducer.rooms };
+};
+
+const mapDispatchToProps = {
+  fetchRooms
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomsComponent);
