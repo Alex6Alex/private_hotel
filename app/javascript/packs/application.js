@@ -28,7 +28,10 @@ require('channels');
 // Initialize the app
 // tinymce.init({
 //   selector: '#tiny',
-//   plugins: ['paste', 'advlist', 'autolink', 'lists', 'image', 'charmap', 'print', 'preview', 'anchor', 'searchreplace']
+//   plugins: [
+//     'paste', 'advlist', 'autolink', 'lists', 'image',
+//     'charmap', 'print', 'preview', 'anchor', 'searchreplace'
+//   ]
 // });
 
 // require.context(

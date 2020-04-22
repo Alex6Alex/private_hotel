@@ -1,13 +1,13 @@
 import {
   RECEIVE_ROOMS,
-  RECEIVE_ROOM
+  RECEIVE_ROOM,
 } from '../actions/rooms_actions';
 
 const initialState = {
   room: {
-    description: ''
+    description: '',
   },
-  rooms: []
+  rooms: [],
 };
 
 export default (state = initialState, action) => {

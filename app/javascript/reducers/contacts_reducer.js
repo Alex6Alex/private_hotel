@@ -1,9 +1,9 @@
 import {
-  RECEIVE_CONTACTS
+  RECEIVE_CONTACTS,
 } from '../actions/contacts_actions';
 
 const initialState = {
-  contacts: []
+  contacts: [],
 };
 
 export default (state = initialState, action) => {

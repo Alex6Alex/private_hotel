@@ -3,6 +3,4 @@ import thunk from 'redux-thunk';
 
 import reducer from './reducers/index';
 
-export default () => {
-  return createStore(reducer, applyMiddleware(thunk));
-}
+export default () => createStore(reducer, applyMiddleware(thunk));

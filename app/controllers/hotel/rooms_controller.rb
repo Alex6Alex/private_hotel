@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hotel
   class RoomsController < ApplicationController
     def index
