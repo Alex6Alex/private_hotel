@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   namespace(:hotel, default: { format: :json }) do
     get('rooms', to: 'rooms#index')
@@ -11,7 +13,7 @@ Rails.application.routes.draw do
   get(
     '*page',
     to: 'home_page#index',
-    constraints: ->(req) do
+    constraints: lambda do |req|
       # non-Ajax and HTML mime-type
       !req.xhr? && req.format.html?
     end
