@@ -1,0 +1,29 @@
+.contacts-page {
+  display: grid;
+  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-areas:
+    ". short-description ."
+    ". contacts-block .";
+
+  .short-description {
+    grid-area: short-description;
+  }
+
+  .contacts-block {
+    grid-area: contacts-block;
+    display: grid;
+    grid-template-columns: 550px 550px;
+    justify-items: center;
+    align-items: center;
+    grid-column-gap: 50px;
+
+    .map {
+      width: 550px;
+      height: 400px;
+    }
+
+    .contacts-data {
+      width: 550px;
+    }
+  }
+}

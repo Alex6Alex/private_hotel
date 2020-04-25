@@ -1,0 +1,88 @@
+.reviews {
+  display: grid;
+  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-areas:
+    ". reviews-description ."
+    ". review-form ."
+    ". last-reviews .";
+
+  .reviews-description {
+    grid-area: reviews-description;
+
+    .description {
+      text-align: justify;
+    }
+  }
+
+  .review-form {
+    grid-area: review-form;
+    margin: 0 auto;
+
+    label {
+      display: block;
+    }
+
+    input[type=text], textarea {
+      display: block;
+      padding: 10px 15px;
+      border: 1px solid #cccccc;
+      border-radius: 10px;
+      font-size: 13pt;
+      outline: none;
+      width: 450px;
+      margin: 10px 0 20px 0;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    input[type=submit] {
+      display: block;
+      width: 250px;
+      height: 40px;
+      margin: 0 auto;
+      background-image: linear-gradient(#00087f, #1b407f, #00087f);
+      border: none;
+      border-radius: 7px;
+      color: #fff;
+      text-transform: uppercase;
+      outline: none;
+      cursor: pointer;
+      font-size: 10pt;
+    }
+  }
+
+  .last-reviews {
+    grid-area: last-reviews;
+
+    .reviews-list {
+      text-align: justify;
+
+      .review {
+        display: inline-block;
+        border-radius: 5px;
+        padding: 0 20px;
+        margin: 10px 20px 10px 20px;
+        background-color: #cbd3ff;
+
+        .review-info {
+          p {
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 0;
+            width: 50%;
+
+            &:first-child {
+              float: left;
+            }
+
+            &:last-child {
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+  }
+}

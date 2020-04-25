@@ -14,10 +14,10 @@ class HeaderComponent extends React.Component {
         ]
       },
       { name: 'отель', link: '/', sub_items: [
-          { name: 'Об отеле', link: '/' },
+          { name: 'Об отеле', link: '/about' },
           { name: 'Услуги и удобства', link: '/services' },
           { name: 'Питание', link: '/' },
-          { name: 'Отзывы гостей', link: '/' }
+          { name: 'Отзывы гостей', link: '/reviews' }
         ]
       },
       { name: 'номера', link: '/rooms' },
