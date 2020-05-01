@@ -1,9 +1,9 @@
 import React from 'react'
 
 import SliderComponent from "./SliderComponent";
-import YandexMapComponent from "./YandexMapComponent";
+import withMap from '../hoc/withMap';
 
-export default class HomePageComponent extends React.Component {
+class HomePageComponent extends React.Component {
   componentDidMount() {
     document.title = 'Гостевой дом «Авия»'
   }
@@ -19,19 +19,7 @@ export default class HomePageComponent extends React.Component {
         { this.renderDetails() }
         <div className='find-us-info'>
           <h2 id='how_to_find'>Как нас найти</h2>
-          <YandexMapComponent
-            id='yandex-map'
-            options={{
-              center: [44.573087, 33.498725],
-              zoom: 12
-            }}
-            onMapLoad={ map => {
-              let placeMark = new window.ymaps.GeoObject({
-                geometry: { type: 'Point', coordinates: [44.573087, 33.498725] }
-              });
-              map.geoObjects.add(placeMark);
-              map.behaviors.disable('scrollZoom');
-            }}/>
+          { this.props.mapComponent }
         </div>
       </article>
     )
@@ -101,3 +89,5 @@ export default class HomePageComponent extends React.Component {
     )
   }
 }
+
+export default withMap(HomePageComponent);

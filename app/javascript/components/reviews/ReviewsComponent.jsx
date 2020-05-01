@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 
-export default class ReviewsComponent extends React.Component {
+import {fetchReviews} from "../../actions/reviews_actions";
+
+class ReviewsComponent extends React.Component {
   componentDidMount() {
-    document.title = 'Отзывы | Гостевой дом «Авия»'
+    document.title = 'Отзывы | Гостевой дом «Авия»';
+
+    this.props.fetchReviews();
   }
 
   render() {
@@ -37,16 +42,16 @@ export default class ReviewsComponent extends React.Component {
       <div className='last-reviews'>
         <h2>Последние отзывы посетителей</h2>
         {
-          [1, 2, 3].map(index => {
+          this.props.reviews.map(review => {
             return(
-              <div key={ index } className='reviews-list'>
+              <div key={ review.id } className='reviews-list'>
                 <div className='review'>
                   <div className='review-info'>
-                    <p className='name'>Имя Фамилия</p>
-                    <p className='date'>12.05.2020</p>
+                    <p>{ review.user_name }</p>
+                    <p>{ review.created_at }</p>
                   </div>
                   <div className='review-body'>
-                    <p className='text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolor ducimus eius error expedita facere illum nobis numquam, pariatur porro, quas quis recusandae repellendus sapiente sunt temporibus voluptates? Blanditiis, quas!</p>
+                    <p>{ review.content }</p>
                   </div>
                 </div>
               </div>
@@ -57,3 +62,13 @@ export default class ReviewsComponent extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return { reviews: state.reviewsReducer.reviews };
+};
+
+const mapDispatchToProps = {
+  fetchReviews
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsComponent)

@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-import { fetchContacts } from '../../actions/contacts_actions';
+import withContacts from '../hoc/withContacts';
 
 class HeaderComponent extends React.Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class HeaderComponent extends React.Component {
       { name: 'номера', link: '/rooms' },
       { name: 'контакты', link: '/contacts' },
       { name: 'конференц-сервис', link: '/conference' },
-      { name: 'спецпредложения', link: '/services' }
+      { name: 'спецпредложения', link: '/special_offers' }
     ];
   }
 
@@ -107,13 +106,5 @@ class HeaderComponent extends React.Component {
     )
   }
 }
-// TODO: use one loading for footer and header
-const mapStateToProps = (state) => {
-   return { contacts: state.contactsReducer.contacts }
-};
 
-const mapDispatchToProps = {
-  fetchContacts
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent);
+export default withContacts(HeaderComponent);

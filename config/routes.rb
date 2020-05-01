@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   namespace(:hotel, default: { format: :json }) do
     get('rooms', to: 'rooms#index')
     get('rooms/:id', to: 'rooms#show')
+
+    get('reviews', to: 'reviews#index')
   end
 
   namespace(:v1, default: { format: 'json' }) do

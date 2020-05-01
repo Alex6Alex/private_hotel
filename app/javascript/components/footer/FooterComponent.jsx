@@ -1,17 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux';
 
-import { fetchContacts } from '../../actions/contacts_actions';
+import withContacts from '../hoc/withContacts';
 
 class FooterComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    this.props.fetchContacts();
-  }
-
   render() {
     return(
       <footer>
@@ -47,12 +38,4 @@ class FooterComponent extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { contacts: state.contactsReducer.contacts }
-};
-
-const mapDispatchToProps = {
-  fetchContacts
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FooterComponent);
+export default withContacts(FooterComponent);

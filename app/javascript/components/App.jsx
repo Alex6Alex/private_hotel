@@ -12,6 +12,7 @@ import ReviewsComponent from "./reviews/ReviewsComponent";
 import ServicesComponent from './services/ServicesComponent';
 import RoomsComponent from './rooms/RoomsComponent';
 import ContactsComponent from './contacts/ContactsComponent';
+import SpecialOffersComponent from './special_offers/SpecialOffersComponent';
 
 import RoomComponent from './room/RoomComponent';
 import configureStore from '../configureStore';
@@ -35,6 +36,7 @@ export default class App extends React.Component {
               }}
             />
             <Route exact path='/contacts' component={ ContactsComponent } />
+            <Route exact path='/special_offers' component={ SpecialOffersComponent } />
           </Switch>
           <FooterComponent />
         </BrowserRouter>
