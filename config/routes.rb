@@ -6,6 +6,12 @@ Rails.application.routes.draw do
     get('rooms/:id', to: 'rooms#show')
 
     get('reviews', to: 'reviews#index')
+
+    get('descriptions/about-hotel', to: 'descriptions#about_hotel')
+
+    get('news', to: 'news#index')
+
+    get('services', to: 'services#index')
   end
 
   namespace(:v1, default: { format: 'json' }) do

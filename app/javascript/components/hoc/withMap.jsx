@@ -4,6 +4,10 @@ import YandexMapComponent from "../home_page/YandexMapComponent";
 // TODO: add name of hoc for debugging
 export default (WrappedComponent) => {
   return class extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+
     render() {
       return(
         <WrappedComponent
