@@ -13,7 +13,7 @@ class HeaderComponent extends React.Component {
         ]
       },
       { name: 'отель', link: '/', sub_items: [
-          { name: 'Об отеле', link: '/about' },
+          { name: 'Об отеле', link: '/about', sub_items: [{ name: 'Фотогалерея', link: '/about#photo-gallery' }] },
           { name: 'Услуги и удобства', link: '/services' },
           { name: 'Питание', link: '/' },
           { name: 'Отзывы гостей', link: '/reviews' }
@@ -99,7 +99,22 @@ class HeaderComponent extends React.Component {
       <div className='dropdown-links'>
         {
           item.sub_items.map((subItem, key) => {
-            return(<Link to={ subItem.link } key={ key }>{ subItem.name }</Link>);
+            if (subItem.sub_items === undefined) {
+              return (<Link to={subItem.link} key={key}>{subItem.name}</Link>);
+            } else {
+              return (
+                <div className='menu-sub-item' key={key}>
+                  <Link to={subItem.link} key={key}>{subItem.name}</Link>
+                  <div className='sub-links'>
+                    {
+                      subItem.sub_items.map((subSubItem, key) => {
+                        return (<Link to={subSubItem.link} key={key}>{subSubItem.name}</Link>);
+                      })
+                    }
+                  </div>
+                </div>
+              );
+            }
           })
         }
       </div>
