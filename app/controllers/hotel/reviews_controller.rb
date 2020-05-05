@@ -5,5 +5,10 @@ module Hotel
     def index
       render_success_result(reviews: Review.all)
     end
+
+    def create
+      review = Review.create(guest_name: params[:guest_name], content: params[:content])
+      render_success_result({ review: review }, :created)
+    end
   end
 end

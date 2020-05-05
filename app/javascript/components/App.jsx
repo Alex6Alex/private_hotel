@@ -3,42 +3,32 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import HeaderComponent from './header/HeaderComponent';
-import FooterComponent from './footer/FooterComponent';
-
-import HomePageComponent from './home_page/HomePageComponent';
-import AboutHotelComponent from './about_hotel/AboutHotelComponent';
-import ReviewsComponent from "./reviews/ReviewsComponent";
-import ServicesComponent from './services/ServicesComponent';
-import RoomsComponent from './rooms/RoomsComponent';
-import ContactsComponent from './contacts/ContactsComponent';
-import SpecialOffersComponent from './special_offers/SpecialOffersComponent';
-
-import RoomComponent from './room/RoomComponent';
+import * as Components from './index';
 import configureStore from '../configureStore';
 
-export default class App extends React.Component {
+export default class extends React.Component {
   render() {
     return (
       <Provider store={ configureStore() }>
         <BrowserRouter>
-          <HeaderComponent />
+          <Components.HeaderComponent />
           <Switch>
-            <Route exact path='/' component={ HomePageComponent } />
-            <Route exact path='/about' component={ AboutHotelComponent } />
-            <Route exact path='/reviews' component={ ReviewsComponent } />
-            <Route exact path='/services' component={ ServicesComponent } />
-            <Route exact path='/rooms' component={ RoomsComponent } />
+            <Route exact path='/' component={ Components.HomePageComponent } />
+            <Route exact path='/about' component={ Components.AboutHotelComponent } />
+            <Route exact path='/reviews' component={ Components.ReviewsComponent } />
+            <Route exact path='/services' component={ Components.ServicesComponent } />
+            <Route exact path='/rooms' component={ Components.RoomsComponent } />
             <Route path='/rooms/:id' render={
               ({ match }) => {
                 const { id } = match.params;
-                return <RoomComponent roomId={ id }/>
+                return <Components.RoomComponent roomId={ id }/>
               }}
             />
-            <Route exact path='/contacts' component={ ContactsComponent } />
-            <Route exact path='/special_offers' component={ SpecialOffersComponent } />
+            <Route exact path='/contacts' component={ Components.ContactsComponent } />
+            <Route exact path='/special_offers' component={ Components.SpecialOffersComponent } />
+            <Route path='*' component={ Components.NotFoundComponent } />
           </Switch>
-          <FooterComponent />
+          <Components.FooterComponent />
         </BrowserRouter>
       </Provider>
     );

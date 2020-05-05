@@ -1,5 +1,5 @@
 import React from 'react';
-import YandexMapComponent from "../home_page/YandexMapComponent";
+import YandexMapComponent from "../map/YandexMapComponent";
 
 // TODO: add name of hoc for debugging
 export default (WrappedComponent) => {
@@ -10,29 +10,28 @@ export default (WrappedComponent) => {
 
     render() {
       return(
-        <WrappedComponent
-          mapComponent={ this.mapComponent() } { ...this.props }
-        />
+        <WrappedComponent mapComponent={ this.mapComponent() } { ...this.props }/>
       );
     }
 
     mapComponent() {
+      const mapOptions = { center: [44.573087, 33.498725], zoom: 12 };
       return(
         <YandexMapComponent
           id='yandex-map'
-          options={{
-            center: [44.573087, 33.498725],
-            zoom: 12
-          }}
-          onMapLoad={ map => {
-            let placeMark = new window.ymaps.GeoObject({
-              geometry: { type: 'Point', coordinates: [44.573087, 33.498725] }
-            });
-            map.geoObjects.add(placeMark);
-            map.behaviors.disable('scrollZoom');
-          }}
+          options={ mapOptions }
+          onMapLoad={ map => this.onMapLoadHandler(map) }
         />
       )
+    }
+
+    onMapLoadHandler(map) {
+      const placeMark = new window.ymaps.GeoObject({
+        geometry: { type: 'Point', coordinates: [44.573087, 33.498725] }
+      });
+
+      map.geoObjects.add(placeMark);
+      map.behaviors.disable('scrollZoom');
     }
   }
 };

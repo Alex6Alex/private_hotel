@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get('rooms/:id', to: 'rooms#show')
 
     get('reviews', to: 'reviews#index')
+    post('reviews', to: 'reviews#create')
 
     get('descriptions/about-hotel', to: 'descriptions#about_hotel')
 
