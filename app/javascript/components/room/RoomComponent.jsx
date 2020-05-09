@@ -1,10 +1,20 @@
-import React from 'react'
-import SliderComponent from "../home_page/SliderComponent";
+import React from 'react';
+
+import withSlider from '../hoc/withSlider';
+import withRoomBookForm from '../hoc/withRoomBookForm';
+
 import { connect } from 'react-redux';
 
 import { fetchRoom } from '../../actions/rooms_actions';
 
 class RoomComponent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { showBookForm: false };
+    this.handleBookButtonClick = this.handleBookButtonClick.bind(this);
+  }
+
   componentDidMount() {
     document.title = 'Номер | Гостевой дом «Авия»';
 
@@ -15,13 +25,14 @@ class RoomComponent extends React.Component {
   render() {
     return(
       <div className='room'>
-        <SliderComponent/>
+        { this.props.sliderComponent }
         { this.renderRoomDescription() }
         { this.renderShortRoomInformation() }
         { this.renderRoomServices() }
         <div className='book-button'>
-          <a href='/' className='link-button'>Забронировать</a>
+          <div className='link-button' onClick={ this.handleBookButtonClick }>Забронировать</div>
         </div>
+        { this.state.showBookForm && this.props.bookFormComponent }
       </div>
     )
   }
@@ -70,14 +81,20 @@ class RoomComponent extends React.Component {
       </div>
     )
   }
+
+  handleBookButtonClick() {
+    this.setState({ showBookForm: true });
+    // this.props.bookFormComponent.scrollIntoForm();
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return { room: state.hotelRoomsReducer.room, roomId: ownProps.roomId };
 };
 
-const mapDispatchToProps = {
-  fetchRoom
-};
+const mapDispatchToProps = { fetchRoom };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomComponent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withSlider(withRoomBookForm(RoomComponent), false));

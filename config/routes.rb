@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get('news', to: 'news#index')
 
     get('services', to: 'services#index')
+
+    post('book-orders', to: 'book_orders#create')
   end
 
   namespace(:v1, default: { format: 'json' }) do

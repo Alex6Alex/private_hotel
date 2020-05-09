@@ -54,12 +54,6 @@
       outline: none;
       cursor: pointer;
       font-size: 10pt;
-
-      &:disabled {
-        background-image: linear-gradient(#000529, #0c1329, #000529);
-        color: #292929;
-        cursor: auto;
-      }
     }
   }
 

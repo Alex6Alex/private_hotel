@@ -5,7 +5,8 @@
     "room-slider room-slider room-slider room-slider"
     ". room-description room-description ."
     ". room-short-info room-services ."
-    ". book-button book-button .";
+    ". book-button book-button ."
+    ". book-form book-form .";
 
   .slider {
     grid-area: room-slider;
@@ -13,6 +14,44 @@
     transition-property: background-image;
     transition-duration: 1s;
     min-height: 400px;
+
+    .control-panel {
+      height: 400px;
+      display: grid;
+      grid-template-columns: 15% 70% 15%;
+      justify-items: center;
+      align-items: center;
+
+      .arrow {
+        font-size: 24pt;
+        color: #cccccc;
+
+        &:hover {
+          color: #3e3e3e;
+          cursor: pointer;
+        }
+      }
+
+      .photo-dots {
+        align-self: end;
+
+        .photo-dot {
+          width: 50px;
+          height: 3px;
+          background-color: #cccccc;
+          margin: 10px 5px;
+          display: inline-block;
+
+          &.active {
+            background-color: #3e3e3e;
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 
   .room-description {
@@ -49,12 +88,16 @@
 
   .book-button {
     grid-area: book-button;
-    padding: 50px;
+    padding: 20px;
 
     .link-button {
       width: 250px;
       padding: 15px 0;
       font-size: 11pt;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

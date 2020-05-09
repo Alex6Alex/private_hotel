@@ -6,6 +6,7 @@ import reviewsReducer from './reviews_reducer';
 import descriptionsReducer from './descriptions_reducer';
 import newsReducer from './news_reducer';
 import servicesReducer from './services_reducer';
+import bookOrdersReducer from './book_orders_reducer';
 
 export default combineReducers({
   hotelRoomsReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   reviewsReducer,
   descriptionsReducer,
   newsReducer,
-  servicesReducer
+  servicesReducer,
+  bookOrdersReducer
 });

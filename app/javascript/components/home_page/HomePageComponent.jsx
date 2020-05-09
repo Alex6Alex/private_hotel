@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchDescriptionAboutHotel } from '../../actions/descriptions_actions';
 import { fetchNewsList } from '../../actions/news_actions';
 
-import SliderComponent from './SliderComponent';
+import withSlider from '../hoc/withSlider';
 import withMap from '../hoc/withMap';
 
 class HomePageComponent extends React.Component {
@@ -23,7 +23,7 @@ class HomePageComponent extends React.Component {
   render() {
     return(
       <article>
-        <SliderComponent/>
+        { this.props.sliderComponent }
         <div className='short-about'>
           <h2>Приветствуем Вас в нашем отеле!</h2>
           { this.renderDescriptionText() }
@@ -77,4 +77,7 @@ const mapDispatchToProps = {
   fetchNewsList
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withMap(HomePageComponent));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withSlider(withMap(HomePageComponent), true));
