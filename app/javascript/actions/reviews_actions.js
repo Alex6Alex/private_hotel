@@ -7,15 +7,15 @@ const receiveReviews = (json) => ({
 export const RECEIVE_NEW_REVIEW = 'RECEIVE_NEW_REVIEW';
 const receiveNewReview = (json) => ({
   type: RECEIVE_NEW_REVIEW,
-  payload: json
+  payload: json,
 });
 
 const sendReview = (data) => (dispatch) => {
   const headers = new Headers(
-    { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': data.csrf }
+    { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': data.csrf },
   );
   const body = JSON.stringify(
-    { guest_name: data.guest_name, email: data.email, content: data.content }
+    { guest_name: data.guest_name, email: data.email, content: data.content },
   );
 
   fetch('/hotel/reviews', { method: 'POST', headers, body })

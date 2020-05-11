@@ -3,7 +3,7 @@ import {
 } from '../actions/news_actions';
 
 const initialState = {
-  news: []
+  news: [],
 };
 
 export default (state = initialState, action) => {

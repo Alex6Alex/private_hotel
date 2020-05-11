@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
     case RECEIVE_REVIEWS:
       return { ...state, reviews: action.payload.reviews };
     case RECEIVE_NEW_REVIEW:
-      const reviews = state.reviews;
+      const { reviews } = state;
       return { ...state, reviews: [action.payload.review, ...reviews] };
     default:
       return state;

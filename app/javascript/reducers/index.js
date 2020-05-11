@@ -15,5 +15,5 @@ export default combineReducers({
   descriptionsReducer,
   newsReducer,
   servicesReducer,
-  bookOrdersReducer
+  bookOrdersReducer,
 });

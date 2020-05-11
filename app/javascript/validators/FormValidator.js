@@ -22,7 +22,7 @@ export default class FormValidator {
     if (!this.rules[fieldName]) return true;
     let valid = true;
 
-    this.rules[fieldName].forEach(rule => valid &= rule.check(fieldValue));
+    this.rules[fieldName].forEach((rule) => valid &= rule.check(fieldValue));
     return valid;
   }
 }

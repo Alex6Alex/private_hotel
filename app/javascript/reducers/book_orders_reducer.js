@@ -1,5 +1,5 @@
 import {
-  RECEIVE_NEW_BOOK_ORDER
+  RECEIVE_NEW_BOOK_ORDER,
 } from '../actions/book_orders_actions';
 
 const initialState = {

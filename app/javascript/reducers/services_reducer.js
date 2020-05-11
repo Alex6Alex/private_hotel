@@ -3,7 +3,7 @@ import {
 } from '../actions/services_actions';
 
 const initialState = {
-  services: []
+  services: [],
 };
 
 export default (state = initialState, action) => {
