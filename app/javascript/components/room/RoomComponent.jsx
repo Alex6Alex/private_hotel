@@ -39,7 +39,7 @@ class RoomComponent extends React.Component {
 
   renderRoomDescription() {
     return(
-      <div className='room-description'>
+      <div className='page-description'>
         <h2>{ this.props.room.name }</h2>
         {
           this.props.room.description.split("\n").map((paragraph, index) =>
@@ -73,10 +73,10 @@ class RoomComponent extends React.Component {
       <div className='room-services'>
         <h3>Доступные услуги в номере</h3>
         <div className='services'>
-          <p>Wi-Fi интернет</p><p>Холодильник</p>
-          <p>Кабельное телевидиние</p><p>Телефон с международным доступом</p>
+          <div><p>Wi-Fi интернет</p><p>Холодильник</p>
+          <p>Кабельное телевидиние</p><p>Телефон с международным доступом</p></div><div>
           <p>Кондиционер</p><p>Электронный замок</p>
-          <p>Сейф</p><p>Чайный набор</p>
+          <p>Сейф</p><p>Чайный набор</p></div>
         </div>
       </div>
     )

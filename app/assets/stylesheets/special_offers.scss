@@ -2,12 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1200px 1fr;
   grid-template-areas:
-    ". short-description ."
+    ". page-description ."
     ". special-offers-list .";
-
-  .short-description {
-    grid-area: short-description;
-  }
 
   .special-offers-list {
     grid-area: special-offers-list;

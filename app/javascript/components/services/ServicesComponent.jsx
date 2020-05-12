@@ -13,7 +13,7 @@ class ServicesComponent extends React.Component {
   render() {
     return (
       <div className='services'>
-        <div className='short-description'>
+        <div className='page-description'>
           <h2>Услуги</h2>
         </div>
         <div className='service-list'>

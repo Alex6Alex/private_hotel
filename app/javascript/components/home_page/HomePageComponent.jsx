@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchDescriptionAboutHotel } from '../../actions/descriptions_actions';
@@ -24,7 +25,7 @@ class HomePageComponent extends React.Component {
     return(
       <article>
         { this.props.sliderComponent }
-        <div className='short-about'>
+        <div className='page-description'>
           <h2>Приветствуем Вас в нашем отеле!</h2>
           { this.renderDescriptionText() }
         </div>
@@ -55,7 +56,9 @@ class HomePageComponent extends React.Component {
               <div className='detail' key={ peaceOfNews.id }>
                 <img alt='detail-preview' src={ peaceOfNews.image_link }/>
                 <p>{ peaceOfNews.content }</p>
-                <a href='/'><i className="fas fa-arrow-right"/> Подробнее</a>
+                <Link to={ `special-offers/${peaceOfNews.id}` }>
+                  <i className="fas fa-arrow-right"/> Подробнее
+                </Link>
               </div>
             )
           })

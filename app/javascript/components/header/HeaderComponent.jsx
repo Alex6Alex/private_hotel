@@ -21,8 +21,8 @@ class HeaderComponent extends React.Component {
       },
       { name: 'номера', link: '/rooms' },
       { name: 'контакты', link: '/contacts' },
-      { name: 'конференц-сервис', link: '/conference' },
-      { name: 'спецпредложения', link: '/special_offers' }
+      { name: 'конференц-сервис', link: '/conference-room' },
+      { name: 'спецпредложения', link: '/special-offers' }
     ];
   }
 

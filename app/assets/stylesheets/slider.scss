@@ -1,0 +1,45 @@
+.slider {
+  grid-area: slider;
+  background-size: cover;
+  transition-property: background-image;
+  transition-duration: 1s;
+  min-height: 400px;
+
+  .control-panel {
+    height: 400px;
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    justify-items: center;
+    align-items: center;
+
+    .arrow {
+      font-size: 24pt;
+      color: #cccccc;
+
+      &:hover {
+        color: #3e3e3e;
+        cursor: pointer;
+      }
+    }
+
+    .photo-dots {
+      align-self: end;
+
+      .photo-dot {
+        width: 50px;
+        height: 3px;
+        background-color: #cccccc;
+        margin: 10px 5px;
+        display: inline-block;
+
+        &.active {
+          background-color: #3e3e3e;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

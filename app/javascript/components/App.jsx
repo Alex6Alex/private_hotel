@@ -25,7 +25,20 @@ export default class extends React.Component {
               }}
             />
             <Route exact path='/contacts' component={ Components.ContactsComponent } />
-            <Route exact path='/special_offers' component={ Components.SpecialOffersComponent } />
+            <Route exact path='/conference-room' component={ Components.ConferenceRoomComponent } />
+            <Route exact path='/special-offers' component={ Components.SpecialOffersComponent } />
+            <Route path='/special-offers/:id' render={
+              ({ match }) => {
+                const { id } = match.params;
+                return <Components.Article offerId={ id }/>
+              }}
+            />
+            <Route path='/news/:id' render={
+              ({ match }) => {
+                const { id } = match.params;
+                return <Components.Article offerId={ id }/>
+              }}
+            />
             <Route path='*' component={ Components.NotFoundComponent } />
           </Switch>
           <Components.FooterComponent />

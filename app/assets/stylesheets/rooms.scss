@@ -2,13 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1200px 1fr;
   grid-template-areas:
-    ". short-description ."
+    ". page-description ."
     ". rooms .";
-
-  .short-description {
-    grid-area: short-description;
-    text-align: justify;
-  }
 
   .rooms {
     grid-area: rooms;

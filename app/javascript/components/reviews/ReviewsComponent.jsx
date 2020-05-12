@@ -30,7 +30,7 @@ class ReviewsComponent extends React.Component {
   render() {
     return(
       <div className='reviews'>
-        <div className='reviews-description'>
+        <div className='page-description'>
           <h2>Отзывы</h2>
           <p>Для тех наших гостей, кто не успел или забыл оставить свой отзыв
             об отеле книге отзывов - можно сделать это прямо на сайте.

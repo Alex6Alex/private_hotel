@@ -1,0 +1,30 @@
+.conference-room {
+  display: grid;
+  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-areas:
+    "slider slider slider"
+    ". page-description ."
+    ". conference-room-schema ."
+    ". book-button ."
+    ". book-form .";
+
+  .conference-room-schema {
+    grid-area: conference-room-schema;
+    text-align: center;
+  }
+
+  .book-button {
+    grid-area: book-button;
+    padding: 20px;
+
+    .link-button {
+      width: 250px;
+      padding: 15px 0;
+      font-size: 11pt;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

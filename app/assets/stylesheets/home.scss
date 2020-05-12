@@ -3,27 +3,10 @@ article {
   grid-template-columns: 1fr 1200px 1fr;
   grid-template-areas:
     "slider slider slider"
-    ". short-info ."
+    ". page-description ."
     ". details ."
     "map map map";
   border-bottom: 5px #730e15 solid;
-
-  .slider {
-    grid-area: slider;
-    background-size: cover;
-    transition-property: background-image;
-    transition-duration: 1s;
-    min-height: 400px;
-  }
-
-  .short-about {
-    grid-area: short-info;
-
-    .description {
-      text-align: justify;
-      white-space: pre-line;
-    }
-  }
 
   .details {
     grid-area: details;

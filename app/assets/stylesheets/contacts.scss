@@ -2,12 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1200px 1fr;
   grid-template-areas:
-    ". short-description ."
+    ". page-description ."
     ". contacts-block .";
-
-  .short-description {
-    grid-area: short-description;
-  }
 
   .contacts-block {
     grid-area: contacts-block;

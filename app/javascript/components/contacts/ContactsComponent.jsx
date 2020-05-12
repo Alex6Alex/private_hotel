@@ -11,7 +11,7 @@ class ContactsComponent extends React.Component {
   render() {
     return(
       <div className='contacts-page'>
-        <div className='short-description'>
+        <div className='page-description'>
           <h2>Контакты</h2>
         </div>
         <div className='contacts-block'>

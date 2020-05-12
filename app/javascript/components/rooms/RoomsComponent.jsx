@@ -14,7 +14,7 @@ class RoomsComponent extends React.Component {
   render() {
     return(
       <div className='rooms-page'>
-        <div className='short-description'>
+        <div className='page-description'>
           <h2>Номера и цены</h2>
           <p>
             В распоряжении гостей мини-отеля «Авия» двухместные и трехместный номера.

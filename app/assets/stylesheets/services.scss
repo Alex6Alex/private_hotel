@@ -2,12 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1200px 1fr;
   grid-template-areas:
-    ". short-description ."
+    ". page-description ."
     ". service-list .";
-
-  .short-description {
-    grid-area: short-description;
-  }
 
   .service-list {
     grid-area: service-list;

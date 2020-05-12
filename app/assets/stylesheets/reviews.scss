@@ -2,17 +2,9 @@
   display: grid;
   grid-template-columns: 1fr 1200px 1fr;
   grid-template-areas:
-    ". reviews-description ."
+    ". page-description ."
     ". review-form ."
     ". last-reviews .";
-
-  .reviews-description {
-    grid-area: reviews-description;
-
-    .description {
-      text-align: justify;
-    }
-  }
 
   .review-form {
     grid-area: review-form;

@@ -12,6 +12,12 @@ body {
     align-content: stretch;
   }
 
+  .page-description {
+    grid-area: page-description;
+    text-align: justify;
+    white-space: pre-line;
+  }
+
   h2 {
     text-align: center;
   }

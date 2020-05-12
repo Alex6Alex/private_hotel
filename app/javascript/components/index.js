@@ -8,6 +8,8 @@ import RoomsComponent from './rooms/RoomsComponent';
 import RoomComponent from './room/RoomComponent';
 import ContactsComponent from './contacts/ContactsComponent';
 import SpecialOffersComponent from './special_offers/SpecialOffersComponent';
+import Article from './article/Article';
+import ConferenceRoomComponent from './conference_room/ConferenceRoomComponent';
 import NotFoundComponent from './not_found/NotFoundComponent';
 
 export {
@@ -21,5 +23,7 @@ export {
   RoomComponent,
   ContactsComponent,
   SpecialOffersComponent,
+  Article,
+  ConferenceRoomComponent,
   NotFoundComponent,
 };
