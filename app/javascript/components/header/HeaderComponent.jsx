@@ -39,7 +39,7 @@ class HeaderComponent extends React.Component {
 
   renderLogo() {
     return(
-      <div className='logo'><img src='images/hotel_logo.png' alt='logo'/></div>
+      <div className='logo'><img src='/images/hotel_logo.png' alt='logo'/></div>
     );
   }
 
@@ -58,13 +58,13 @@ class HeaderComponent extends React.Component {
     return(
       <div className='phone'>
         <a className='direct-call' href='https://wa.me/79101510855'>
-          <img alt='telegram' src='images/tele_icon.png'/>
+          <img alt='telegram' src='/images/tele_icon.png'/>
         </a>
         <a className='direct-call' href='https://wa.me/79101510855'>
-          <img alt='viber' src='images/viber_icon.png'/>
+          <img alt='viber' src='/images/viber_icon.png'/>
         </a>
         <a className='direct-call' href='https://wa.me/79101510855'>
-          <img alt='whatsapp' src='images/whats_icon.png'/>
+          <img alt='whatsapp' src='/images/whats_icon.png'/>
         </a>
         {/*<span className='number'>+7(978)123-45-67</span>*/}
         {/*// TODO: use formats for phone*/}

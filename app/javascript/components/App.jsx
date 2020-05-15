@@ -36,7 +36,7 @@ export default class extends React.Component {
             <Route path='/news/:id' render={
               ({ match }) => {
                 const { id } = match.params;
-                return <Components.Article offerId={ id }/>
+                return <Components.Article elementId={ id }/>
               }}
             />
             <Route path='*' component={ Components.NotFoundComponent } />

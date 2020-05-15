@@ -9,6 +9,20 @@ class RoomBookFormComponent extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      roomId: props.room.id,
+      roomName: props.room.name,
+      dateIn: '',
+      dateOut: '',
+      guestsWithPlace: 1,
+      guestsWithoutPlace: 1,
+      email: '',
+      phone: '',
+      timeIn: '',
+      personCapacity: props.room.person_capacity
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -34,10 +48,7 @@ class RoomBookFormComponent extends React.Component {
       <div>
         <div>
           <label htmlFor='room-name'>Номер</label>
-          <select id='room-name'>
-            <option defaultValue>Стандарт 2-ухместный</option>
-            <option>Стандарт 3-ухместный</option>
-          </select>
+          <input readOnly required name='roomName' value={ this.state.roomName }/>
         </div>
       </div>
     )
@@ -48,33 +59,38 @@ class RoomBookFormComponent extends React.Component {
       <div>
         <div>
           <label htmlFor='date-in'>Дата заезда</label>
-          <input id='date-in' type='date'/>
+          <input id='date-in' type='date' required value={ this.state.dateIn }
+                 name= 'dateIn' onChange={ this.handleInputChange }/>
         </div>
         <div>
           <label htmlFor='date-out'>Дата выезда</label>
-          <input id='date-out' type='date'/>
+          <input id='date-out' type='date' required value={ this.state.dateOut }
+                 name='dateOut' onChange={ this.handleInputChange }/>
         </div>
       </div>
     )
   }
 
   renderAccommodationSelectors() {
+    let allowedOptions = [];
+    for (let i = 0; i < this.state.personCapacity; i++) {
+      allowedOptions.push(<option key={ i }>{ i + 1 }</option>)
+    }
+
     return(
       <div>
         <div>
           <label htmlFor='accommodation-with-place'>Размещение в номере</label>
-          <select id='accommodation-with-place'>
-            <option defaultValue>1</option>
-            <option>2</option>
-            <option>3</option>
+          <select id='accommodation-with-place' name='guestsWithPlace'
+                  value={ this.state.guestsWithPlace } onChange={ this.handleInputChange }>
+            { allowedOptions }
           </select>
         </div>
         <div>
           <label htmlFor='accommodation-without-place'>Размещение без отдельного места</label>
-          <select id='accommodation-without-place'>
-            <option defaultValue>1</option>
-            <option>2</option>
-            <option>3</option>
+          <select id='accommodation-without-place' name='guestsWithoutPlace'
+                  value={ this.state.guestsWithoutPlace } onChange={ this.handleInputChange }>
+            { allowedOptions }
           </select>
         </div>
       </div>
@@ -86,11 +102,13 @@ class RoomBookFormComponent extends React.Component {
       <div>
         <div>
           <label htmlFor='email'>Электронная почта</label>
-          <input id='email' type='email'/>
+          <input id='email' type='email' required value={ this.state.email }
+                 name='email' onChange={ this.handleInputChange }/>
         </div>
         <div>
           <label htmlFor='phone'>Номер телефона</label>
-          <input id='phone' type='phone'/>
+          <input id='phone' type='phone' required value={ this.state.phone }
+                 name='phone' onChange={ this.handleInputChange }/>
         </div>
       </div>
     )
@@ -108,7 +126,7 @@ class RoomBookFormComponent extends React.Component {
         </div>
         <div>
           <label>Время выезда</label>
-          <label>12:00</label>
+          <input readOnly required value='12:00'/>
         </div>
       </div>
     )
@@ -119,7 +137,7 @@ class RoomBookFormComponent extends React.Component {
       <div>
         <div>
           <label htmlFor='extra-service-picker'>Дополнительные услуги</label>
-          <select id='extra-service-picker'>
+          <select multiple id='extra-service-picker'>
             <option>Трансфер</option>
           </select>
         </div>
@@ -131,16 +149,35 @@ class RoomBookFormComponent extends React.Component {
     return(<div><input type='submit' value='Отправить завку'/></div>)
   }
 
+  handleInputChange(event) {
+    const target = event.target;
+    this.setState({ [target.name]: target.value });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
 
+    const {
+      roomId, dateIn, dateOut, guestsWithPlace, guestsWithoutPlace, email, phone, timeIn
+    } = this.state;
+
     const csrf = document.querySelector('[name=csrf-token]').content;
-    this.props.sendBookOrder({ csrf });
+    this.props.sendBookOrder({
+      csrf,
+      roomId,
+      dateIn,
+      dateOut,
+      guestsWithPlace,
+      guestsWithoutPlace,
+      email,
+      phone,
+      timeIn
+    });
   }
 }
 
 const mapStateToProps = (state) => {
-  return { reviews: state.bookOrdersReducer.reviews };
+  return { sentBookOrder: state.bookOrdersReducer.sentBookOrder };
 };
 
 const mapDispatchToProps = {

@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class SpecialOffersComponent extends React.Component {
+import { fetchSpecialOffers } from '../../actions/special_offers_actions';
+
+class SpecialOffersComponent extends React.Component {
   componentDidMount() {
     document.title = 'Спецпредложения | Гостевой дом «Авия»';
+
+    this.props.fetchSpecialOffers();
   }
 
   render() {
@@ -13,48 +18,29 @@ export default class SpecialOffersComponent extends React.Component {
           <h2>Спецпредложения</h2>
         </div>
         <div className='special-offers-list'>
-          <div className='special-offers-row'>
-            {
-              [1,2,3].map(index => {
-                return(
-                  <div className='special-offer' key={ index }>
-                    <img alt='detail-preview' src='images/Hotel4.jpg'/>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aliquid amet asperiores assumenda dolorem inventore, ipsa
-                      iste maiores maxime natus numquam optio provident quae quas
-                      quis rerum sit tempore totam voluptatem?
-                    </p>
-                    <Link className='special-offer-link' to={ `special-offers/${index}` }>
-                      <i className="fas fa-arrow-right"/> Подробнее
-                    </Link>
-                  </div>
-                )
-              })
-            }
-          </div>
-          <div className='special-offers-row'>
-            {
-              [1,2,3].map(index => {
-                return(
-                  <div className='special-offer' key={ index }>
-                    <img alt='detail-preview' src='images/Hotel4.jpg'/>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aliquid amet asperiores assumenda dolorem inventore, ipsa
-                      iste maiores maxime natus numquam optio provident quae quas
-                      quis rerum sit tempore totam voluptatem?
-                    </p>
-                    <Link className='special-offer-link' to={ `special-offers/${index}` }>
-                      <i className="fas fa-arrow-right"/> Подробнее
-                    </Link>
-                  </div>
-                )
-              })
-            }
-          </div>
+          {
+            this.props.specialOffers.map((specialOffer) => {
+              return(
+                <div className='special-offer' key={ specialOffer.id }>
+                  <img alt='detail-preview' src={ specialOffer.image_link }/>
+                  <p>{ specialOffer.content }</p>
+                  <Link className='special-offer-link' to={ `special-offers/${specialOffer.id}` }>
+                    <i className="fas fa-arrow-right"/> Подробнее
+                  </Link>
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return { specialOffers: state.specialOffersReducer.specialOffers };
+};
+
+const mapDispatchToProps = { fetchSpecialOffers };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SpecialOffersComponent);

@@ -1,9 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import withSlider from '../hoc/withSlider';
-import withRoomBookForm from '../hoc/withRoomBookForm';
-
-import { connect } from 'react-redux';
+import RoomBookFormComponent from '../forms/RoomBookFormComponent';
 
 import { fetchRoom } from '../../actions/rooms_actions';
 
@@ -32,7 +31,9 @@ class RoomComponent extends React.Component {
         <div className='book-button'>
           <div className='link-button' onClick={ this.handleBookButtonClick }>Забронировать</div>
         </div>
-        { this.state.showBookForm && this.props.bookFormComponent }
+        {
+          this.state.showBookForm && <RoomBookFormComponent room={ this.props.room } />
+        }
       </div>
     )
   }
@@ -97,4 +98,4 @@ const mapDispatchToProps = { fetchRoom };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withSlider(withRoomBookForm(RoomComponent), false));
+)(withSlider(RoomComponent, false));

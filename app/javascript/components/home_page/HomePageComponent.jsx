@@ -51,12 +51,12 @@ class HomePageComponent extends React.Component {
       <div className='details'>
         <h2>Последние новости</h2>
         {
-          this.props.news.map((peaceOfNews) => {
+          this.props.newsList.map((peaceOfNews) => {
             return(
               <div className='detail' key={ peaceOfNews.id }>
                 <img alt='detail-preview' src={ peaceOfNews.image_link }/>
                 <p>{ peaceOfNews.content }</p>
-                <Link to={ `special-offers/${peaceOfNews.id}` }>
+                <Link to={ `news/${peaceOfNews.id}` }>
                   <i className="fas fa-arrow-right"/> Подробнее
                 </Link>
               </div>
@@ -71,7 +71,7 @@ class HomePageComponent extends React.Component {
 const mapStateToProps = (state) => {
   return {
     aboutHotel: state.descriptionsReducer.aboutHotel,
-    news: state.newsReducer.news
+    newsList: state.newsReducer.newsList
   };
 };
 

@@ -11,10 +11,14 @@ Rails.application.routes.draw do
     get('descriptions/about-hotel', to: 'descriptions#about_hotel')
 
     get('news', to: 'news#index')
+    get('news/:id', to: 'news#show')
 
     get('services', to: 'services#index')
 
     post('book-orders', to: 'book_orders#create')
+
+    get('special-offers', to: 'special_offers#index')
+    get('special-offers/:id', to: 'special_offers#show')
   end
 
   namespace(:v1, default: { format: 'json' }) do
