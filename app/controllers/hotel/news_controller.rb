@@ -3,11 +3,11 @@
 module Hotel
   class NewsController < ApplicationController
     def index
-      render_success_result(news_list: News.all)
+      render_success_result(news_list: Post.all)
     end
 
     def show
-      render_success_result(news: News.find_by(id: params[:id]))
+      render_success_result(news: Post.find_by(id: params[:id]))
     end
   end
 end

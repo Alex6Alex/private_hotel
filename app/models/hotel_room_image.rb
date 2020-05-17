@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class BookOrder < ApplicationRecord
+class HotelRoomImage < ApplicationRecord
   belongs_to :hotel_room
 end

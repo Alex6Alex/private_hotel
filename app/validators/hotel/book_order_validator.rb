@@ -15,7 +15,7 @@ module Hotel
     end
 
     def inspect_room_id
-      raise(Hotel::RoomIdNotSetError.build) if @params[:room_id].blank?
+      raise(Hotel::RoomIdNotSetError.build) if @params[:hotel_room_id].blank?
     end
 
     def inspect_dates
@@ -23,9 +23,7 @@ module Hotel
 
       raise 'Departure date was not set' if @params[:date_out].blank?
 
-      if Date.parse(@params[:date_in]) < Date.tomorrow
-        raise 'Arrival date can not be less than tomorrow'
-      end
+      raise 'Arrival date can not be less than tomorrow' if Date.parse(@params[:date_in]) < Date.tomorrow
 
       if Date.parse(@params[:date_out]) <= Date.parse(@params[:date_in])
         raise 'Departure date can not be less than arrival date'

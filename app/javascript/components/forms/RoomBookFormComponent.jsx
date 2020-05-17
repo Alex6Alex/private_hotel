@@ -18,7 +18,7 @@ class RoomBookFormComponent extends React.Component {
       guestsWithoutPlace: 1,
       email: '',
       phone: '',
-      timeIn: '',
+      timeIn: '12:00',
       personCapacity: props.room.person_capacity
     };
 
@@ -119,7 +119,8 @@ class RoomBookFormComponent extends React.Component {
       <div>
         <div>
           <label htmlFor='time-in'>Время заезда</label>
-          <select id='time-in'>
+          <select id='time-in' name='timeIn' value={ this.state.timeIn }
+                  onChange={ this.handleInputChange }>
             <option defaultValue>12:00</option>
             <option>13:00</option>
           </select>

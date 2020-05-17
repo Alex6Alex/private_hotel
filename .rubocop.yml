@@ -1,0 +1,20 @@
+Layout/LineLength:
+  Max: 120
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/seeds.rb
+    - db/schema.rb
+    - 'bin/{rails,rake,bundle}'
+    - 'node_modules/**/*'

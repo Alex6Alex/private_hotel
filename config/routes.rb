@@ -19,10 +19,8 @@ Rails.application.routes.draw do
 
     get('special-offers', to: 'special_offers#index')
     get('special-offers/:id', to: 'special_offers#show')
-  end
 
-  namespace(:v1, default: { format: 'json' }) do
-    get('contacts', to: 'things#contacts')
+    get('contacts', to: 'contacts#index')
   end
 
   get(

@@ -4,8 +4,8 @@ const receiveContacts = (json) => ({
   payload: json,
 });
 
-const fetchContacts = () => (dispatch) => fetch('/v1/contacts')
+const fetchContacts = () => (dispatch) => fetch('/hotel/contacts')
   .then((response) => response.json())
-  .then((json) => dispatch(receiveContacts(json)));
+  .then((json) => dispatch(receiveContacts(json.data)));
 
 export { fetchContacts };

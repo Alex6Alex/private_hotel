@@ -9,7 +9,7 @@ const sendBookOrder = (data) => (dispatch) => {
     { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': data.csrf },
   );
   const body = JSON.stringify({
-    room_id: data.roomId,
+    hotel_room_id: data.roomId,
     date_in: data.dateIn,
     date_out: data.dateOut,
     guests_with_place: data.guestsWithPlace,
