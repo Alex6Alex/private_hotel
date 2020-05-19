@@ -2,8 +2,13 @@
 
 class ApplicationController < ActionController::Base
   rescue_from(StandardError) do |exc|
-    render_error_result(exc)
+    render_failed_result(exc.message, :internal_server_error)
   end
+
+  rescue_from(BaseError) do |exc|
+    render_failed_result(exc.message, exc.http_status)
+  end
+
 
   protected
 
@@ -17,12 +22,12 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  def render_error_result(exc)
+  def render_failed_result(data, status)
     render(
-      status: 500,
+      status: status,
       json: {
         success: false,
-        data: exc.message
+        data: data
       }
     )
   end

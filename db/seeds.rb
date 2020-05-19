@@ -147,3 +147,5 @@
 #   HotelRoomImage.create(hotel_room_id: room.id, image_link: '/images/Hotel3.jpg')
 #   HotelRoomImage.create(hotel_room_id: room.id, image_link: '/images/Hotel4.jpg')
 # end
+#
+# Administrator.create(name: 'super_admin', password: 'securedPa$$', email: 'sample_email@mail.ru')

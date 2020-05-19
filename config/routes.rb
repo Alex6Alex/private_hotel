@@ -2,11 +2,8 @@
 
 Rails.application.routes.draw do
   namespace(:hotel, default: { format: :json }) do
-    get('rooms', to: 'rooms#index')
-    get('rooms/:id', to: 'rooms#show')
-
-    get('reviews', to: 'reviews#index')
-    post('reviews', to: 'reviews#create')
+    resources(:rooms, only: %i[index show])
+    resources(:reviews, only: %i[index create])
 
     get('descriptions/about-hotel', to: 'descriptions#about_hotel')
 
@@ -23,14 +20,19 @@ Rails.application.routes.draw do
     get('contacts', to: 'contacts#index')
   end
 
-  get(
-    '*page',
-    to: 'home_page#index',
-    constraints: lambda do |req|
-      # non-Ajax and HTML mime-type
-      !req.xhr? && req.format.html?
-    end
-  )
+  namespace(:admin, default: { format: :json }) do
+    get('authentication/profile', to: 'authentication#profile')
+    post('authentication/login', to: 'authentication#login')
 
-  root('home_page#index')
+    resources(:book_orders, only: %i[index])
+  end
+
+  scope('/admin') do
+    get('*page', to: 'admin#index')
+    get('/', to: 'admin#index')
+  end
+
+  get('*page', to: 'client#index', constraints: -> (req) { !req.xhr? && req.format.html? })
+
+  root('client#index')
 end

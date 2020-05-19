@@ -18,7 +18,7 @@ module Hotel
       break unless File.exist?(env_file)
 
       YAML.safe_load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
+        ENV[key.to_s] = value.to_s
       end
     end
   end
