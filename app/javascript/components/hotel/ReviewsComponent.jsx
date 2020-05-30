@@ -39,7 +39,7 @@ class ReviewsComponent extends React.Component {
           </p>
         </div>
         { this.renderReviewForm() }
-        { this.props.reviews.length && this.renderLastReviews() }
+        { !!this.props.reviews.length && this.renderLastReviews() }
       </div>
     )
   }

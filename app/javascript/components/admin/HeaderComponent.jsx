@@ -2,14 +2,20 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { closeAdminProfile } from '../../actions/admin/authentication_actions';
+
 class HeaderComponent extends React.Component {
   constructor(props) {
     super(props);
 
     this.menuItems = [
-      { name: 'главная', link: '/admin' },
+      { name: 'новости', link: '/admin/news' },
+      { name: 'услуги', link: '/admin/services-list' },
+      { name: 'отзывы гостей', link: '/admin/reviews' },
       { name: 'номера', link: '/admin/rooms' },
-      { name: 'заявки на бронирование', link: '/admin/contacts' },
+      { name: 'страницы', link: '/admin/pages' },
+      { name: 'фото', link: '/admin/photos' },
+      { name: 'заявки на бронирование', link: '/admin/book-orders' },
     ];
   }
 
@@ -19,7 +25,7 @@ class HeaderComponent extends React.Component {
     return(
       <header>
         { this.renderLogo() }
-        { this.renderAddress() }
+        { this.renderAdminInfo() }
         { this.renderMenu() }
       </header>
     )
@@ -31,10 +37,11 @@ class HeaderComponent extends React.Component {
     );
   }
 
-  renderAddress() {
+  renderAdminInfo() {
     return(
-      <div className='address'>
+      <div className='admin-info'>
         <span>{ this.props.admin.name }</span>
+        <span className='logout' onClick={ () => this.props.closeAdminProfile() }>(Выйти)</span>
       </div>
     );
   }
@@ -65,4 +72,8 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(HeaderComponent);
+const mapDispatchToProps = {
+  closeAdminProfile
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent);

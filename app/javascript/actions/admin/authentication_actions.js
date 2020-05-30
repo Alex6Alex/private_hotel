@@ -3,11 +3,22 @@ const loadingAdminProfile = () => ({
   type: LOADING_ADMIN_PROFILE,
 });
 
-export const RECEIVE_ADMIN_PROFILE = 'RECEIVE_ADMIN_PROFILE';
-const receiveAdminProfile = (json) => ({
-  type: RECEIVE_ADMIN_PROFILE,
+export const RECEIVE_ADMIN_PROFILE_SUCCESS = 'RECEIVE_ADMIN_PROFILE_SUCCESS';
+const receiveAdminProfileSuccess = (json) => ({
+  type: RECEIVE_ADMIN_PROFILE_SUCCESS,
   payload: json,
 });
+
+export const RECEIVE_ADMIN_PROFILE_FAILED = 'RECEIVE_ADMIN_PROFILE_FAILED';
+const receiveAdminProfileFailed = () => ({
+  type: RECEIVE_ADMIN_PROFILE_FAILED
+});
+
+export const CLOSE_ADMIN_PROFILE = 'CLOSE_ADMIN_PROFILE';
+const closeAdminProfile = () => (dispatch) => {
+  localStorage.removeItem('token');
+  dispatch({ type: CLOSE_ADMIN_PROFILE });
+};
 
 const fetchAdminProfile = () => (dispatch) => {
   dispatch(loadingAdminProfile());
@@ -20,9 +31,11 @@ const fetchAdminProfile = () => (dispatch) => {
     .then((response) => response.json())
     .then((json) => {
       if (json.success)
-        dispatch(receiveAdminProfile(json.data));
-      else
+        dispatch(receiveAdminProfileSuccess(json.data));
+      else {
         localStorage.removeItem('token');
+        dispatch(receiveAdminProfileFailed());
+      }
     });
 };
 
@@ -37,9 +50,9 @@ const authenticateAdmin = (data) => (dispatch) => {
     .then((json) => {
       if (json.success) {
         localStorage.setItem('token', json.data.token);
-        dispatch(receiveAdminProfile(json.data));
+        dispatch(receiveAdminProfileSuccess(json.data));
       }
     });
 };
 
-export { fetchAdminProfile, authenticateAdmin };
+export { fetchAdminProfile, authenticateAdmin, closeAdminProfile };

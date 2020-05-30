@@ -16,6 +16,47 @@ export default class extends React.Component {
             <Switch>
               <Route exact path='/admin/login' component={ Components.AuthenticationComponent } />
               <Route exact path='/admin' component={ Components.HomePageComponent } />
+              <Route exact path='/admin/news' render={ () => {
+                return(
+                  <Components.ItemListComponent
+                    title='Список новостей'
+                    url='/admin/posts'
+                    createNewUrl='/admin/new-post'
+                    editUrl='/admin/edit-post'
+                  />)
+              }} />
+              <Route exact path='/admin/new-post' component={ Components.PostEditorComponent } />
+              <Route path='/admin/edit-post/:id' render={
+                ({ match }) => {
+                  const { id } = match.params;
+                  return <Components.PostEditorComponent postId={ id } />
+                }}
+              />
+              <Route exact path='/admin/rooms' render={ () => {
+                return(
+                  <Components.ItemListComponent
+                    title='Список номеров'
+                    url='/admin/hotel_rooms'
+                    createNewUrl='/admin/new-room'
+                    editUrl='/admin/edit-room'
+                  />)
+              }} />
+              <Route exact path='/admin/new-room' component={ Components.RoomEditorComponent } />
+              <Route path='/admin/edit-room/:id' render={
+                ({ match }) => {
+                  const { id } = match.params;
+                  return <Components.RoomEditorComponent roomId={ id } />
+                }}
+              />
+              <Route exact path='/admin/services-list' render={ () => {
+                return(
+                  <Components.ItemListComponent
+                    title='Список сервисов'
+                    url='/admin/services'
+                    createNewUrl='/admin/new-service'
+                    editUrl='/admin/edit-service'
+                  />)
+              }} />
             </Switch>
           </BrowserRouter>
         </Components.AdminAuthentication>

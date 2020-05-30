@@ -16,8 +16,8 @@ class Article extends React.Component {
         <div className='page-description'>
           <h2>{ this.props.selectedNews.name }</h2>
         </div>
-        <div className='special-offer-info'>
-          <p>{ this.props.selectedNews.content }</p>
+        <div className='special-offer-info'
+             dangerouslySetInnerHTML={{ __html: this.props.selectedNews.content }}>
         </div>
         <img src={ this.props.selectedNews.image_link } alt='Special Offer Image'/>
       </div>

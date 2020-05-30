@@ -2,7 +2,7 @@
   "name": "hotel",
   "private": true,
   "dependencies": {
-    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-react": "^7.10.1",
     "@rails/actioncable": "^6.0.3",
     "@rails/activestorage": "^6.0.3",
     "@rails/ujs": "^6.0.3",
@@ -21,7 +21,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "tinymce": "^5.2.2",
+    "tinymce": "^5.3.1",
     "turbolinks": "^5.2.0",
     "yarn": "^1.22.4"
   },
@@ -33,7 +33,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^2.5.1",
-    "stylelint": "^13.3.3",
+    "stylelint": "^13.5.0",
     "stylelint-config-standard": "^20.0.0",
     "webpack-dev-server": "^3.11.0"
   }

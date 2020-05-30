@@ -47,6 +47,17 @@ header {
     }
   }
 
+  /*ADMIN*/
+  .admin-info {
+    grid-area: phone;
+
+    .logout {
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  }
+  /*ADMIN*/
+
   nav {
     grid-area: navigation;
     justify-self: right;

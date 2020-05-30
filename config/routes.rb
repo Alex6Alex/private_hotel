@@ -25,6 +25,9 @@ Rails.application.routes.draw do
     post('authentication/login', to: 'authentication#login')
 
     resources(:book_orders, only: %i[index])
+    resources(:posts)
+    resources(:hotel_rooms)
+    resources(:services)
   end
 
   scope('/admin') do

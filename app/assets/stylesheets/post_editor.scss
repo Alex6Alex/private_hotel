@@ -1,0 +1,51 @@
+.post-edit-page {
+  display: grid;
+  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-areas:
+    ". page-description ."
+    ". edit-form .";
+
+  .edit-form {
+    grid-area: edit-form;
+    display: block;
+
+    form {
+      margin: 0 50px;
+
+      label {
+        display: block;
+        margin: 10px 0;
+      }
+
+      input {
+        display: block;
+        padding: 10px 15px;
+        border: 1px solid #cccccc;
+        border-radius: 10px;
+        font-size: 11pt;
+        outline: none;
+        width: 500px;
+        box-sizing: border-box;
+
+        &:valid {
+          border-color: green;
+        }
+      }
+
+      input[type=submit] {
+        display: block;
+        width: 200px;
+        height: 40px;
+        margin: 10px;
+        background-image: linear-gradient(#00087f, #1b407f, #00087f);
+        border: none;
+        border-radius: 7px;
+        color: #fff;
+        text-transform: uppercase;
+        outline: none;
+        cursor: pointer;
+        font-size: 10pt;
+      }
+    }
+  }
+}

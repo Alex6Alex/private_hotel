@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class HomePageComponent extends React.Component {
@@ -8,8 +7,6 @@ class HomePageComponent extends React.Component {
   }
 
   render() {
-    if (!this.props.isLoggedIn) return(<Redirect to='/admin/login'/>);
-
     return(
       <article>
         <div className='page-description'>
