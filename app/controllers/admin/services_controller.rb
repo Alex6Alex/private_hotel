@@ -7,33 +7,33 @@ module Admin
     end
 
     def create
-      # raise('Required fields does not set') if params[:name].blank? || params[:content].blank?
-      #
-      # post = Post.create(name: params[:name], image_link: '/images/Hotel1.jpg', content: params[:content])
-      # render_success_result({ post: post }, :created)
+      raise('Required fields does not set') if params[:name].blank?
+
+      service = Service.create(name: params[:name], image_link: '/images/Hotel1.jpg')
+      render_success_result(service, :created)
     end
 
     def show
-      # post = Post.find_by(id: params[:id])
-      # raise('Incorrect id') if post.nil?
-      #
-      # render_success_result(post: post)
+      service = Service.find_by(id: params[:id])
+      raise('Incorrect id') if service.nil?
+
+      render_success_result(service)
     end
 
     def update
-      # post = Post.find_by(id: params[:id])
-      # raise('Incorrect id') if post.nil?
-      #
-      # post.update(name: params[:name], content: params[:content])
-      # render_success_result(update: true)
+      service = Service.find_by(id: params[:id])
+      raise('Incorrect id') if service.nil?
+
+      service.update(name: params[:name], image_link: params[:image_link])
+      render_success_result(service)
     end
 
     def destroy
-      # post = Post.find_by(id: params[:id])
-      # raise('incorrect id') if post.nil?
-      #
-      # post.delete
-      # render_success_result({})
+      service = Service.find_by(id: params[:id])
+      raise('incorrect id') if service.nil?
+
+      service.delete
+      render_success_result({})
     end
   end
 end

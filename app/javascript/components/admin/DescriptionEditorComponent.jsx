@@ -6,11 +6,11 @@ import { Editor } from '@tinymce/tinymce-react';
 
 import { fetchItem, sendItem } from '../../actions/admin/entities_actions';
 
-class PostEditorComponent extends React.Component {
+class DescriptionEditorComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { postName: '', content: '', isInitialState: true };
+    this.state = { name: '', description: '', isInitialState: true };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -18,24 +18,24 @@ class PostEditorComponent extends React.Component {
   }
 
   componentDidMount() {
-    document.title = 'Новость';
+    document.title = 'Текст';
 
-    const { postId } = this.props;
-    if (postId) this.props.fetchItem('/admin/posts', postId);
+    const { descriptionId } = this.props;
+    if (descriptionId) this.props.fetchItem('/admin/description_texts', descriptionId);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.postId && prevState.isInitialState) {
+    if (prevProps.descriptionId && prevState.isInitialState) {
       this.setState({
-        postName: this.props.selectedEntity.name,
-        content: this.props.selectedEntity.content,
+        name: this.props.selectedEntity.name,
+        description: this.props.selectedEntity.description,
         isInitialState: false
       })
     }
   }
 
   render() {
-    if (this.props.shouldRedirectToList) return(<Redirect to='/admin/news'/>);
+    if (this.props.shouldRedirectToList) return(<Redirect to='/admin/page-descriptions'/>);
 
     return(
       <div className='edit-page'>
@@ -44,12 +44,12 @@ class PostEditorComponent extends React.Component {
         </div>
         <div className='edit-form'>
           <form onSubmit={ this.handleSubmit }>
-            <label htmlFor='postName'>Название</label>
-            <input name='postName' id='postName' value={ this.state.postName }
+            <label htmlFor='name'>Название</label>
+            <input name='name' id='name' value={ this.state.name }
                    required onChange={ this.handleInputChange }/>
-            <label htmlFor='content'>Текст новости</label>
+            <label htmlFor='description'>Текст описания страницы</label>
             <Editor
-              id='content'
+              id='description'
               init={{
                 menubar: false,
                 plugins: [
@@ -62,7 +62,7 @@ class PostEditorComponent extends React.Component {
                   alignleft aligncenter alignright alignjustify | \
                   bullist numlist outdent indent | removeformat | help'
               }}
-              value={ this.state.content }
+              value={ this.state.description }
               onEditorChange={ this.handleEditorChange } />
             <input type='submit' value='Сохранить'/>
           </form>
@@ -76,17 +76,17 @@ class PostEditorComponent extends React.Component {
     this.setState({ [target.name]: target.value });
   }
 
-  handleEditorChange(content, editor) {
-    this.setState({ content });
+  handleEditorChange(description, editor) {
+    this.setState({ description });
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    const { postName, content } = this.state;
+    const { name, description } = this.state;
 
     const csrf = document.querySelector('[name=csrf-token]').content;
-    this.props.sendItem('/admin/posts', csrf, { id: this.props.postId, name: postName, content });
+    this.props.sendItem('/admin/description_texts', csrf, { id: this.props.descriptionId, name, description });
   }
 }
 
@@ -101,4 +101,4 @@ const mapDispatchToProps = {
   fetchItem, sendItem
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostEditorComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(DescriptionEditorComponent);

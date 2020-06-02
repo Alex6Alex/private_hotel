@@ -6,7 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 
 import { fetchItem, sendItem } from '../../actions/admin/entities_actions';
 
-class PostEditorComponent extends React.Component {
+class SpecialOfferEditorComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -18,14 +18,14 @@ class PostEditorComponent extends React.Component {
   }
 
   componentDidMount() {
-    document.title = 'Новость';
+    document.title = 'Спецпредложение';
 
-    const { postId } = this.props;
-    if (postId) this.props.fetchItem('/admin/posts', postId);
+    const { specialOfferId } = this.props;
+    if (specialOfferId) this.props.fetchItem('/admin/special_offers', specialOfferId);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.postId && prevState.isInitialState) {
+    if (prevProps.specialOfferId && prevState.isInitialState) {
       this.setState({
         postName: this.props.selectedEntity.name,
         content: this.props.selectedEntity.content,
@@ -35,7 +35,7 @@ class PostEditorComponent extends React.Component {
   }
 
   render() {
-    if (this.props.shouldRedirectToList) return(<Redirect to='/admin/news'/>);
+    if (this.props.shouldRedirectToList) return(<Redirect to='/admin/special-offers-list'/>);
 
     return(
       <div className='edit-page'>
@@ -86,7 +86,7 @@ class PostEditorComponent extends React.Component {
     const { postName, content } = this.state;
 
     const csrf = document.querySelector('[name=csrf-token]').content;
-    this.props.sendItem('/admin/posts', csrf, { id: this.props.postId, name: postName, content });
+    this.props.sendItem('/admin/special_offers', csrf, { id: this.props.specialOfferId, name: postName, content });
   }
 }
 
@@ -101,4 +101,4 @@ const mapDispatchToProps = {
   fetchItem, sendItem
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostEditorComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(SpecialOfferEditorComponent);

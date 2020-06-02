@@ -65,23 +65,23 @@ class ReviewsComponent extends React.Component {
     return(
       <div className='last-reviews'>
         <h2>Последние отзывы посетителей</h2>
-        {
-          this.props.reviews.map(review => {
-            return(
-              <div key={ review.id } className='reviews-list'>
-                <div className='review'>
+        <div className='reviews-list'>
+          {
+            this.props.reviews.map(review => {
+              return(
+                <div key={ review.id } className='review'>
                   <div className='review-info'>
                     <p>{ review.guest_name }</p>
-                    <p>{ review.created_at }</p>
+                    <p>{ new Date(review.created_at).toLocaleString() }</p>
                   </div>
                   <div className='review-body'>
                     <p>{ review.content }</p>
                   </div>
                 </div>
-              </div>
-            )
-          })
-        }
+              )
+            })
+          }
+        </div>
       </div>
     )
   }

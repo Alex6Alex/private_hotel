@@ -1,0 +1,52 @@
+.admin-reviews {
+  display: grid;
+  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-areas:
+    ". page-description ."
+    ". reviews-list .";
+
+  .reviews-list {
+    grid-area: reviews-list;
+    text-align: center;
+
+    .review {
+      display: inline-block;
+      text-align: justify;
+      border-radius: 5px;
+      padding: 0 20px;
+      margin: 10px 0;
+      width: 1150px;
+      background-color: #cbd3ff;
+
+      &.not-approved {
+        background-color: #e6e6e6;
+      }
+
+      .review-info {
+        p {
+          display: inline-block;
+          font-weight: bold;
+          margin-bottom: 0;
+          width: 50%;
+
+          &:first-child {
+            float: left;
+          }
+
+          &:last-child {
+            text-align: right;
+          }
+        }
+      }
+
+      .admin-actions {
+        text-align: right;
+
+        i {
+          cursor: pointer;
+          margin: 10px 5px;
+        }
+      }
+    }
+  }
+}

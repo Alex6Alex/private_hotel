@@ -28,6 +28,11 @@ Rails.application.routes.draw do
     resources(:posts)
     resources(:hotel_rooms)
     resources(:services)
+    resources(:special_offers)
+    resources(:description_texts)
+
+    resources(:reviews, only: %i[index destroy])
+    put('reviews/:id/approve', to: 'reviews#approve')
   end
 
   scope('/admin') do

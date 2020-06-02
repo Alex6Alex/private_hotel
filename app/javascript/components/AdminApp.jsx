@@ -57,6 +57,46 @@ export default class extends React.Component {
                     editUrl='/admin/edit-service'
                   />)
               }} />
+              <Route exact path='/admin/new-service' component={ Components.ServiceEditorComponent } />
+              <Route path='/admin/edit-service/:id' render={
+                ({ match }) => {
+                  const { id } = match.params;
+                  return <Components.ServiceEditorComponent serviceId={ id } />
+                }}
+              />
+              <Route exact path='/admin/special-offers-list' render={ () => {
+                return(
+                  <Components.ItemListComponent
+                    title='Список спецпредложений'
+                    url='/admin/special_offers'
+                    createNewUrl='/admin/new-special-offer'
+                    editUrl='/admin/edit-special-offer'
+                  />)
+              }} />
+              <Route exact path='/admin/new-special-offer' component={ Components.SpecialOfferEditorComponent } />
+              <Route path='/admin/edit-special-offer/:id' render={
+                ({ match }) => {
+                  const { id } = match.params;
+                  return <Components.SpecialOfferEditorComponent specialOfferId={ id } />
+                }}
+              />
+              <Route exact path='/admin/page-descriptions' render={ () => {
+                return(
+                  <Components.ItemListComponent
+                    title='Список описаний страниц'
+                    url='/admin/description_texts'
+                    createNewUrl='/admin/new-page-description'
+                    editUrl='/admin/edit-page-description'
+                  />)
+              }} />
+              <Route exact path='/admin/new-page-description' component={ Components.DescriptionEditorComponent } />
+              <Route path='/admin/edit-page-description/:id' render={
+                ({ match }) => {
+                  const { id } = match.params;
+                  return <Components.DescriptionEditorComponent descriptionId={ id } />
+                }}
+              />
+              <Route exact path='/admin/reviews-list' component={ Components.ReviewsComponent } />
             </Switch>
           </BrowserRouter>
         </Components.AdminAuthentication>

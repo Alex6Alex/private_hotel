@@ -5,6 +5,10 @@ import HomePageComponent from './HomePageComponent';
 import ItemListComponent from './ItemListComponent';
 import PostEditorComponent from './PostEditorComponent';
 import RoomEditorComponent from './RoomEditorComponent';
+import ServiceEditorComponent from './ServiceEditorComponent';
+import SpecialOfferEditorComponent from './SpecialOfferEditorComponent';
+import DescriptionEditorComponent from './DescriptionEditorComponent';
+import ReviewsComponent from './ReviewsComponent';
 
 export {
   AdminAuthentication,
@@ -13,5 +17,9 @@ export {
   HomePageComponent,
   ItemListComponent,
   PostEditorComponent,
-  RoomEditorComponent
+  RoomEditorComponent,
+  ServiceEditorComponent,
+  SpecialOfferEditorComponent,
+  DescriptionEditorComponent,
+  ReviewsComponent
 }

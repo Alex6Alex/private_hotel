@@ -52,7 +52,7 @@ class RoomEditorComponent extends React.Component {
     if (this.props.shouldRedirectToList) return(<Redirect to='/admin/rooms'/>);
 
     return(
-      <div className='post-edit-page'>
+      <div className='edit-page'>
         <div className='page-description'>
           <h2>Добавление новости</h2>
         </div>
