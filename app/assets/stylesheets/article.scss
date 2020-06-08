@@ -1,16 +1,11 @@
 .info-article {
   display: grid;
-  grid-template-columns: 1fr 700px 500px 1fr;
+  grid-template-columns: 1fr 1200px 1fr;
   grid-template-areas:
-    ". page-description page-description ."
-    ". special-offer-info special-offer-image .";
+    ". page-description ."
+    ". special-offer-info .";
 
   .special-offer-info {
     grid-area: special-offer-info;
-  }
-
-  img {
-    grid-area: special-offer-image;
-    width: 450px;
   }
 }

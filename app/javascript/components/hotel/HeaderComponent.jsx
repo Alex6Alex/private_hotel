@@ -46,7 +46,7 @@ class HeaderComponent extends React.Component {
   renderAddress() {
     return(
       <div className='address'>
-        <span>г. севастополь, ул. название 2</span>
+        <span>г. севастополь, ул. ленина 14</span>
       </div>
     );
   }

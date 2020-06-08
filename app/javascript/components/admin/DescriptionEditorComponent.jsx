@@ -50,6 +50,7 @@ class DescriptionEditorComponent extends React.Component {
             <label htmlFor='description'>Текст описания страницы</label>
             <Editor
               id='description'
+              outputFormat='text'
               init={{
                 menubar: false,
                 plugins: [

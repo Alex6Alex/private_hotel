@@ -54,8 +54,9 @@ class HomePageComponent extends React.Component {
           this.props.newsList.map((peaceOfNews) => {
             return(
               <div className='detail' key={ peaceOfNews.id }>
-                <img alt='detail-preview' src={ peaceOfNews.image_link }/>
-                <p>{ peaceOfNews.content }</p>
+                <p className='title'>{ peaceOfNews.name }</p>
+                <div className='content'
+                     dangerouslySetInnerHTML={{ __html: peaceOfNews.content }} />
                 <Link to={ `news/${peaceOfNews.id}` }>
                   <i className="fas fa-arrow-right"/> Подробнее
                 </Link>

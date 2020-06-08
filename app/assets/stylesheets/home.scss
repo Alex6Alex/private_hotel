@@ -10,11 +10,11 @@ article {
 
   .details {
     grid-area: details;
-    display: block;
     text-align: center;
 
     .detail {
       display: inline-block;
+      vertical-align: top;
       width: 330px;
       margin: 0 10px 0 10px;
       text-align: justify;
@@ -22,10 +22,37 @@ article {
       background-color: #eef6ff;
       border-radius: 5px;
 
-      img {
-        object-fit: cover;
-        height: 240px;
-        width: 330px;
+      .title {
+        text-align: center;
+        font-size: 14pt;
+        margin: 3px;
+      }
+
+      .content {
+        display: grid;
+        grid-template-areas:
+          "image"
+          "description";
+
+        * {
+          display: none;
+        }
+
+        p {
+          &:first-child {
+            display: block;
+            grid-area: image;
+          }
+
+          &:nth-child(2) {
+            display: block;
+            grid-area: description;
+          }
+
+          img {
+            max-width: 330px;
+          }
+        }
       }
 
       a {

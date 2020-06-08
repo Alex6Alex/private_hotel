@@ -60,8 +60,9 @@ class PostEditorComponent extends React.Component {
                 toolbar:
                   'undo redo | formatselect | bold italic | \
                   alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help'
+                  bullist numlist outdent indent | removeformat | image | help'
               }}
+              image_list='/images/Hotel1.jpg'
               value={ this.state.content }
               onEditorChange={ this.handleEditorChange } />
             <input type='submit' value='Сохранить'/>
