@@ -8,7 +8,7 @@ module Hotel
 
     def create
       review = Review.create(guest_name: params[:guest_name], email: params[:email], content: params[:content])
-      render_success_result({ review: review }, :created)
+      render_success_result({}, :created)
     end
   end
 end

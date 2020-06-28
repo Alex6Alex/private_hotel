@@ -30,8 +30,8 @@ class HomePageComponent extends React.Component {
           { this.renderDescriptionText() }
         </div>
         { this.renderDetails() }
-        <div className='find-us-info'>
-          <h2 id='how_to_find'>Как нас найти</h2>
+        <div id='how_to_find' className='find-us-info'>
+          <h2>Как нас найти</h2>
           { this.props.mapComponent }
         </div>
       </article>

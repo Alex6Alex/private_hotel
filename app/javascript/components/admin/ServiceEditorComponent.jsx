@@ -8,9 +8,10 @@ class ServiceEditorComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { name: '', image_link: '', isInitialState: true };
+    this.state = { name: '', image_file: null, isInitialState: true };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFileInputChange = this.handleFileInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,7 +26,6 @@ class ServiceEditorComponent extends React.Component {
     if (prevProps.serviceId && prevState.isInitialState) {
       this.setState({
         name: this.props.selectedEntity.name,
-        image_link: this.props.selectedEntity.image_link,
         isInitialState: false
       })
     }
@@ -40,13 +40,13 @@ class ServiceEditorComponent extends React.Component {
           <h2>Добавление новости</h2>
         </div>
         <div className='edit-form'>
-          <form onSubmit={ this.handleSubmit }>
+          <form onSubmit={ this.handleSubmit } encType='multipart/form-data'>
             <label htmlFor='name'>Название</label>
             <input name='name' id='name' value={ this.state.name }
                    required onChange={ this.handleInputChange }/>
-            <label htmlFor='image_link'>Изображение</label>
-            <input name='image_link' id='image_link' value={ this.state.image_link }
-                   required onChange={ this.handleInputChange }/>
+            <label htmlFor='image_file'>Изображение</label>
+            <input name='image_file' id='image_file' required type='file'
+                   onChange={ this.handleFileInputChange }/>
             <input type='submit' value='Сохранить'/>
           </form>
         </div>
@@ -59,14 +59,19 @@ class ServiceEditorComponent extends React.Component {
     this.setState({ [target.name]: target.value });
   }
 
+  handleFileInputChange() {
+    const target = event.target;
+    this.setState({ [target.name]: target.files[0] });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
 
-    const { name, image_link } = this.state;
+    const { name, image_file } = this.state;
 
     const csrf = document.querySelector('[name=csrf-token]').content;
     this.props.sendItem('/admin/services', csrf, {
-      id: this.props.serviceId, name, image_link
+      id: this.props.serviceId, name, image_file
     });
   }
 }

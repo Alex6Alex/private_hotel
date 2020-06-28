@@ -15,7 +15,7 @@ export default (WrappedComponent) => {
     }
 
     mapComponent() {
-      const mapOptions = { center: [44.573087, 33.498725], zoom: 12 };
+      const mapOptions = { center: [44.612403, 33.525327], zoom: 12 };
       return(
         <YandexMapComponent
           id='yandex-map'
@@ -27,7 +27,7 @@ export default (WrappedComponent) => {
 
     onMapLoadHandler(map) {
       const placeMark = new window.ymaps.GeoObject({
-        geometry: { type: 'Point', coordinates: [44.573087, 33.498725] }
+        geometry: { type: 'Point', coordinates: [44.612403, 33.525327] }
       });
 
       map.geoObjects.add(placeMark);

@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import { sendBookOrder } from '../../../actions/book_orders_actions';
 
-// import FormValidator from '../../../validators/FormValidator';
-
 class RoomBookFormComponent extends React.Component {
   constructor(props) {
     super(props);

@@ -30,14 +30,17 @@ const fetchItem = (url, id) => (dispatch) => fetch(`${url}/${id}`)
   .then((json) => dispatch(receiveItem(json.data)));
 
 const sendItem = (url, csrf, data) => (dispatch) => {
-  const headers = new Headers(
-    { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrf }
-  );
-  const body = JSON.stringify(data);
+  const headers = new Headers({ 'X-CSRF-TOKEN': csrf });
+
+  let formData = new FormData();
+  for (const key in data) {
+    formData.append(key, data[key]);
+  }
+
   const method = data.id ? 'PUT' : 'POST';
   const apiUrl = data.id ? `${url}/${data.id}` : url;
 
-  fetch(apiUrl, { method, headers, body })
+  fetch(apiUrl, { method, headers, body: formData })
     .then((response) => response.json())
     .then((json) => {
       if (json.success) dispatch(saveItemSuccess())

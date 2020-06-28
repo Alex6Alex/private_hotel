@@ -55,7 +55,7 @@ class RoomsComponent extends React.Component {
           }
           <p>Цена за сутки: { room.day_price } { room.currency }</p>
         </div>
-        <a href='/' className='link-button'>Забронировать</a>
+        <Link className='link-button' to={ `/rooms/${room.id}` }>Забронировать</Link>
       </div>
     )
   }

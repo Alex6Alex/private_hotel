@@ -85,7 +85,6 @@ class RoomComponent extends React.Component {
 
   handleBookButtonClick() {
     this.setState({ showBookForm: true });
-    // this.props.bookFormComponent.scrollIntoForm();
   }
 }
 

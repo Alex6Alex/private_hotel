@@ -3,13 +3,9 @@ import { connect } from 'react-redux';
 
 import { fetchReviews, sendReview } from '../../actions/reviews_actions';
 
-import FormValidator from '../../validators/FormValidator';
-
 class ReviewsComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.validator = new FormValidator();
-
     this.state = { guest_name: '', email: '', content: '' };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -19,12 +15,13 @@ class ReviewsComponent extends React.Component {
   componentDidMount() {
     document.title = 'Отзывы | Гостевой дом «Авия»';
 
-    this.validator
-      .setRule('guest_name', { rule: 'minLengthRule', minLength: 4 })
-      .setRule('guest_name', { rule: 'formatRule', format: /^\D{4,30}$/gi })
-      .setRule('content', { rule: 'minLengthRule', minLength: 5 });
-
     this.props.fetchReviews();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!prevProps.reviewWasCreated && this.props.reviewWasCreated) {
+      this.setState({guest_name: '', email: '', content: ''})
+    }
   }
 
   render() {
@@ -40,6 +37,7 @@ class ReviewsComponent extends React.Component {
         </div>
         { this.renderReviewForm() }
         { !!this.props.reviews.length && this.renderLastReviews() }
+        { this.props.reviewWasCreated && this.renderSuccessMessage() }
       </div>
     )
   }
@@ -86,6 +84,14 @@ class ReviewsComponent extends React.Component {
     )
   }
 
+  renderSuccessMessage() {
+    return(
+      <div className='success-message'>
+        <p>Ваш отзыв был отправлен администрации отеля. Спасибо!</p>
+      </div>
+    )
+  }
+
   handleInputChange(event) {
     const target = event.target;
     this.setState({ [target.name]: target.value });
@@ -96,19 +102,16 @@ class ReviewsComponent extends React.Component {
 
     const { guest_name, email, content } = this.state;
 
-    let formValid = this.validator.check('guest_name', guest_name)
-      && this.validator.check('email', email)
-      && this.validator.check('content', content);
-
-    if (!formValid) return;
-
     const csrf = document.querySelector('[name=csrf-token]').content;
     this.props.sendReview({ guest_name, email, content, csrf });
   }
 }
 
 const mapStateToProps = (state) => {
-  return { reviews: state.reviewsReducer.reviews };
+  return {
+    reviews:          state.reviewsReducer.reviews,
+    reviewWasCreated: state.reviewsReducer.reviewWasCreated
+  };
 };
 
 const mapDispatchToProps = {

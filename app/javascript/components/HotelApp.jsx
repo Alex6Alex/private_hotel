@@ -10,7 +10,7 @@ export default class extends React.Component {
   render() {
     return (
       <Provider store={ configureStore() }>
-        <BrowserRouter>
+        <BrowserRouter forceRefresh={true}>
           <Components.HeaderComponent />
           <Switch>
             <Route exact path='/' component={ Components.HomePageComponent } />

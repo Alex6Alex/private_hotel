@@ -3,8 +3,6 @@ import React from 'react';
 
 // import { sendBookOrder } from '../../actions/book_orders_actions';
 
-// import FormValidator from '../../validators/FormValidator';
-
 class ConferenceRoomBookFormComponent extends React.Component {
   constructor(props) {
     super(props);

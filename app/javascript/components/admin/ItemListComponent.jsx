@@ -47,7 +47,6 @@ class PostsListComponent extends React.Component {
     return(
       <div className='list'>
         <div className='list-header'>
-          <div>ID</div>
           <div>Название</div>
           <div>Дата создания</div>
           <div>Дата обновления</div>
@@ -61,7 +60,6 @@ class PostsListComponent extends React.Component {
   renderItemRow(item) {
     return(
       <div key={ item.id } className='list-item'>
-        <div>{ item.id }</div>
         <div>{ item.name }</div>
         <div>{ new Date(item.created_at).toLocaleString() }</div>
         <div>{ new Date(item.updated_at).toLocaleString() }</div>

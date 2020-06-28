@@ -53,21 +53,20 @@ class HeaderComponent extends React.Component {
 
   renderContactPhone() {
     const contact = this.props.contacts.find(contact => contact.priority);
-    const phone = contact !== undefined ? contact.phone : null;
+    const phone = contact !== undefined ? contact.phone : '';
+    const formattedPhone = phone.substr(1);
 
     return(
       <div className='phone'>
-        <a className='direct-call' href='https://wa.me/79101510855'>
+        <a className='direct-call' href={ `https://t-do.ru/${formattedPhone}` }>
           <img alt='telegram' src='/images/tele_icon.png'/>
         </a>
-        <a className='direct-call' href='https://wa.me/79101510855'>
+        <a className='direct-call' href={ `viber://chat?number=${phone}` }>
           <img alt='viber' src='/images/viber_icon.png'/>
         </a>
-        <a className='direct-call' href='https://wa.me/79101510855'>
+        <a className='direct-call' href={ `https://wa.me/${phone}` }>
           <img alt='whatsapp' src='/images/whats_icon.png'/>
         </a>
-        {/*<span className='number'>+7(978)123-45-67</span>*/}
-        {/*// TODO: use formats for phone*/}
         <span className='number'>{ phone }</span>
       </div>
     );

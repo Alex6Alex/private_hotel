@@ -4,10 +4,9 @@ const receiveReviews = (json) => ({
   payload: json,
 });
 
-export const RECEIVE_NEW_REVIEW = 'RECEIVE_NEW_REVIEW';
-const receiveNewReview = (json) => ({
-  type: RECEIVE_NEW_REVIEW,
-  payload: json,
+export const REVIEW_WAS_CREATED = 'REVIEW_WAS_CREATED';
+const reviewWasCreated = () => ({
+  type: REVIEW_WAS_CREATED,
 });
 
 const sendReview = (data) => (dispatch) => {
@@ -20,7 +19,7 @@ const sendReview = (data) => (dispatch) => {
 
   fetch('/hotel/reviews', { method: 'POST', headers, body })
     .then((response) => response.json())
-    .then((json) => dispatch(receiveNewReview(json.data)));
+    .then(() => dispatch(reviewWasCreated()));
 };
 
 const fetchReviews = () => (dispatch) => fetch('/hotel/reviews')
