@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     get('special-offers/:id', to: 'special_offers#show')
 
     get('contacts', to: 'contacts#index')
+
+    get('photos', to: 'photos#index')
   end
 
   namespace(:admin, default: { format: :json }) do

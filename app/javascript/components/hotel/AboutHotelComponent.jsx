@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { fetchDescriptionAboutHotel } from '../../actions/descriptions_actions';
+import { fetchPhotos } from '../../actions/photos_actions';
 
 class AboutHotelComponent extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class AboutHotelComponent extends React.Component {
     document.title = 'Об отеле | Гостевой дом «Авия»';
 
     this.props.fetchDescriptionAboutHotel();
+    this.props.fetchPhotos();
   }
 
   render() {
@@ -53,10 +55,13 @@ class AboutHotelComponent extends React.Component {
   }
 
   renderPhotoGallery() {
+    const { photos } = this.props;
+    if (!this.props.photos.length) return (<p>Фотографии еще не загружены</p>);
+
     return(
       <div id='photo-gallery' className='gallery-table'>
         {
-          this.photos.map((photoSrc, index) => {
+          this.props.photos.map((photoSrc, index) => {
             return(
               <img key={ index } src={ photoSrc } alt='hotel-photo'
                    onClick={ () => this.openPhoto(index) }/>
@@ -75,11 +80,11 @@ class AboutHotelComponent extends React.Component {
         <div className='modal'>
           <i className='close-photo fas fa-times'
              onClick={ () => this.setState({ showPhotoModalWindow: false }) }/>
-          <img src={ this.photos[this.state.photoModalIndex] } alt='zoomed-hotel-photo'/>
+          <img src={ this.props.photos[this.state.photoModalIndex] } alt='zoomed-hotel-photo'/>
           <div className='photo-control'>
             <i className='fas fa-arrow-left'
                onClick={ () => this.openPhoto(this.state.photoModalIndex - 1) }/>
-            <span>Фото { this.state.photoModalIndex + 1 } из { this.photos.length }</span>
+            <span>Фото { this.state.photoModalIndex + 1 } из { this.props.photos.length }</span>
             <i className='fas fa-arrow-right'
                onClick={ () => this.openPhoto(this.state.photoModalIndex + 1) }/>
           </div>
@@ -89,7 +94,7 @@ class AboutHotelComponent extends React.Component {
   }
 
   openPhoto(index) {
-    let lastPhotoIndex = this.photos.length - 1;
+    let lastPhotoIndex = this.props.photos.length - 1;
     let photoModalIndex = index;
 
     if (photoModalIndex > lastPhotoIndex) photoModalIndex = 0;
@@ -101,12 +106,13 @@ class AboutHotelComponent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    aboutHotel: state.descriptionsReducer.aboutHotel
+    aboutHotel: state.descriptionsReducer.aboutHotel,
+    photos: state.photosReducer.photos,
   };
 };
 
 const mapDispatchToProps = {
-  fetchDescriptionAboutHotel
+  fetchDescriptionAboutHotel, fetchPhotos
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AboutHotelComponent);

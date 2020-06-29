@@ -21,6 +21,12 @@ class RoomComponent extends React.Component {
     fetchRoom(roomId);
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!prevProps.room.name && this.props.room.name) {
+      document.title = `${this.props.room.name} | Гостевой дом «Авия»`;
+    }
+  }
+
   render() {
     return(
       <div className='room'>

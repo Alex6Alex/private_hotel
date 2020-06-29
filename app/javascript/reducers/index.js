@@ -8,6 +8,8 @@ import newsReducer from './news_reducer';
 import servicesReducer from './services_reducer';
 import bookOrdersReducer from './book_orders_reducer';
 import specialOffersReducer from './special_offers_reducer';
+import articleReducer from './article_reducer';
+import photosReducer from './photos_reducer';
 
 export default combineReducers({
   hotelRoomsReducer,
@@ -18,4 +20,6 @@ export default combineReducers({
   servicesReducer,
   bookOrdersReducer,
   specialOffersReducer,
+  articleReducer,
+  photosReducer,
 });

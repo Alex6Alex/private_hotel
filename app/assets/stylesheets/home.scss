@@ -11,59 +11,6 @@ article {
   .details {
     grid-area: details;
     text-align: center;
-
-    .detail {
-      display: inline-block;
-      vertical-align: top;
-      width: 330px;
-      margin: 0 10px 0 10px;
-      text-align: justify;
-      padding: 20px;
-      background-color: #eef6ff;
-      border-radius: 5px;
-
-      .title {
-        text-align: center;
-        font-size: 14pt;
-        margin: 3px;
-      }
-
-      .content {
-        display: grid;
-        grid-template-areas:
-          "image"
-          "description";
-
-        * {
-          display: none;
-        }
-
-        p {
-          &:first-child {
-            display: block;
-            grid-area: image;
-          }
-
-          &:nth-child(2) {
-            display: block;
-            grid-area: description;
-          }
-
-          img {
-            max-width: 330px;
-          }
-        }
-      }
-
-      a {
-        color: #696969;
-        text-decoration: none;
-
-        &:hover {
-          color: #3e3e3e;
-        }
-      }
-    }
   }
 
   .find-us-info {

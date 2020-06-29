@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_081054) do
+ActiveRecord::Schema.define(version: 2020_06_29_202130) do
 
   create_table "administrators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 100, null: false
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2020_06_01_081054) do
     t.index ["hotel_room_id"], name: "fk_rails_ca9fd9a4fa"
   end
 
+  create_table "conference_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.text "description", null: false
+    t.string "plan_image_link", limit: 250, null: false
+    t.integer "person_capacity", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 100, null: false
     t.string "phone", limit: 100, null: false
@@ -49,6 +58,10 @@ ActiveRecord::Schema.define(version: 2020_06_01_081054) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "hotel_photos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "image_link", limit: 250, null: false
+  end
+
   create_table "hotel_room_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "hotel_room_id", null: false
     t.string "image_link", limit: 100, null: false
@@ -59,7 +72,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_081054) do
 
   create_table "hotel_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 100, null: false
-    t.text "description", size: :tiny, null: false
+    t.text "description", null: false
     t.decimal "day_price", precision: 10, null: false
     t.string "currency", limit: 3, null: false
     t.integer "person_capacity", null: false

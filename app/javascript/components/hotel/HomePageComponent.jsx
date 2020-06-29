@@ -8,6 +8,8 @@ import { fetchNewsList } from '../../actions/news_actions';
 import withSlider from './hoc/withSlider';
 import withMap from './hoc/withMap';
 
+import DetailComponent from './DetailComponent';
+
 class HomePageComponent extends React.Component {
   componentDidMount() {
     document.title = 'Гостевой дом «Авия»';
@@ -52,16 +54,7 @@ class HomePageComponent extends React.Component {
         <h2>Последние новости</h2>
         {
           this.props.newsList.map((peaceOfNews) => {
-            return(
-              <div className='detail' key={ peaceOfNews.id }>
-                <p className='title'>{ peaceOfNews.name }</p>
-                <div className='content'
-                     dangerouslySetInnerHTML={{ __html: peaceOfNews.content }} />
-                <Link to={ `news/${peaceOfNews.id}` }>
-                  <i className="fas fa-arrow-right"/> Подробнее
-                </Link>
-              </div>
-            )
+            return(<DetailComponent url='/news' key={ peaceOfNews.id } detail={ peaceOfNews } />)
           })
         }
       </div>

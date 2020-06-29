@@ -30,13 +30,19 @@ export default class extends React.Component {
             <Route path='/special-offers/:id' render={
               ({ match }) => {
                 const { id } = match.params;
-                return <Components.Article offerId={ id }/>
+                return <Components.Article
+                  title='Спецпредложение'
+                  url='/hotel/special-offers'
+                  elementId={ id }/>
               }}
             />
             <Route path='/news/:id' render={
               ({ match }) => {
                 const { id } = match.params;
-                return <Components.Article elementId={ id }/>
+                return <Components.Article
+                  title='Новость'
+                  url='/hotel/news'
+                  elementId={ id }/>
               }}
             />
             <Route path='*' component={ Components.NotFoundComponent } />

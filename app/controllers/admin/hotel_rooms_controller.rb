@@ -42,6 +42,8 @@ module Admin
         count_of_rooms:  params[:count_of_rooms]
       )
       render_success_result(hotel_room)
+    rescue StandardError => err
+      puts err.message
     end
 
     def destroy

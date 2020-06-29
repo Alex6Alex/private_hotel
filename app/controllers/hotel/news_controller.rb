@@ -7,7 +7,7 @@ module Hotel
     end
 
     def show
-      render_success_result(news: Post.find_by(id: params[:id]))
+      render_success_result(Post.find_by(id: params[:id]))
     end
   end
 end

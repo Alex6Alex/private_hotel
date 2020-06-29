@@ -64,6 +64,7 @@ class RoomEditorComponent extends React.Component {
             <label htmlFor='description'>Описание номера</label>
             <Editor
               id='description'
+              outputFormat='text'
               init={{
                 menubar: false,
                 plugins: [
