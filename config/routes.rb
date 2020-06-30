@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
     get('hotel-photos', to: 'hotel_photos#index')
     post('hotel-photos', to: 'hotel_photos#create')
+    delete('hotel-photos/:id', to: 'hotel_photos#destroy')
 
     resources(:reviews, only: %i[index destroy])
     put('reviews/:id/approve', to: 'reviews#approve')

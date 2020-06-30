@@ -25,13 +25,13 @@ module Admin
     end
 
     def destroy
-      # service = Service.find_by(id: params[:id])
-      # raise('incorrect id') if service.nil?
-      #
-      # FileUtils.remove_file([Rails.public_path, service.image_link].join)
-      #
-      # service.delete
-      # render_success_result({})
+      hotel_photo = HotelPhoto.find_by(id: params[:id])
+      raise('incorrect id') if hotel_photo.nil?
+
+      FileUtils.remove_file([Rails.public_path, hotel_photo.image_link].join)
+
+      hotel_photo.delete
+      render_success_result({})
     end
   end
 end

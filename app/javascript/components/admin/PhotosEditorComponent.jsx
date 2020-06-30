@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPhotos, sendPhoto } from '../../actions/admin/hotel_photos_actions';
+import { fetchPhotos, sendPhoto, deletePhoto } from '../../actions/admin/hotel_photos_actions';
 
 class PhotosEditorComponent extends React.Component {
   constructor(props) {
@@ -11,6 +11,8 @@ class PhotosEditorComponent extends React.Component {
 
     this.handleFileInputChange = this.handleFileInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.fileInputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -29,7 +31,8 @@ class PhotosEditorComponent extends React.Component {
           <form onSubmit={ this.handleSubmit } encType='multipart/form-data'>
             <label htmlFor='hotel_photo'>Новое изображение</label>
             <input name='hotel_photo' id='hotel_photo' type='file'
-                   required onChange={ this.handleFileInputChange }/>
+                   required onChange={ this.handleFileInputChange }
+                   ref={this.fileInputRef}/>
             <input type='submit' value='Сохранить'/>
           </form>
         </div>
@@ -39,7 +42,11 @@ class PhotosEditorComponent extends React.Component {
             {
               this.props.hotelPhotos.map(photo => {
                 return(
-                  <img key={ photo.id } src={ photo.image_link } alt='hotel-photo'/>
+                  <div className='photo-block' key={ photo.id }>
+                    <img src={ photo.image_link } alt='hotel-photo'/>
+                    <i className='fas fa-trash-alt delete-btn'
+                       onClick={ () => this.deletePhoto(photo) }/>
+                  </div>
                 )
               })
             }
@@ -49,7 +56,7 @@ class PhotosEditorComponent extends React.Component {
     )
   }
 
-  handleFileInputChange() {
+  handleFileInputChange(event) {
     const target = event.target;
     this.setState({ [target.name]: target.files[0] });
   }
@@ -61,6 +68,12 @@ class PhotosEditorComponent extends React.Component {
 
     const csrf = document.querySelector('[name=csrf-token]').content;
     this.props.sendPhoto('/admin/hotel-photos', csrf, { hotel_photo });
+    this.fileInputRef.current.value = null;
+  }
+
+  deletePhoto(photo) {
+    const csrf = document.querySelector('[name=csrf-token]').content;
+    this.props.deletePhoto('/admin/hotel-photos', csrf, { id: photo.id });
   }
 }
 
@@ -69,7 +82,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  fetchPhotos, sendPhoto
+  fetchPhotos, sendPhoto, deletePhoto
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhotosEditorComponent);
