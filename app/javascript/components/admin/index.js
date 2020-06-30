@@ -9,6 +9,7 @@ import ServiceEditorComponent from './ServiceEditorComponent';
 import SpecialOfferEditorComponent from './SpecialOfferEditorComponent';
 import DescriptionEditorComponent from './DescriptionEditorComponent';
 import ReviewsComponent from './ReviewsComponent';
+import PhotosEditorComponent from './PhotosEditorComponent';
 
 export {
   AdminAuthentication,
@@ -21,5 +22,6 @@ export {
   ServiceEditorComponent,
   SpecialOfferEditorComponent,
   DescriptionEditorComponent,
-  ReviewsComponent
+  ReviewsComponent,
+  PhotosEditorComponent,
 }

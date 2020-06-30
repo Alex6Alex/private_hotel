@@ -8,18 +8,6 @@ class AboutHotelComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.photos = [
-      'images/Hotel1.jpg',
-      'images/Hotel2.jpg',
-      'images/Hotel3.jpg',
-      'images/Hotel4.jpg',
-      'images/Hotel1.jpg',
-      'images/Hotel2.jpg',
-      'images/Hotel3.jpg',
-      'images/Hotel4.jpg',
-      'images/Hotel2.jpg'
-    ];
-
     this.state = { photoModalIndex: 0, showPhotoModalWindow: false };
   }
 
@@ -55,15 +43,14 @@ class AboutHotelComponent extends React.Component {
   }
 
   renderPhotoGallery() {
-    const { photos } = this.props;
     if (!this.props.photos.length) return (<p>Фотографии еще не загружены</p>);
 
     return(
       <div id='photo-gallery' className='gallery-table'>
         {
-          this.props.photos.map((photoSrc, index) => {
+          this.props.photos.map((photo, index) => {
             return(
-              <img key={ index } src={ photoSrc } alt='hotel-photo'
+              <img key={ photo.id } src={ photo.image_link } alt='hotel-photo'
                    onClick={ () => this.openPhoto(index) }/>
             )
           })
@@ -80,7 +67,7 @@ class AboutHotelComponent extends React.Component {
         <div className='modal'>
           <i className='close-photo fas fa-times'
              onClick={ () => this.setState({ showPhotoModalWindow: false }) }/>
-          <img src={ this.props.photos[this.state.photoModalIndex] } alt='zoomed-hotel-photo'/>
+          <img src={ this.props.photos[this.state.photoModalIndex].image_link } alt='zoomed-hotel-photo'/>
           <div className='photo-control'>
             <i className='fas fa-arrow-left'
                onClick={ () => this.openPhoto(this.state.photoModalIndex - 1) }/>

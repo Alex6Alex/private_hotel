@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     resources(:special_offers)
     resources(:description_texts)
 
+    get('hotel-photos', to: 'hotel_photos#index')
+    post('hotel-photos', to: 'hotel_photos#create')
+
     resources(:reviews, only: %i[index destroy])
     put('reviews/:id/approve', to: 'reviews#approve')
   end

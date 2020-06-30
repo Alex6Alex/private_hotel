@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   rescue_from(StandardError) do |exc|
+    puts exc.message
     render_failed_result(exc.message, :internal_server_error)
   end
 

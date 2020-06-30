@@ -97,6 +97,7 @@ export default class extends React.Component {
                 }}
               />
               <Route exact path='/admin/reviews-list' component={ Components.ReviewsComponent } />
+              <Route exact path='/admin/photos' component={ Components.PhotosEditorComponent } />
             </Switch>
           </BrowserRouter>
         </Components.AdminAuthentication>
@@ -104,9 +105,3 @@ export default class extends React.Component {
     );
   }
 }
-
-// Новости, Услуги, Отзывы гостей,
-// Номера(Классы номеров, Номера),
-// Питание (Категории блюд, блюда),
-// Страницы (текст главной страницы, страниц раздела Отель), Фото,
-// Заявки на бронирование.
