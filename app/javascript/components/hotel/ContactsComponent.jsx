@@ -5,7 +5,7 @@ import withMap from './hoc/withMap';
 
 class ContactsComponent extends React.Component {
   componentDidMount() {
-    document.title = 'Контакты | Гостевой дом «Авия»';
+    document.title = 'Контакты | Гостевой дом';
   }
 
   render() {

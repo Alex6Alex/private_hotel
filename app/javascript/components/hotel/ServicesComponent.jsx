@@ -5,7 +5,7 @@ import { fetchServices } from '../../actions/services_actions';
 
 class ServicesComponent extends React.Component {
   componentDidMount() {
-    document.title = 'Услуги | Гостевой дом «Авия»';
+    document.title = 'Услуги | Гостевой дом';
 
     this.props.fetchServices();
   }

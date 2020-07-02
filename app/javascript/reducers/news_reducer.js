@@ -9,7 +9,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_NEWS_LIST:
-      return { ...state, newsList: action.payload.news_list };
+      return { ...state, newsList: action.payload };
     default:
       return state;
   }

@@ -13,9 +13,11 @@ export default (state = initialState, action) => {
     case RECEIVE_REVIEWS:
       return { ...state, entities: action.payload };
     case APPROVE_REVIEW_SUCCESS:
-      let review = state.entities.find(review => review.id === action.payload.id);
-      if (review) review.approved = true;
-      return { ...state, entities: state.entities };
+      let entities = state.entities.map((review) => {
+        if (review.id === action.payload.id) review.approved = true;
+        return review;
+      });
+      return { ...state, entities };
     case REMOVE_REVIEW:
       return { ...state, entities: state.entities.filter(entity => entity.id !== action.payload.id) };
     default:

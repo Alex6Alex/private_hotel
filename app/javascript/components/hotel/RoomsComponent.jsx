@@ -6,7 +6,7 @@ import { fetchRooms } from '../../actions/rooms_actions';
 
 class RoomsComponent extends React.Component {
   componentDidMount() {
-    document.title = 'Номера | Гостевой дом «Авия»';
+    document.title = 'Номера | Гостевой дом';
 
     this.props.fetchRooms();
   }
@@ -41,10 +41,13 @@ class RoomsComponent extends React.Component {
   }
 
   renderRoom(room) {
+    const roomImages = room.hotel_room_images || [];
+    const imageLink = roomImages[0] ? roomImages[0].image_link : null;
+
     return(
       <div key={ room.id } className='room'>
         <div className='room-image'>
-          <img src={ room.image_links[0] } alt='room photo'/>
+          <img src={ imageLink } alt='room photo'/>
         </div>
         <Link className='room-name' to={ `/rooms/${room.id}` }>{ room.name }</Link>
         <div className='room-description'>

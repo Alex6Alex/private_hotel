@@ -1,5 +1,6 @@
 import React from 'react';
-// import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 
 import { fetchAdminProfile } from '../../actions/admin/authentication_actions';
@@ -11,7 +12,7 @@ class AdminAuthentication extends React.Component {
 
   render() {
     if (this.props.isAdminProfileLoading) return(<h1>Loading</h1>);
-    // if (!this.props.isLoggedIn) return(<Redirect to='/admin/login'/>);
+    if (!this.props.isLoggedIn) return(<Redirect to='/admin/login'/>);
 
     return this.props.children;
   }

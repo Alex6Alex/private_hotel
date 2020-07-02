@@ -3,9 +3,7 @@
 module Hotel
   class ContactsController < ApplicationController
     def index
-      contacts = Contact.all.as_json
-      contacts[1][:priority] = true
-      render_success_result(contacts: contacts)
+      render_success_result(data: Contact.all)
     end
   end
 end

@@ -7,7 +7,8 @@ module Admin
       raise(Admin::RequestHeaderNotSetError.build) if auth_header.blank?
 
       begin
-        token_payload = JWT.decode(auth_header.split(' ').last, ENV['JWT_TOKEN'])
+        auth_token = auth_header.split(' ').last
+        token_payload = JWT.decode(auth_token, ENV['JWT_TOKEN'])
       rescue JWT::DecodeError
         raise(Admin::WrongLoginCredentialsError.build)
       end
@@ -15,7 +16,7 @@ module Admin
       admin = Administrator.find_by(id: token_payload.first['admin_id'])
       raise(Admin::WrongLoginCredentialsError.build) if admin.nil?
 
-      render_success_result(admin: { id: admin.id, name: admin.name })
+      render_success_result(data: { admin: { id: admin.id, name: admin.name } })
     end
 
     def login
@@ -25,8 +26,10 @@ module Admin
       end
 
       render_success_result(
-        admin: { id: admin.id, name: admin.name },
-        token: JWT.encode({ admin_id: admin.id }, ENV['JWT_TOKEN'])
+        data: {
+          admin: { id: admin.id, name: admin.name },
+          token: JWT.encode({ admin_id: admin.id }, ENV['JWT_TOKEN'])
+        }
       )
     end
   end

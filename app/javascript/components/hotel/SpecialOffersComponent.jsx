@@ -8,7 +8,7 @@ import DetailComponent from './DetailComponent';
 
 class SpecialOffersComponent extends React.Component {
   componentDidMount() {
-    document.title = 'Спецпредложения | Гостевой дом «Авия»';
+    document.title = 'Спецпредложения | Гостевой дом';
 
     this.props.fetchSpecialOffers();
   }

@@ -6,6 +6,7 @@ import ItemListComponent from './ItemListComponent';
 import PostEditorComponent from './PostEditorComponent';
 import RoomEditorComponent from './RoomEditorComponent';
 import ServiceEditorComponent from './ServiceEditorComponent';
+import ConferenceRoomEditorComponent from './ConferenceRoomEditorComponent';
 import SpecialOfferEditorComponent from './SpecialOfferEditorComponent';
 import DescriptionEditorComponent from './DescriptionEditorComponent';
 import ReviewsComponent from './ReviewsComponent';
@@ -20,6 +21,7 @@ export {
   PostEditorComponent,
   RoomEditorComponent,
   ServiceEditorComponent,
+  ConferenceRoomEditorComponent,
   SpecialOfferEditorComponent,
   DescriptionEditorComponent,
   ReviewsComponent,

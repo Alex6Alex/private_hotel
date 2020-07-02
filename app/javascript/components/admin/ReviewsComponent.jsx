@@ -9,7 +9,7 @@ class ReviewsComponent extends React.Component {
   }
 
   componentDidMount() {
-    document.title = 'Отзывы';
+    document.title = 'Список отзывов';
 
     this.props.fetchReviews('/admin/reviews');
   }

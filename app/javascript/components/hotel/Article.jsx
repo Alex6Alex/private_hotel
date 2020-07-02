@@ -5,14 +5,14 @@ import { fetchArticle } from '../../actions/articles_actions';
 
 class Article extends React.Component {
   componentDidMount() {
-    document.title = `${this.props.title} | Гостевой дом «Авия»`;
+    document.title = `${this.props.title} | Гостевой дом`;
 
     this.props.fetchArticle(this.props.url, this.props.elementId);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (!prevProps.article.name && this.props.article.name) {
-      document.title = `${this.props.article.name} | Гостевой дом «Авия»`;
+      document.title = `${this.props.article.name} | Гостевой дом`;
     }
   }
 

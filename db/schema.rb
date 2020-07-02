@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_202130) do
+ActiveRecord::Schema.define(version: 2020_07_02_163942) do
 
   create_table "administrators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 100, null: false
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 2020_06_29_202130) do
     t.index ["hotel_room_id"], name: "fk_rails_ca9fd9a4fa"
   end
 
+  create_table "conference_room_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "conference_room_id", null: false
+    t.string "image_link", limit: 100, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conference_room_id", "image_link"], name: "conference_room_image_unique", unique: true
+  end
+
   create_table "conference_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 100, null: false
     t.text "description", null: false
@@ -49,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_06_29_202130) do
     t.string "email", limit: 100, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "priority", default: false
   end
 
   create_table "description_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -84,7 +93,6 @@ ActiveRecord::Schema.define(version: 2020_06_29_202130) do
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 100, null: false
-    t.string "image_link", limit: 100, null: false
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -108,12 +116,12 @@ ActiveRecord::Schema.define(version: 2020_06_29_202130) do
 
   create_table "special_offers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 100, null: false
-    t.string "image_link", limit: 100, null: false
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "book_orders", "hotel_rooms", on_update: :cascade
+  add_foreign_key "conference_room_images", "conference_rooms", on_update: :cascade, on_delete: :cascade
   add_foreign_key "hotel_room_images", "hotel_rooms", on_update: :cascade, on_delete: :cascade
 end

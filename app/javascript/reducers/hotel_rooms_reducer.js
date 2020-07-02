@@ -6,6 +6,7 @@ import {
 const initialState = {
   room: {
     description: '',
+    hotel_room_images: []
   },
   rooms: [],
 };
@@ -13,9 +14,9 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_ROOM:
-      return { ...state, room: action.payload.room };
+      return { ...state, room: action.payload };
     case RECEIVE_ROOMS:
-      return { ...state, rooms: action.payload.rooms };
+      return { ...state, rooms: action.payload };
     default:
       return state;
   }

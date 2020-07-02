@@ -10,6 +10,8 @@ class PostsListComponent extends React.Component {
   }
 
   componentDidMount() {
+    document.title = this.props.title;
+
     this.props.fetchItems(this.props.url);
   }
 
@@ -38,7 +40,7 @@ class PostsListComponent extends React.Component {
     if (!entities.length) return(
       <div className='list'>
         <p className='empty-list-message'>
-          На данный момент записей нет. Вы можете <Link to='/admin/new-post'>
+          На данный момент записей нет. Вы можете <Link to={ this.props.createNewUrl }>
           создать новую запись</Link>.
         </p>
       </div>

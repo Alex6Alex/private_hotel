@@ -12,10 +12,9 @@ class HeaderComponent extends React.Component {
           { name: 'схема проезда', link: '/#how_to_find' }
         ]
       },
-      { name: 'отель', link: '/', sub_items: [
+      { name: 'отель', link: '/about', sub_items: [
           { name: 'Об отеле', link: '/about', sub_items: [{ name: 'Фотогалерея', link: '/about#photo-gallery' }] },
           { name: 'Услуги и удобства', link: '/services' },
-          { name: 'Питание', link: '/' },
           { name: 'Отзывы гостей', link: '/reviews' }
         ]
       },

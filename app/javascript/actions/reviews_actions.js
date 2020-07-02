@@ -9,6 +9,12 @@ const reviewWasCreated = () => ({
   type: REVIEW_WAS_CREATED,
 });
 
+export const REVIEW_WAS_NOT_CREATED = 'REVIEW_WAS_NOT_CREATED';
+const reviewWasNotCreated = (json) => ({
+  type: REVIEW_WAS_NOT_CREATED,
+  payload: json
+});
+
 const sendReview = (data) => (dispatch) => {
   const headers = new Headers(
     { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': data.csrf },
@@ -19,7 +25,9 @@ const sendReview = (data) => (dispatch) => {
 
   fetch('/hotel/reviews', { method: 'POST', headers, body })
     .then((response) => response.json())
-    .then(() => dispatch(reviewWasCreated()));
+    .then((json) => {
+      dispatch(json.success ? reviewWasCreated() : reviewWasNotCreated(json.errors));
+    })
 };
 
 const fetchReviews = () => (dispatch) => fetch('/hotel/reviews')

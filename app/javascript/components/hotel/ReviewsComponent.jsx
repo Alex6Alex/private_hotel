@@ -13,7 +13,7 @@ class ReviewsComponent extends React.Component {
   }
 
   componentDidMount() {
-    document.title = 'Отзывы | Гостевой дом «Авия»';
+    document.title = 'Отзывы | Гостевой дом';
 
     this.props.fetchReviews();
   }
@@ -37,7 +37,7 @@ class ReviewsComponent extends React.Component {
         </div>
         { this.renderReviewForm() }
         { !!this.props.reviews.length && this.renderLastReviews() }
-        { this.props.reviewWasCreated && this.renderSuccessMessage() }
+        { this.props.showMessage && this.renderMessage() }
       </div>
     )
   }
@@ -47,13 +47,15 @@ class ReviewsComponent extends React.Component {
       <form className='review-form' onSubmit={ this.handleSubmit }>
         <label htmlFor='name'>Имя посетителя</label>
         <input type='text' name='guest_name' id='name' value={ this.state.guest_name }
-               onChange={ this.handleInputChange } required minLength={4} maxLength={30}/>
+               onChange={ this.handleInputChange } required
+               minLength={4} maxLength={30} pattern='^\D+'/>
         <label htmlFor='email'>Электронный адрес</label>
         <input type='email' name='email' id='email' value={ this.state.email }
                onChange={ this.handleInputChange } required/>
         <label htmlFor='content'>Отзыв</label>
         <textarea name='content' id='content' rows='6' value={ this.state.content }
-                  onChange={ this.handleInputChange } required minLength={5} maxLength={250}/>
+                  onChange={ this.handleInputChange } required
+                  minLength={5} maxLength={250}/>
         <input type='submit' value='Отправить отзыв'/>
       </form>
     )
@@ -84,10 +86,13 @@ class ReviewsComponent extends React.Component {
     )
   }
 
-  renderSuccessMessage() {
+  renderMessage() {
+    let message = 'Ваш отзыв был отправлен администрации отеля. Спасибо!';
+    if (this.props.errors.length) message = this.props.errors.join('. ');
+
     return(
       <div className='success-message'>
-        <p>Ваш отзыв был отправлен администрации отеля. Спасибо!</p>
+        <p>{ message }</p>
       </div>
     )
   }
@@ -108,10 +113,8 @@ class ReviewsComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    reviews:          state.reviewsReducer.reviews,
-    reviewWasCreated: state.reviewsReducer.reviewWasCreated
-  };
+  const { reviews, showMessage, errors } = state.reviewsReducer;
+  return { reviews, showMessage, errors };
 };
 
 const mapDispatchToProps = {

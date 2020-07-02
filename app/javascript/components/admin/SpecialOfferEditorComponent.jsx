@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Editor } from '@tinymce/tinymce-react';
 
 import { fetchItem, sendItem } from '../../actions/admin/entities_actions';
+import TinyMceEditorComponent from "./TinyMceEditorComponent";
 
 class SpecialOfferEditorComponent extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class SpecialOfferEditorComponent extends React.Component {
   }
 
   componentDidMount() {
-    document.title = 'Спецпредложение';
+    document.title = 'Редактирование спецпредложения';
 
     const { specialOfferId } = this.props;
     if (specialOfferId) this.props.fetchItem('/admin/special_offers', specialOfferId);
@@ -40,30 +41,19 @@ class SpecialOfferEditorComponent extends React.Component {
     return(
       <div className='edit-page'>
         <div className='page-description'>
-          <h2>Добавление новости</h2>
+          <h2>Редактирование спецпредложения</h2>
         </div>
         <div className='edit-form'>
           <form onSubmit={ this.handleSubmit }>
             <label htmlFor='postName'>Название</label>
             <input name='postName' id='postName' value={ this.state.postName }
-                   required onChange={ this.handleInputChange }/>
-            <label htmlFor='content'>Текст новости</label>
-            <Editor
-              id='content'
-              init={{
-                menubar: false,
-                plugins: [
-                  'advlist autolink lists link image',
-                  'charmap preview anchor searchreplace visualblocks',
-                  'insertdatetime media paste help wordcount'
-                ],
-                toolbar:
-                  'undo redo | formatselect | bold italic | \
-                  alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help'
-              }}
+                   required onChange={ this.handleInputChange }
+                   minLength={5} maxLength={100}/>
+            <label htmlFor='editor'>Текст новости</label>
+            <TinyMceEditorComponent
+              format='html'
               value={ this.state.content }
-              onEditorChange={ this.handleEditorChange } />
+              onEditorChange={ this.handleEditorChange }/>
             <input type='submit' value='Сохранить'/>
           </form>
         </div>

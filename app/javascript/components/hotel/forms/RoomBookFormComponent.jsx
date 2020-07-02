@@ -24,6 +24,10 @@ class RoomBookFormComponent extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+// clear form
+  }
+
   render() {
     return(
       <div className='book-form'>
@@ -34,8 +38,8 @@ class RoomBookFormComponent extends React.Component {
           { this.renderAccommodationSelectors() }
           { this.renderContactInfoInputs() }
           { this.renderTimeSelectors() }
-          { this.renderExtraServicesSelector() }
           { this.renderSubmitButton() }
+          { this.props.showMessage && this.renderMessage() }
         </form>
       </div>
     );
@@ -80,14 +84,16 @@ class RoomBookFormComponent extends React.Component {
         <div>
           <label htmlFor='accommodation-with-place'>Размещение в номере</label>
           <select id='accommodation-with-place' name='guestsWithPlace'
-                  value={ this.state.guestsWithPlace } onChange={ this.handleInputChange }>
+                  value={ this.state.guestsWithPlace } required
+                  onChange={ this.handleInputChange }>
             { allowedOptions }
           </select>
         </div>
         <div>
           <label htmlFor='accommodation-without-place'>Размещение без отдельного места</label>
           <select id='accommodation-without-place' name='guestsWithoutPlace'
-                  value={ this.state.guestsWithoutPlace } onChange={ this.handleInputChange }>
+                  value={ this.state.guestsWithoutPlace } required
+                  onChange={ this.handleInputChange }>
             { allowedOptions }
           </select>
         </div>
@@ -118,27 +124,18 @@ class RoomBookFormComponent extends React.Component {
         <div>
           <label htmlFor='time-in'>Время заезда</label>
           <select id='time-in' name='timeIn' value={ this.state.timeIn }
-                  onChange={ this.handleInputChange }>
+                  onChange={ this.handleInputChange } required>
             <option defaultValue>12:00</option>
             <option>13:00</option>
+            <option>14:00</option>
+            <option>15:00</option>
+            <option>16:00</option>
+            <option>17:00</option>
           </select>
         </div>
         <div>
           <label>Время выезда</label>
           <input readOnly required value='12:00'/>
-        </div>
-      </div>
-    )
-  }
-
-  renderExtraServicesSelector() {
-    return(
-      <div>
-        <div>
-          <label htmlFor='extra-service-picker'>Дополнительные услуги</label>
-          <select multiple id='extra-service-picker'>
-            <option>Трансфер</option>
-          </select>
         </div>
       </div>
     )
@@ -173,10 +170,24 @@ class RoomBookFormComponent extends React.Component {
       timeIn
     });
   }
+
+  renderMessage() {
+    let message = 'Информация о бронирования была отправлена. Спасибо!';
+    if (this.props.errors.length) message = this.props.errors.join('. ');
+
+    return(
+      <div className='success-message'>
+        <p>{ message }</p>
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
-  return { sentBookOrder: state.bookOrdersReducer.sentBookOrder };
+  return {
+    showMessage: state.bookOrdersReducer.showMessage,
+    errors: state.bookOrdersReducer.errors,
+  };
 };
 
 const mapDispatchToProps = {

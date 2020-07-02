@@ -9,7 +9,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_SPECIAL_OFFERS:
-      return { ...state, specialOffers: action.payload.special_offers };
+      return { ...state, specialOffers: action.payload };
     default:
       return state;
   }

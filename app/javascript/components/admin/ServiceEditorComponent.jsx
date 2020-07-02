@@ -8,7 +8,7 @@ class ServiceEditorComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { name: '', image_file: null, isInitialState: true };
+    this.state = { name: '', image_file: '', isInitialState: true };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFileInputChange = this.handleFileInputChange.bind(this);
@@ -37,15 +37,16 @@ class ServiceEditorComponent extends React.Component {
     return(
       <div className='edit-page'>
         <div className='page-description'>
-          <h2>Добавление новости</h2>
+          <h2>Редактирование сервиса</h2>
         </div>
         <div className='edit-form'>
           <form onSubmit={ this.handleSubmit } encType='multipart/form-data'>
             <label htmlFor='name'>Название</label>
             <input name='name' id='name' value={ this.state.name }
-                   required onChange={ this.handleInputChange }/>
+                   required onChange={ this.handleInputChange }
+                   minLength={3} maxLength={100}/>
             <label htmlFor='image_file'>Изображение</label>
-            <input name='image_file' id='image_file' required type='file'
+            <input name='image_file' id='image_file' type='file'
                    onChange={ this.handleFileInputChange }/>
             <input type='submit' value='Сохранить'/>
           </form>
@@ -59,7 +60,7 @@ class ServiceEditorComponent extends React.Component {
     this.setState({ [target.name]: target.value });
   }
 
-  handleFileInputChange() {
+  handleFileInputChange(event) {
     const target = event.target;
     this.setState({ [target.name]: target.files[0] });
   }

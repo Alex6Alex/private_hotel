@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Editor } from '@tinymce/tinymce-react';
+import TinyMceEditorComponent from './TinyMceEditorComponent';
 
 import { fetchItem, sendItem } from '../../actions/admin/entities_actions';
 
@@ -18,7 +18,7 @@ class DescriptionEditorComponent extends React.Component {
   }
 
   componentDidMount() {
-    document.title = 'Текст';
+    document.title = 'Редактирование описания';
 
     const { descriptionId } = this.props;
     if (descriptionId) this.props.fetchItem('/admin/description_texts', descriptionId);
@@ -40,31 +40,22 @@ class DescriptionEditorComponent extends React.Component {
     return(
       <div className='edit-page'>
         <div className='page-description'>
-          <h2>Добавление новости</h2>
+          <h2>Редактирование описания</h2>
         </div>
         <div className='edit-form'>
           <form onSubmit={ this.handleSubmit }>
             <label htmlFor='name'>Название</label>
-            <input name='name' id='name' value={ this.state.name }
-                   required onChange={ this.handleInputChange }/>
-            <label htmlFor='description'>Текст описания страницы</label>
-            <Editor
-              id='description'
-              outputFormat='text'
-              init={{
-                menubar: false,
-                plugins: [
-                  'advlist autolink lists link image',
-                  'charmap preview anchor searchreplace visualblocks',
-                  'insertdatetime media paste help wordcount'
-                ],
-                toolbar:
-                  'undo redo | formatselect | bold italic | \
-                  alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help'
-              }}
+            <select name='name' id='name' value={ this.state.name }
+                    required onChange={ this.handleInputChange }>
+              <option key='about_hotel_description'>
+                Описание об отеле
+              </option>
+            </select>
+            <label htmlFor='editor'>Текст описания страницы</label>
+            <TinyMceEditorComponent
+              format='text'
               value={ this.state.description }
-              onEditorChange={ this.handleEditorChange } />
+              onEditorChange={ this.handleEditorChange }/>
             <input type='submit' value='Сохранить'/>
           </form>
         </div>

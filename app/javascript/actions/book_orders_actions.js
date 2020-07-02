@@ -1,7 +1,12 @@
-export const RECEIVE_NEW_BOOK_ORDER = 'RECEIVE_NEW_BOOK_ORDER';
-const receiveNewBookOrder = (json) => ({
-  type: RECEIVE_NEW_BOOK_ORDER,
-  payload: json,
+export const BOOK_ORDER_WAS_CREATED = 'BOOK_ORDER_WAS_CREATED';
+const bookOrderWasCreated = () => ({
+  type: BOOK_ORDER_WAS_CREATED,
+});
+
+export const BOOK_ORDER_WAS_NOT_CREATED = 'BOOK_ORDER_WAS_NOT_CREATED';
+const bookOrderWasNotCreated = (json) => ({
+  type: BOOK_ORDER_WAS_NOT_CREATED,
+  payload: json
 });
 
 const sendBookOrder = (data) => (dispatch) => {
@@ -21,7 +26,9 @@ const sendBookOrder = (data) => (dispatch) => {
 
   fetch('/hotel/book-orders', { method: 'POST', headers, body })
     .then((response) => response.json())
-    .then((json) => dispatch(receiveNewBookOrder(json.data)));
+    .then((json) => {
+      dispatch(json.success ? bookOrderWasCreated() : bookOrderWasNotCreated(json.errors))
+    });
 };
 
 export { sendBookOrder };

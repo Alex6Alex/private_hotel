@@ -4,13 +4,6 @@ export default class Slider extends React.Component {
   constructor(props) {
     super(props);
 
-    this.imagePaths = [
-      '../images/Hotel1.jpg',
-      '../images/Hotel2.jpg',
-      '../images/Hotel3.jpg',
-      '../images/Hotel4.jpg'
-    ];
-
     this.state = { imageIndex: 0, lockChange: false };
   }
 
@@ -36,7 +29,7 @@ export default class Slider extends React.Component {
   }
 
   changeImage(nextImageIndex) {
-    const lastImageIndex = this.imagePaths.length - 1;
+    const lastImageIndex = this.props.images.length - 1;
     let imageIndex = nextImageIndex;
 
     if (nextImageIndex > lastImageIndex) imageIndex = 0;
@@ -59,7 +52,7 @@ export default class Slider extends React.Component {
         <div className='arrow fas fa-arrow-left' onClick={() => this.handleChangePhotoClick(-1) }/>
         <div className='photo-dots'>
           {
-            this.imagePaths.map((_, index) => {
+            this.props.images.map((_, index) => {
               return(
                 <div key={ index }
                      className={ (index === this.state.imageIndex) ? 'photo-dot active' : 'photo-dot' }
@@ -74,7 +67,7 @@ export default class Slider extends React.Component {
   }
 
   getImage() {
-    return this.imagePaths[this.state.imageIndex];
+    return this.props.images[this.state.imageIndex];
   }
 
   handleChangePhotoClick(indexChanger) {

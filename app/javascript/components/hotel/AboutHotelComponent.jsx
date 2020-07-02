@@ -12,7 +12,7 @@ class AboutHotelComponent extends React.Component {
   }
 
   componentDidMount() {
-    document.title = 'Об отеле | Гостевой дом «Авия»';
+    document.title = 'Об отеле | Гостевой дом';
 
     this.props.fetchDescriptionAboutHotel();
     this.props.fetchPhotos();

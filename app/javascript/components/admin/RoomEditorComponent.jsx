@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Editor } from '@tinymce/tinymce-react';
+import TinyMceEditorComponent from './TinyMceEditorComponent';
 
 import { fetchItem, sendItem } from '../../actions/admin/entities_actions';
 
@@ -54,46 +54,37 @@ class RoomEditorComponent extends React.Component {
     return(
       <div className='edit-page'>
         <div className='page-description'>
-          <h2>Добавление новости</h2>
+          <h2>Редактирование номера</h2>
         </div>
         <div className='edit-form'>
           <form onSubmit={ this.handleSubmit }>
             <label htmlFor='name'>Название</label>
             <input name='name' id='name' value={ this.state.name }
-                   required onChange={ this.handleInputChange }/>
-            <label htmlFor='description'>Описание номера</label>
-            <Editor
-              id='description'
-              outputFormat='text'
-              init={{
-                menubar: false,
-                plugins: [
-                  'advlist autolink lists link image',
-                  'charmap preview anchor searchreplace visualblocks',
-                  'insertdatetime media paste help wordcount'
-                ],
-                toolbar:
-                  'undo redo | formatselect | bold italic | \
-                  alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help'
-              }}
+                   required onChange={ this.handleInputChange }
+                   minLength={5} maxLength={100}/>
+            <label htmlFor='editor'>Описание номера</label>
+            <TinyMceEditorComponent
+              format='text'
               value={ this.state.description }
-              onEditorChange={ this.handleEditorChange } />
+              onEditorChange={ this.handleEditorChange }/>
             <label htmlFor='day_price'>Стоимость номера за сутки</label>
             <input name='day_price' id='day_price' value={ this.state.day_price }
                    required onChange={ this.handleInputChange }/>
             <label htmlFor='currency'>Валюта</label>
             <input name='currency' id='currency' value={ this.state.currency }
-                   required onChange={ this.handleInputChange }/>
+                   required onChange={ this.handleInputChange }
+                   minLength={2} maxLength={3}/>
             <label htmlFor='person_capacity'>Вместимость номера</label>
-            <input name='person_capacity' id='person_capacity' value={ this.state.person_capacity }
-                   required onChange={ this.handleInputChange }/>
+            <input name='person_capacity' id='person_capacity'
+                   value={ this.state.person_capacity } required
+                   onChange={ this.handleInputChange } pattern='\d{1,2}'/>
             <label htmlFor='room_area'>Площадь номера</label>
             <input name='room_area' id='room_area' value={ this.state.room_area }
                    required onChange={ this.handleInputChange }/>
             <label htmlFor='count_of_rooms'>Количество номеров данного типа</label>
-            <input name='count_of_rooms' id='count_of_rooms' value={ this.state.count_of_rooms }
-                   required onChange={ this.handleInputChange }/>
+            <input name='count_of_rooms' id='count_of_rooms'
+                   value={ this.state.count_of_rooms } required
+                   onChange={ this.handleInputChange } pattern='\d{1,2}'/>
             <input type='submit' value='Сохранить'/>
           </form>
         </div>

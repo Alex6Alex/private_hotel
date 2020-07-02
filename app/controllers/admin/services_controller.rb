@@ -3,51 +3,66 @@
 module Admin
   class ServicesController < ApplicationController
     def index
-      render_success_result(Service.all)
+      render_success_result(data: Service.all)
     end
 
     def create
-      raise('Required fields does not set') if params[:name].blank?
-
       tmp_file  = params[:image_file]
-      file_name = "/images/services/#{Time.now.to_i}.png"
-      if tmp_file.content_type == 'image/png'
-        FileUtils.mv(tmp_file.tempfile.path, [Rails.public_path, file_name].join)
+      raise(Admin::FileWasNotSetError.build) if tmp_file.blank?
+
+      unless tmp_file.content_type == 'image/png'
+        raise(Admin::InvalidFileExtensionError.build)
       end
 
+      file_name = FileUploader.new.upload(
+        tempfile: tmp_file.tempfile,
+        dir: '/images/services',
+        ext: 'png'
+      )
+
       service = Service.create(name: params[:name], image_link: file_name)
-      render_success_result(service, :created)
+      check_validation_results!(service)
+
+      render_success_result(data: service, status: :created)
     end
 
     def show
       service = Service.find_by(id: params[:id])
-      raise('Incorrect id') if service.nil?
+      raise(RecordNotFoundError.build) if service.nil?
 
-      render_success_result(service)
+      render_success_result(data: service)
     end
 
     def update
-      puts params
       service = Service.find_by(id: params[:id])
-      raise('Incorrect id') if service.nil?
+      raise(RecordNotFoundError.build) if service.nil?
 
+      file_name = service.image_link
       tmp_file  = params[:image_file]
-      file_name = "/images/services/#{Time.now.to_i}.png"
-      if tmp_file.content_type == 'image/png'
-        FileUtils.mv(tmp_file.tempfile.path, [Rails.public_path, file_name].join)
+
+      if tmp_file.present?
+        file_name = FileUploader.new.upload(
+          tempfile: tmp_file.tempfile,
+          dir: '/images/services',
+          ext: 'png'
+        )
+        FileUtils.remove_file([Rails.public_path, service.image_link].join)
       end
+
       service.update(name: params[:name], image_link: file_name)
-      render_success_result(service)
+      check_validation_results!(service)
+
+      render_success_result(data: service)
     end
 
     def destroy
       service = Service.find_by(id: params[:id])
-      raise('incorrect id') if service.nil?
+      raise(RecordNotFoundError.build) if service.nil?
 
       FileUtils.remove_file([Rails.public_path, service.image_link].join)
 
       service.delete
-      render_success_result({})
+      render_success_result
     end
   end
 end

@@ -1,6 +1,8 @@
 .slider {
   grid-area: slider;
-  background-size: cover;
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
   transition-property: background-image;
   transition-duration: 1s;
   min-height: 400px;

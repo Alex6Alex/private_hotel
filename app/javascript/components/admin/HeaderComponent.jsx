@@ -16,6 +16,7 @@ class HeaderComponent extends React.Component {
       { name: 'отзывы гостей', link: '/admin/reviews-list' },
       { name: 'описания страниц', link: '/admin/page-descriptions' },
       { name: 'фото отеля', link: '/admin/photos' },
+      { name: 'Конференц-залы', link: '/admin/conference-rooms' },
       { name: 'заявки на бронирование', link: '/admin/book-orders' },
     ];
   }

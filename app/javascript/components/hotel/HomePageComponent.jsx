@@ -1,18 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import SliderComponent from './SliderComponent';
 
 import { fetchDescriptionAboutHotel } from '../../actions/descriptions_actions';
 import { fetchNewsList } from '../../actions/news_actions';
+import { fetchPhotos } from '../../actions/photos_actions';
 
-import withSlider from './hoc/withSlider';
 import withMap from './hoc/withMap';
 
 import DetailComponent from './DetailComponent';
 
 class HomePageComponent extends React.Component {
   componentDidMount() {
-    document.title = 'Гостевой дом «Авия»';
+    document.title = 'Гостевой дом';
 
     let anchorLink = this.props.location.hash;
     if (anchorLink && document.getElementById(anchorLink.substr(1))) {
@@ -21,12 +22,15 @@ class HomePageComponent extends React.Component {
 
     this.props.fetchDescriptionAboutHotel();
     this.props.fetchNewsList();
+    this.props.fetchPhotos();
   }
 
   render() {
     return(
       <article>
-        { this.props.sliderComponent }
+        <SliderComponent
+          autoChange={true}
+          images={ this.props.photos.map(photo => photo.image_link) } />
         <div className='page-description'>
           <h2>Приветствуем Вас в нашем отеле!</h2>
           { this.renderDescriptionText() }
@@ -65,16 +69,16 @@ class HomePageComponent extends React.Component {
 const mapStateToProps = (state) => {
   return {
     aboutHotel: state.descriptionsReducer.aboutHotel,
-    newsList: state.newsReducer.newsList
+    newsList: state.newsReducer.newsList,
+    photos: state.photosReducer.photos,
   };
 };
 
 const mapDispatchToProps = {
-  fetchDescriptionAboutHotel,
-  fetchNewsList
+  fetchDescriptionAboutHotel, fetchNewsList, fetchPhotos
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withSlider(withMap(HomePageComponent), true));
+)(withMap(HomePageComponent));

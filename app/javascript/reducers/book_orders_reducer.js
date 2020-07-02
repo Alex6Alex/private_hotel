@@ -1,15 +1,19 @@
 import {
-  RECEIVE_NEW_BOOK_ORDER,
+  BOOK_ORDER_WAS_CREATED,
+  BOOK_ORDER_WAS_NOT_CREATED,
 } from '../actions/book_orders_actions';
 
 const initialState = {
-  sentBookOrder: {},
+  showMessage: false,
+  errors: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case RECEIVE_NEW_BOOK_ORDER:
-      return { ...state, sentBookOrder: action.payload.book_order };
+    case BOOK_ORDER_WAS_CREATED:
+      return { ...state, showMessage: true, errors: [] };
+    case BOOK_ORDER_WAS_NOT_CREATED:
+      return { ...state, errors: action.payload, showMessage: true };
     default:
       return state;
   }

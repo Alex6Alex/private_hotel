@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Editor } from '@tinymce/tinymce-react';
+import TinyMceEditorComponent from './TinyMceEditorComponent';
 
 import { fetchItem, sendItem } from '../../actions/admin/entities_actions';
 
@@ -46,25 +46,13 @@ class PostEditorComponent extends React.Component {
           <form onSubmit={ this.handleSubmit }>
             <label htmlFor='postName'>Название</label>
             <input name='postName' id='postName' value={ this.state.postName }
-                   required onChange={ this.handleInputChange }/>
-            <label htmlFor='content'>Текст новости</label>
-            <Editor
-              id='content'
-              init={{
-                menubar: false,
-                plugins: [
-                  'advlist autolink lists link image',
-                  'charmap preview anchor searchreplace visualblocks',
-                  'insertdatetime media paste help wordcount'
-                ],
-                toolbar:
-                  'undo redo | formatselect | bold italic | \
-                  alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | image | help'
-              }}
-              image_list='/images/Hotel1.jpg'
+                   required minLength={5} maxLength={100}
+                   onChange={ this.handleInputChange }/>
+            <label htmlFor='editor'>Текст новости</label>
+            <TinyMceEditorComponent
+              format='html'
               value={ this.state.content }
-              onEditorChange={ this.handleEditorChange } />
+              onEditorChange={ this.handleEditorChange }/>
             <input type='submit' value='Сохранить'/>
           </form>
         </div>

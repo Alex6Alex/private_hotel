@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 class HomePageComponent extends React.Component {
   componentDidMount() {
-    document.title = 'Гостевой дом «Авия»';
+    document.title = 'Гостевой дом';
   }
 
   render() {

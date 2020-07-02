@@ -18,7 +18,7 @@
         margin: 10px 0;
       }
 
-      input {
+      input, select {
         display: block;
         padding: 10px 15px;
         border: 1px solid #cccccc;
@@ -53,6 +53,10 @@
   .available-photos {
     grid-area: available-photos;
     text-align: center;
+
+    form {
+      text-align: justify;
+    }
 
     .photo-block {
       position: relative;

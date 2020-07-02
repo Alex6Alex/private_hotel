@@ -10,6 +10,7 @@ import bookOrdersReducer from './book_orders_reducer';
 import specialOffersReducer from './special_offers_reducer';
 import articleReducer from './article_reducer';
 import photosReducer from './photos_reducer';
+import conferenceRoomReducer from './conference_room_reducer';
 
 export default combineReducers({
   hotelRoomsReducer,
@@ -22,4 +23,5 @@ export default combineReducers({
   specialOffersReducer,
   articleReducer,
   photosReducer,
+  conferenceRoomReducer,
 });

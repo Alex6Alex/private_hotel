@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import withSlider from './hoc/withSlider';
+import SliderComponent from './SliderComponent';
 import RoomBookFormComponent from './forms/RoomBookFormComponent';
 
 import { fetchRoom } from '../../actions/rooms_actions';
@@ -15,7 +15,7 @@ class RoomComponent extends React.Component {
   }
 
   componentDidMount() {
-    document.title = 'Номер | Гостевой дом «Авия»';
+    document.title = 'Номер | Гостевой дом';
 
     const { fetchRoom, roomId } = this.props;
     fetchRoom(roomId);
@@ -23,14 +23,18 @@ class RoomComponent extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (!prevProps.room.name && this.props.room.name) {
-      document.title = `${this.props.room.name} | Гостевой дом «Авия»`;
+      document.title = `${this.props.room.name} | Гостевой дом`;
     }
   }
 
   render() {
+    const { room } = this.props;
+
     return(
       <div className='room'>
-        { this.props.sliderComponent }
+        <SliderComponent
+          autoChange={false}
+          images={ room.hotel_room_images.map(image => image.image_link) } />
         { this.renderRoomDescription() }
         { this.renderShortRoomInformation() }
         { this.renderRoomServices() }
@@ -38,7 +42,7 @@ class RoomComponent extends React.Component {
           <div className='link-button' onClick={ this.handleBookButtonClick }>Забронировать</div>
         </div>
         {
-          this.state.showBookForm && <RoomBookFormComponent room={ this.props.room } />
+          this.state.showBookForm && <RoomBookFormComponent room={ room } />
         }
       </div>
     )
@@ -100,7 +104,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = { fetchRoom };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withSlider(RoomComponent, false));
+export default connect(mapStateToProps, mapDispatchToProps)(RoomComponent);

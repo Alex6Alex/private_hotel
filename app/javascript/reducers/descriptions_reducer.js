@@ -7,7 +7,7 @@ const initialState = {};
 export default (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_DESCRIPTION_ABOUT_HOTEL:
-      return { ...state, aboutHotel: action.payload.text };
+      return { ...state, aboutHotel: action.payload };
     default:
       return state;
   }
