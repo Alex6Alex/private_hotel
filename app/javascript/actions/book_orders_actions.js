@@ -9,6 +9,11 @@ const bookOrderWasNotCreated = (json) => ({
   payload: json
 });
 
+export const CLOSE_MESSAGE = 'CLOSE_MESSAGE';
+const closeMessage = () => ({
+  type: CLOSE_MESSAGE
+});
+
 const sendBookOrder = (data) => (dispatch) => {
   const headers = new Headers(
     { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': data.csrf },
@@ -31,4 +36,6 @@ const sendBookOrder = (data) => (dispatch) => {
     });
 };
 
-export { sendBookOrder };
+const hideMessage = () => (dispatch) => dispatch(closeMessage());
+
+export { sendBookOrder, hideMessage };

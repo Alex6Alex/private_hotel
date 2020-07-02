@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { sendBookOrder } from '../../../actions/book_orders_actions';
+import { sendBookOrder, hideMessage } from '../../../actions/book_orders_actions';
 
 class RoomBookFormComponent extends React.Component {
   constructor(props) {
@@ -175,8 +175,10 @@ class RoomBookFormComponent extends React.Component {
     let message = 'Информация о бронирования была отправлена. Спасибо!';
     if (this.props.errors.length) message = this.props.errors.join('. ');
 
+    setTimeout(() => this.props.hideMessage(), 2000);
+
     return(
-      <div className='success-message'>
+      <div className='result-message'>
         <p>{ message }</p>
       </div>
     )
@@ -191,7 +193,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  sendBookOrder
+  sendBookOrder, hideMessage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomBookFormComponent);

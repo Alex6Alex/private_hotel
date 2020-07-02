@@ -18,9 +18,9 @@ module Hotel
       )
       check_validation_results!(book_order)
 
-      # BookOrderMailer.with(
-      #   book_order: book_order
-      # ).new_book_order_email.deliver_later
+      BookOrderMailer.with(
+        book_order: book_order
+      ).new_book_order_email.deliver_later
 
       render_success_result(status: :created)
     end

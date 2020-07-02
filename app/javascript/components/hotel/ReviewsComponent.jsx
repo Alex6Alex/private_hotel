@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchReviews, sendReview } from '../../actions/reviews_actions';
+import { fetchReviews, sendReview, hideMessage } from '../../actions/reviews_actions';
 
 class ReviewsComponent extends React.Component {
   constructor(props) {
@@ -87,11 +87,14 @@ class ReviewsComponent extends React.Component {
   }
 
   renderMessage() {
+    const errorsLength = this.props.errors.length;
     let message = 'Ваш отзыв был отправлен администрации отеля. Спасибо!';
-    if (this.props.errors.length) message = this.props.errors.join('. ');
+    if (errorsLength) message = this.props.errors.join('. ');
+
+    setTimeout(() => this.props.hideMessage(), 2000);
 
     return(
-      <div className='success-message'>
+      <div className={ `result-message ${errorsLength ? 'success' : 'error'}` }>
         <p>{ message }</p>
       </div>
     )
@@ -117,9 +120,6 @@ const mapStateToProps = (state) => {
   return { reviews, showMessage, errors };
 };
 
-const mapDispatchToProps = {
-  fetchReviews,
-  sendReview
-};
+const mapDispatchToProps = { fetchReviews, sendReview, hideMessage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewsComponent)

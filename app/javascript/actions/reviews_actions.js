@@ -15,6 +15,11 @@ const reviewWasNotCreated = (json) => ({
   payload: json
 });
 
+export const CLOSE_MESSAGE = 'CLOSE_MESSAGE';
+const closeMessage = () => ({
+  type: CLOSE_MESSAGE
+});
+
 const sendReview = (data) => (dispatch) => {
   const headers = new Headers(
     { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': data.csrf },
@@ -34,4 +39,6 @@ const fetchReviews = () => (dispatch) => fetch('/hotel/reviews')
   .then((response) => response.json())
   .then((json) => dispatch(receiveReviews(json.data)));
 
-export { fetchReviews, sendReview };
+const hideMessage = () => (dispatch) => dispatch(closeMessage());
+
+export { fetchReviews, sendReview, hideMessage };

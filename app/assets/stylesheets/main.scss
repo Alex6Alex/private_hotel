@@ -91,7 +91,7 @@ body {
     }
   }
 
-  .success-message {
+  .result-message {
     position: fixed;
     background-color: #cbd3ff;
     display: inline-block;
@@ -101,6 +101,10 @@ body {
     top: 40%;
     left: 50%;
     margin-left: -250px;
+
+    &.error {
+      background-color: #73212b;
+    }
 
     p {
       margin: 20px 25px;
