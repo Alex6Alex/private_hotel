@@ -94,7 +94,7 @@ class ReviewsComponent extends React.Component {
     setTimeout(() => this.props.hideMessage(), 2000);
 
     return(
-      <div className={ `result-message ${errorsLength ? 'success' : 'error'}` }>
+      <div className='result-message'>
         <p>{ message }</p>
       </div>
     )

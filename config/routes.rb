@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources(:services)
     resources(:special_offers)
     resources(:description_texts)
+    resources(:contacts)
 
     get('hotel-photos', to: 'hotel_photos#index')
     post('hotel-photos', to: 'hotel_photos#create')
@@ -50,6 +51,9 @@ Rails.application.routes.draw do
 
     resources(:reviews, only: %i[index destroy])
     put('reviews/:id/approve', to: 'reviews#approve')
+
+    resources(:book_orders, only: %i[index destroy])
+    put('book_orders/:id/approve', to: 'book_orders#approve')
   end
 
   scope('/admin') do

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 import {Provider} from 'react-redux';
 
@@ -11,13 +11,12 @@ export default class extends React.Component {
     return (
       <Provider store={configureStore()}>
         <BrowserRouter>
-            <Switch>
-              <Route exact path='/admin/login'
-                     component={Components.AuthenticationComponent}/>
-              <Components.AdminAuthentication>
-                <Components.HeaderComponent/>
-              <Route exact path='/admin'
-                     component={Components.HomePageComponent}/>
+          <Switch>
+            <Route exact path='/admin/login'
+                   component={Components.AuthenticationComponent}/>
+            <Components.AdminAuthentication>
+              <Components.HeaderComponent/>
+              <Route exact path='/admin' render={() => <Redirect to='/admin/book-orders'/>}/>
               <Route exact path='/admin/news' render={() => {
                 return (
                   <Components.ItemListComponent
@@ -52,24 +51,24 @@ export default class extends React.Component {
                   return <Components.RoomEditorComponent roomId={id}/>
                 }}
               />
-                <Route exact path='/admin/conference-rooms' render={() => {
-                  return (
-                    <Components.ItemListComponent
-                      title='Список конференц-залов'
-                      url='/admin/conference_rooms'
-                      createNewUrl='/admin/new-conference-room'
-                      editUrl='/admin/edit-conference-room'
-                    />)
-                }}/>
-                <Route exact path='/admin/new-conference-room'
-                       component={Components.ConferenceRoomEditorComponent}/>
-                <Route path='/admin/edit-conference-room/:id' render={
-                  ({match}) => {
-                    const {id} = match.params;
-                    return(<Components.ConferenceRoomEditorComponent
-                      conferenceRoomId={id}/>)
-                  }}
-                />
+              <Route exact path='/admin/conference-rooms' render={() => {
+                return (
+                  <Components.ItemListComponent
+                    title='Список конференц-залов'
+                    url='/admin/conference_rooms'
+                    createNewUrl='/admin/new-conference-room'
+                    editUrl='/admin/edit-conference-room'
+                  />)
+              }}/>
+              <Route exact path='/admin/new-conference-room'
+                     component={Components.ConferenceRoomEditorComponent}/>
+              <Route path='/admin/edit-conference-room/:id' render={
+                ({match}) => {
+                  const {id} = match.params;
+                  return (<Components.ConferenceRoomEditorComponent
+                    conferenceRoomId={id}/>)
+                }}
+              />
               <Route exact path='/admin/services-list' render={() => {
                 return (
                   <Components.ItemListComponent
@@ -123,13 +122,32 @@ export default class extends React.Component {
                     descriptionId={id}/>
                 }}
               />
+              <Route exact path='/admin/hotel-contacts' render={() => {
+                return (
+                  <Components.ItemListComponent
+                    title='Список контактов'
+                    url='/admin/contacts'
+                    createNewUrl='/admin/new-contact'
+                    editUrl='/admin/edit-contact'
+                  />)
+              }}/>
+              <Route exact path='/admin/new-contact'
+                     component={Components.ContactEditorComponent}/>
+              <Route path='/admin/edit-contact/:id' render={
+                ({match}) => {
+                  const {id} = match.params;
+                  return <Components.ContactEditorComponent
+                    contactId={id}/>
+                }}
+              />
               <Route exact path='/admin/reviews-list'
                      component={Components.ReviewsComponent}/>
               <Route exact path='/admin/photos'
                      component={Components.PhotosEditorComponent}/>
-              </Components.AdminAuthentication>
-
-            </Switch>
+              <Route exact path='/admin/book-orders'
+                     component={Components.BookOrdersComponent}/>
+            </Components.AdminAuthentication>
+          </Switch>
         </BrowserRouter>
       </Provider>
     );

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_163942) do
+ActiveRecord::Schema.define(version: 2020_07_03_062843) do
 
   create_table "administrators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 100, null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_07_02_163942) do
     t.string "time_in", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "approved", default: false
     t.index ["hotel_room_id"], name: "fk_rails_ca9fd9a4fa"
   end
 

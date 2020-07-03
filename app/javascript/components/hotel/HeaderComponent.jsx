@@ -51,7 +51,7 @@ class HeaderComponent extends React.Component {
   }
 
   renderContactPhone() {
-    const contact = this.props.contacts.find(contact => contact.priority);
+    const contact = this.props.contacts[0];
     const phone = contact !== undefined ? contact.phone : '';
     const formattedPhone = phone.substr(1);
 

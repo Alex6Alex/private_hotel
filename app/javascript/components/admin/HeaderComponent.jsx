@@ -18,6 +18,7 @@ class HeaderComponent extends React.Component {
       { name: 'фото отеля', link: '/admin/photos' },
       { name: 'Конференц-залы', link: '/admin/conference-rooms' },
       { name: 'заявки на бронирование', link: '/admin/book-orders' },
+      { name: 'контакты', link: '/admin/hotel-contacts' },
     ];
   }
 
