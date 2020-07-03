@@ -1,4 +1,4 @@
-User-agent: *
+User-agent: Browsershots
 Disallow:
 Sitemap: https://hotel-sevastopol.herokuapp.com/sitemap.xml
 Sitemap: https://hotel-sevastopol.herokuapp.com/sitemap_admin.xml
