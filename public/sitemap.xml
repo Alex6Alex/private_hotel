@@ -7,26 +7,30 @@
   </url>
   <url>
     <loc>https://hotel-sevastopol.herokuapp.com/about/</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hotel-sevastopol.herokuapp.com/rooms/</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hotel-sevastopol.herokuapp.com/room</loc>
+    <loc>https://hotel-sevastopol.herokuapp.com/services/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/reviews/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/rooms/</loc>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hotel-sevastopol.herokuapp.com/contacts/</loc>
-    <priority>0.3</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hotel-sevastopol.herokuapp.com/conference-room/</loc>
-    <priority>0.5</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hotel-sevastopol.herokuapp.com/special-offers/</loc>
-    <priority>0.2</priority>
+    <priority>0.9</priority>
   </url>
 </urlset>

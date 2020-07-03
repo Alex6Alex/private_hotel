@@ -7,7 +7,11 @@
   justify-items: center;
 
   form {
-    grid-area: auth-form;
+    position: fixed;
+    top: 50%;
+    margin-top: -110px;
+    left: 50%;
+    margin-left: -256px;
     display: inline-block;
     padding: 25px 50px;
     border: 1px solid #3e3e3e;

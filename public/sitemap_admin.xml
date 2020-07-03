@@ -10,23 +10,63 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/new-post/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://hotel-sevastopol.herokuapp.com/admin/services-list/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/new-service/</loc>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hotel-sevastopol.herokuapp.com/admin/rooms/</loc>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/new-room/</loc>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hotel-sevastopol.herokuapp.com/admin/special-offers-list/</loc>
-    <priority>0.6</priority>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/new-special-offer/</loc>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hotel-sevastopol.herokuapp.com/admin/reviews-list/</loc>
-    <priority>0.5</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hotel-sevastopol.herokuapp.com/admin/page-descriptions/</loc>
-    <priority>0.4</priority>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/new-page-description/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/photos/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/conference-rooms/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/new-conference-room/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/hotel-contacts/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hotel-sevastopol.herokuapp.com/admin/new-contact/</loc>
+    <priority>0.8</priority>
   </url>
 </urlset>
