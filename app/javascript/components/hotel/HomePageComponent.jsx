@@ -27,7 +27,7 @@ class HomePageComponent extends React.Component {
 
   render() {
     return(
-      <article>
+      <div className='home_page'>
         <SliderComponent
           autoChange={true}
           images={ this.props.photos.map(photo => photo.image_link) } />
@@ -40,7 +40,7 @@ class HomePageComponent extends React.Component {
           <h2>Как нас найти</h2>
           { this.props.mapComponent }
         </div>
-      </article>
+      </div>
     )
   }
 
