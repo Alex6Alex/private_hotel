@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchItem, sendItem } from '../../actions/admin/entities_actions';
+import { fetchItem, sendItem, hideMessage } from '../../actions/admin/entities_actions';
 
 class ContactEditorComponent extends React.Component {
   constructor(props) {
@@ -59,8 +59,22 @@ class ContactEditorComponent extends React.Component {
             <input name='email' id='email' type='email' required
                    onChange={ this.handleInputChange } value={ this.state.email }/>
             <input type='submit' value='Сохранить'/>
+            { this.renderErrorMessage() }
           </form>
         </div>
+      </div>
+    )
+  }
+
+  renderErrorMessage() {
+    if (!this.props.errors.length) return;
+    const message = this.props.errors.join('. ');
+
+    setTimeout(() => this.props.hideMessage(), 2000);
+
+    return(
+      <div className='result-message'>
+        <p>{ message }</p>
       </div>
     )
   }
@@ -85,12 +99,13 @@ class ContactEditorComponent extends React.Component {
 const mapStateToProps = (state) => {
   return {
     selectedEntity: state.entitiesReducer.selectedEntity,
-    shouldRedirectToList: state.entitiesReducer.shouldRedirectToList
+    shouldRedirectToList: state.entitiesReducer.shouldRedirectToList,
+    errors: state.entitiesReducer.errors
   };
 };
 
 const mapDispatchToProps = {
-  fetchItem, sendItem
+  fetchItem, sendItem, hideMessage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactEditorComponent);

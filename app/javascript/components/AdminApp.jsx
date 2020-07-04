@@ -12,9 +12,10 @@ export default class extends React.Component {
       <Provider store={configureStore()}>
         <BrowserRouter>
           <Switch>
+            <Components.AdminAuthentication>
             <Route exact path='/admin/login'
                    component={Components.AuthenticationComponent}/>
-            <Components.AdminAuthentication>
+
               <Components.HeaderComponent/>
               <Route exact path='/admin' render={() => <Redirect to='/admin/book-orders'/>}/>
               <Route exact path='/admin/news' render={() => {

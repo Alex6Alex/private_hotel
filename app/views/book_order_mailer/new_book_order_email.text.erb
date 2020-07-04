@@ -1,13 +1,15 @@
-You got a new book order
+Получена новая заявка на бронирование
 
-Order details
+Детали бронирования
 --------------------------
 
-Room: <%= @book_order.hotel_room_id %>
-Email: <%= @book_order.email %>
-Phone: <%= @book_order.phone %>
+<%= @book_order.hotel_room.name %>
 
-Message:
-----------
+Дата заезда: <%= @book_order.arrival_date %>. Время: <%= @book_order.time_in %>
+Дата выезда: <%= @book_order.departure_date %>
 
-<%= @book_order.arrival_date %>
+Количество гостей с местом: <%= @book_order.guests_with_place %>
+Количество гостей без места: <%= @book_order.guests_without_place %>
+
+Электронный адрес: <%= @book_order.email %>
+Телефон: <%= @book_order.phone %>

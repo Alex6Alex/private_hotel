@@ -15,6 +15,17 @@ const saveItemSuccess = () => ({
   type: SAVE_ENTITY_SUCCESS
 });
 
+export const SAVE_ENTITY_FAIL = 'SAVE_ENTITY_FAIL';
+const saveItemFail = (json) => ({
+  type: SAVE_ENTITY_FAIL,
+  payload: json
+});
+
+export const CLOSE_MESSAGE = 'CLOSE_MESSAGE';
+const closeMessage = () => ({
+  type: CLOSE_MESSAGE
+});
+
 export const REMOVE_ENTITY = 'REMOVE_ENTITY';
 const removeItem = (id) => ({
   type: REMOVE_ENTITY,
@@ -43,7 +54,7 @@ const sendItem = (url, csrf, data) => (dispatch) => {
   fetch(apiUrl, { method, headers, body: formData })
     .then((response) => response.json())
     .then((json) => {
-      if (json.success) dispatch(saveItemSuccess())
+      dispatch(json.success ? saveItemSuccess() : saveItemFail(json.errors));
     });
 };
 
@@ -58,4 +69,6 @@ const deleteItem = (url, csrf, data) => (dispatch) => {
     });
 };
 
-export { fetchItems, fetchItem, sendItem, deleteItem };
+const hideMessage = () => (dispatch) => dispatch(closeMessage());
+
+export { fetchItems, fetchItem, sendItem, deleteItem, hideMessage };

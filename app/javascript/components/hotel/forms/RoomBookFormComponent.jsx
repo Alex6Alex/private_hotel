@@ -25,7 +25,17 @@ class RoomBookFormComponent extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-// clear form
+    if (!prevProps.clearForm && this.props.clearForm) {
+      this.setState({
+        dateIn: '',
+        dateOut: '',
+        guestsWithPlace: 1,
+        email: '',
+        phone: '',
+        timeIn: '12:00',
+        personCapacity: this.props.room.person_capacity
+      })
+    }
   }
 
   render() {
@@ -189,6 +199,7 @@ const mapStateToProps = (state) => {
   return {
     showMessage: state.bookOrdersReducer.showMessage,
     errors: state.bookOrdersReducer.errors,
+    clearForm: state.bookOrdersReducer.clearForm
   };
 };
 

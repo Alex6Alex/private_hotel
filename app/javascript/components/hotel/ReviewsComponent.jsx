@@ -19,7 +19,7 @@ class ReviewsComponent extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (!prevProps.reviewWasCreated && this.props.reviewWasCreated) {
+    if (!prevProps.clearForm && this.props.clearForm) {
       this.setState({guest_name: '', email: '', content: ''})
     }
   }
@@ -116,8 +116,8 @@ class ReviewsComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { reviews, showMessage, errors } = state.reviewsReducer;
-  return { reviews, showMessage, errors };
+  const { reviews, showMessage, errors, clearForm } = state.reviewsReducer;
+  return { reviews, showMessage, errors, clearForm };
 };
 
 const mapDispatchToProps = { fetchReviews, sendReview, hideMessage };

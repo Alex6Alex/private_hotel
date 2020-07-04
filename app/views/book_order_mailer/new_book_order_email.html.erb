@@ -4,18 +4,21 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
   </head>
   <body>
-    <p>You got a new book order</p>
+    <p>Получена новая заявка на бронирование</p>
     <p>
-      Order details<br>
+      Детали бронирования<br>
       --------------------------
     </p>
-    <p>Room: <%= @book_order.hotel_room_id %></p>
-    <p>Email: <%= @book_order.email %></p>
-    <p>Phone: <%= @book_order.phone %></p>
-    <p>
-      Message:<br>
-      ----------
-    </p>
-    <p><%= @book_order.arrival_date %></p>
+    <p><%= @book_order.hotel_room.name %></p>
+    <br>
+    <p>Дата заезда: <%= @book_order.arrival_date %>. Время:
+      <%= @book_order.time_in %></p>
+    <p>Дата выезда: <%= @book_order.departure_date %></p>
+    <br>
+    <p>Количество гостей с местом: <%= @book_order.guests_with_place %></p>
+    <p>Количество гостей без места: <%= @book_order.guests_without_place %></p>
+    <br>
+    <p>Электронный адрес: <%= @book_order.email %></p>
+    <p>Телефон: <%= @book_order.phone %></p>
   </body>
 </html>

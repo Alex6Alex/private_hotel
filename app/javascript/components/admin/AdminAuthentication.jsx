@@ -12,7 +12,10 @@ class AdminAuthentication extends React.Component {
 
   render() {
     if (this.props.isAdminProfileLoading) return(<h1>Loading</h1>);
-    if (!this.props.isLoggedIn) return(<Redirect to='/admin/login'/>);
+
+    const loginPath = '/admin/login';
+    if (!this.props.isLoggedIn && this.props.location.pathname !== loginPath)
+      return(<Redirect to={loginPath}/>);
 
     return this.props.children;
   }
