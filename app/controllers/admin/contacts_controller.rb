@@ -2,9 +2,9 @@
 
 module Admin
   class ContactsController < ApplicationController
-    def index
-      render_success_result(data: Contact.all)
-    end
+    include Recordable
+
+    before_action :find_contact, only: %i[show update destroy]
 
     def create
       contact = Contact.create(
@@ -17,33 +17,26 @@ module Admin
       render_success_result(data: contact, status: :created)
     end
 
-    def show
-      contact = Contact.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if contact.nil?
-
-      render_success_result(data: contact)
-    end
-
     def update
-      contact = Contact.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if contact.nil?
-
-      contact.update(
+      @record.update(
         name:  params[:name],
         phone: params[:phone],
         email: params[:email]
       )
-      check_validation_results!(contact)
+      check_validation_results!(@record)
 
-      render_success_result(data: contact)
+      render_success_result(data: @record)
     end
 
-    def destroy
-      contact = Contact.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if contact.nil?
+    private
 
-      contact.delete
-      render_success_result
+    def all_records
+      Contact.all
+    end
+
+    def find_contact
+      @record = Contact.find_by(id: params[:id])
+      raise(RecordNotFoundError.build) if @record.nil?
     end
   end
 end

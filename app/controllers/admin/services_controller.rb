@@ -2,12 +2,12 @@
 
 module Admin
   class ServicesController < ApplicationController
-    def index
-      render_success_result(data: Service.all)
-    end
+    include Recordable
+
+    before_action :find_service, only: %i[show update destroy]
 
     def create
-      tmp_file  = params[:image_file]
+      tmp_file = params[:image_file]
       raise(Admin::FileWasNotSetError.build) if tmp_file.blank?
 
       unless tmp_file.content_type == 'image/png'
@@ -26,18 +26,8 @@ module Admin
       render_success_result(data: service, status: :created)
     end
 
-    def show
-      service = Service.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if service.nil?
-
-      render_success_result(data: service)
-    end
-
     def update
-      service = Service.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if service.nil?
-
-      file_name = service.image_link
+      file_name = @record.image_link
       tmp_file  = params[:image_file]
 
       if tmp_file.present?
@@ -46,23 +36,31 @@ module Admin
           dir: '/images/services',
           ext: 'png'
         )
-        FileUtils.remove_file([Rails.public_path, service.image_link].join)
+        FileUtils.remove_file([Rails.public_path, @record.image_link].join)
       end
 
-      service.update(name: params[:name], image_link: file_name)
-      check_validation_results!(service)
+      @record.update(name: params[:name], image_link: file_name)
+      check_validation_results!(@record)
 
-      render_success_result(data: service)
+      render_success_result(data: @record)
     end
 
     def destroy
-      service = Service.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if service.nil?
+      FileUtils.remove_file([Rails.public_path, @record.image_link].join)
 
-      FileUtils.remove_file([Rails.public_path, service.image_link].join)
-
-      service.delete
+      @record.delete
       render_success_result
+    end
+
+    private
+
+    def all_records
+      Service.all
+    end
+
+    def find_service
+      @record = Service.find_by(id: params[:id])
+      raise(RecordNotFoundError.build) if @record.nil?
     end
   end
 end
