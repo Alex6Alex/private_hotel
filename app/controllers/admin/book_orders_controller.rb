@@ -2,6 +2,10 @@
 
 module Admin
   class BookOrdersController < ApplicationController
+    include Recordable
+
+    before_action :find_book_order, only: %i[approve destroy]
+
     def index
       render_success_result(
         data: BookOrder.preload(:hotel_room).all.order(created_at: :desc).as_json(
@@ -11,19 +15,15 @@ module Admin
     end
 
     def approve
-      book_order = BookOrder.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if book_order.nil?
-
-      book_order.update(approved: true)
-      render_success_result(data: book_order)
+      @record.update(approved: true)
+      render_success_result(data: @record)
     end
 
-    def destroy
-      book_order = BookOrder.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if book_order.nil?
+    private
 
-      book_order.delete
-      render_success_result
+    def find_book_order
+      @record = BookOrder.find_by(id: params[:id])
+      raise(RecordNotFoundError.build) if @record.nil?
     end
   end
 end

@@ -2,46 +2,33 @@
 
 module Admin
   class PostsController < ApplicationController
-    def index
-      render_success_result(data: Post.all)
-    end
+    include Recordable
+
+    before_action :find_post, only: %i[show update destroy]
 
     def create
-      post = Post.create(
-        name:    params[:name],
-        content: params[:content]
-      )
+      post = Post.create(name: params[:name], content: params[:content])
       check_validation_results!(post)
 
       render_success_result(data: post, status: :created)
     end
 
-    def show
-      post = Post.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if post.nil?
-
-      render_success_result(data: post)
-    end
-
     def update
-      post = Post.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if post.nil?
+      @record.update(name: params[:name], content: params[:content])
+      check_validation_results!(@record)
 
-      post.update(
-        name:    params[:name],
-        content: params[:content]
-      )
-      check_validation_results!(post)
-
-      render_success_result(data: post)
+      render_success_result(data: @record)
     end
 
-    def destroy
-      post = Post.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if post.nil?
+    private
 
-      post.delete
-      render_success_result
+    def all_records
+      Post.all
+    end
+
+    def find_post
+      @record = Post.find_by(id: params[:id])
+      raise(RecordNotFoundError.build) if @record.nil?
     end
   end
 end
