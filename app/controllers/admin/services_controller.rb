@@ -14,41 +14,41 @@ module Admin
         raise(Admin::InvalidFileExtensionError.build)
       end
 
-      file_name = FileUploader.new.upload(
-        tempfile: tmp_file.tempfile,
-        dir: '/images/services',
-        ext: 'png'
+      service = Service.create(
+        name: params[:name],
+        service_image: tmp_file,
+        image_link: tmp_file.original_filename
       )
-
-      service = Service.create(name: params[:name], image_link: file_name)
       check_validation_results!(service)
 
-      render_success_result(data: service, status: :created)
+      render_success_result(
+        data: service.as_json.merge(image_link: url_for(service.service_image)),
+        status: :created
+      )
+    end
+
+    def show
+      render_success_result(
+        data: @record.as_json.merge(image_link: url_for(@record.service_image))
+      )
     end
 
     def update
-      file_name = @record.image_link
-      tmp_file  = params[:image_file]
-
-      if tmp_file.present?
-        file_name = FileUploader.new.upload(
-          tempfile: tmp_file.tempfile,
-          dir: '/images/services',
-          ext: 'png'
-        )
-        FileUtils.remove_file([Rails.public_path, @record.image_link].join)
-      end
-
-      @record.update(name: params[:name], image_link: file_name)
+      @record.update(name: params[:name])
       check_validation_results!(@record)
 
-      render_success_result(data: @record)
+      tmp_file = params[:image_file]
+      @record.service_image.attach(tmp_file) if tmp_file.present?
+
+      render_success_result(
+        data: @record.as_json.merge(image_link: url_for(@record.service_image))
+      )
     end
 
     def destroy
-      FileUtils.remove_file([Rails.public_path, @record.image_link].join)
-
+      @record.service_image.purge_later
       @record.delete
+
       render_success_result
     end
 

@@ -8,9 +8,7 @@ module Admin
 
     def create
       contact = Contact.create(
-        name:  params[:name],
-        phone: params[:phone],
-        email: params[:email]
+        name:  params[:name], phone: params[:phone], email: params[:email]
       )
       check_validation_results!(contact)
 
@@ -19,9 +17,7 @@ module Admin
 
     def update
       @record.update(
-        name:  params[:name],
-        phone: params[:phone],
-        email: params[:email]
+        name:  params[:name], phone: params[:phone], email: params[:email]
       )
       check_validation_results!(@record)
 

@@ -11,9 +11,9 @@ const sendRoomImageSuccess = (json) => ({
 });
 
 export const REMOVE_ROOM_IMAGE = 'REMOVE_ROOM_IMAGE';
-const removeRoomImage = (json) => ({
+const removeRoomImage = (id) => ({
   type: REMOVE_ROOM_IMAGE,
-  payload: json
+  payload: { id }
 });
 
 const fetchHotelRoomImages = (url) => (dispatch) => fetch(url)
@@ -42,7 +42,7 @@ const deleteRoomImage = (url, csrf, data) => (dispatch) => {
   fetch(`${url}/${data.id}`, { method: 'DELETE', headers })
     .then((response) => response.json())
     .then((json) => {
-      if (json.success) dispatch(removeRoomImage(json.data))
+      if (json.success) dispatch(removeRoomImage(data.id))
     });
 };
 
