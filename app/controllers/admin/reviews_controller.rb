@@ -2,24 +2,24 @@
 
 module Admin
   class ReviewsController < ApplicationController
-    def index
-      render_success_result(data: Review.all.order(created_at: :desc))
-    end
+    include Recordable
+
+    before_action :find_review, only: %i[approve destroy]
 
     def approve
-      review = Review.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if review.nil?
-
-      review.update(approved: true)
-      render_success_result(data: review)
+      @record.update(approved: true)
+      render_success_result(data: @record)
     end
 
-    def destroy
-      review = Review.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if review.nil?
+    private
 
-      review.delete
-      render_success_result
+    def all_records
+      Review.all.order(created_at: :desc)
+    end
+
+    def find_review
+      @record = Review.find_by(id: params[:id])
+      raise(RecordNotFoundError.build) if @record.nil?
     end
   end
 end

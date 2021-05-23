@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  namespace(:hotel, default: { format: :json }) do
+  namespace(:hotel, defaults: { format: :json }) do
     resources(:rooms, only: %i[index show])
     resources(:reviews, only: %i[index create])
 
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     get('photos', to: 'photos#index')
   end
 
-  namespace(:admin, default: { format: :json }) do
+  namespace(:admin, defaults: { format: :json }) do
     get('authentication/profile', to: 'authentication#profile')
     post('authentication/login', to: 'authentication#login')
 

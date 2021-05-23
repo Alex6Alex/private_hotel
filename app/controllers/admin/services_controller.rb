@@ -2,9 +2,9 @@
 
 module Admin
   class ServicesController < ApplicationController
-    def index
-      render_success_result(data: Service.all)
-    end
+    include Recordable
+
+    before_action :find_service, only: %i[show update destroy]
 
     def create
       tmp_file = params[:image_file]
@@ -28,37 +28,39 @@ module Admin
     end
 
     def show
-      service = Service.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if service.nil?
-
       render_success_result(
-        data: service.as_json.merge(image_link: url_for(service.service_image))
+        data: @record.as_json.merge(image_link: url_for(@record.service_image))
       )
     end
 
     def update
-      service = Service.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if service.nil?
-
-      service.update(name: params[:name])
-      check_validation_results!(service)
+      @record.update(name: params[:name])
+      check_validation_results!(@record)
 
       tmp_file = params[:image_file]
-      service.service_image.attach(tmp_file) if tmp_file.present?
+      @record.service_image.attach(tmp_file) if tmp_file.present?
 
       render_success_result(
-        data: service.as_json.merge(image_link: url_for(service.service_image))
+        data: @record.as_json.merge(image_link: url_for(@record.service_image))
       )
     end
 
     def destroy
-      service = Service.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if service.nil?
-
-      service.service_image.purge_later
-      service.delete
+      @record.service_image.purge_later
+      @record.delete
 
       render_success_result
+    end
+
+    private
+
+    def all_records
+      Service.all
+    end
+
+    def find_service
+      @record = Service.find_by(id: params[:id])
+      raise(RecordNotFoundError.build) if @record.nil?
     end
   end
 end
