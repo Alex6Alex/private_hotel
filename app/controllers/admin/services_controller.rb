@@ -7,61 +7,57 @@ module Admin
     end
 
     def create
-      tmp_file  = params[:image_file]
+      tmp_file = params[:image_file]
       raise(Admin::FileWasNotSetError.build) if tmp_file.blank?
 
       unless tmp_file.content_type == 'image/png'
         raise(Admin::InvalidFileExtensionError.build)
       end
 
-      file_name = FileUploader.new.upload(
-        tempfile: tmp_file.tempfile,
-        dir: '/images/services',
-        ext: 'png'
+      service = Service.create(
+        name: params[:name],
+        service_image: tmp_file,
+        image_link: tmp_file.original_filename
       )
-
-      service = Service.create(name: params[:name], image_link: file_name)
       check_validation_results!(service)
 
-      render_success_result(data: service, status: :created)
+      render_success_result(
+        data: service.as_json.merge(image_link: url_for(service.service_image)),
+        status: :created
+      )
     end
 
     def show
       service = Service.find_by(id: params[:id])
       raise(RecordNotFoundError.build) if service.nil?
 
-      render_success_result(data: service)
+      render_success_result(
+        data: service.as_json.merge(image_link: url_for(service.service_image))
+      )
     end
 
     def update
       service = Service.find_by(id: params[:id])
       raise(RecordNotFoundError.build) if service.nil?
 
-      file_name = service.image_link
-      tmp_file  = params[:image_file]
-
-      if tmp_file.present?
-        file_name = FileUploader.new.upload(
-          tempfile: tmp_file.tempfile,
-          dir: '/images/services',
-          ext: 'png'
-        )
-        FileUtils.remove_file([Rails.public_path, service.image_link].join)
-      end
-
-      service.update(name: params[:name], image_link: file_name)
+      service.update(name: params[:name])
       check_validation_results!(service)
 
-      render_success_result(data: service)
+      tmp_file = params[:image_file]
+      service.service_image.attach(tmp_file) if tmp_file.present?
+
+      render_success_result(
+        data: service.as_json.merge(image_link: url_for(service.service_image))
+      )
     end
 
     def destroy
       service = Service.find_by(id: params[:id])
       raise(RecordNotFoundError.build) if service.nil?
 
-      FileUtils.remove_file([Rails.public_path, service.image_link].join)
-
+      service.service_image.purge_later
       service.delete
+
       render_success_result
     end
   end
