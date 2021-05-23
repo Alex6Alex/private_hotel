@@ -31,7 +31,9 @@ describe Admin::PostsController, type: :controller do
         get(:show, params: { id: -1 })
 
         expect(JSON.parse(response.body)).to eq(
-          'error_code' => 'not_found', 'success' => false, 'errors' => []
+          'error_code' => 'not_found',
+          'success' => false,
+          'errors' => ['Requested record was not found']
         )
       end
     end
@@ -53,7 +55,9 @@ describe Admin::PostsController, type: :controller do
         delete(:destroy, params: { id: -1 })
 
         expect(JSON.parse(response.body)).to eq(
-          'error_code' => 'not_found', 'success' => false, 'errors' => []
+          'error_code' => 'not_found',
+          'success' => false,
+          'errors' => ['Requested record was not found']
         )
       end
     end

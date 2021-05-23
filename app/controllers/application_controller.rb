@@ -2,7 +2,6 @@
 
 class ApplicationController < ActionController::Base
   rescue_from(StandardError) do |exc|
-    puts exc.message
     render_failed_result(errors: [exc.message])
   end
 

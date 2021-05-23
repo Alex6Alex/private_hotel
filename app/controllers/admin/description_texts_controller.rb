@@ -8,8 +8,7 @@ module Admin
 
     def create
       description = DescriptionText.create(
-        name:        params[:name],
-        description: params[:description]
+        name: params[:name], description: params[:description]
       )
       check_validation_results!(description)
 
@@ -17,10 +16,7 @@ module Admin
     end
 
     def update
-      @record.update(
-        name:        params[:name],
-        description: params[:description]
-      )
+      @record.update(name: params[:name], description: params[:description])
       check_validation_results!(@record)
 
       render_success_result(data: @record)

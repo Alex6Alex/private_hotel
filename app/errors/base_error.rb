@@ -7,7 +7,7 @@ class BaseError < StandardError
   end
 
   def errors
-    @errors || [message]
+    @errors.presence || [message]
   end
 
   def http_status

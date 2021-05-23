@@ -8,8 +8,7 @@ module Admin
 
     def create
       special_offer = SpecialOffer.create(
-        name:    params[:name],
-        content: params[:content]
+        name: params[:name], content: params[:content]
       )
       check_validation_results!(special_offer)
 
