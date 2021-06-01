@@ -1,25 +1,55 @@
 .contacts-page {
   display: grid;
-  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-columns: 1fr 10fr 1fr;
   grid-template-areas:
     ". page-description ."
     ". contacts-block .";
 
+  @media screen and (max-width: 768px) {
+    grid-template-columns: auto;
+    grid-template-areas:
+      "page-description"
+      "contacts-block";
+  }
+
   .contacts-block {
     grid-area: contacts-block;
     display: grid;
-    grid-template-columns: 550px 550px;
+    grid-template-columns: 1fr 1fr;
     justify-items: center;
     align-items: center;
-    grid-column-gap: 50px;
+    grid-column-gap: 3%;
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr 12fr 1fr;
+      grid-template-areas:
+        ". contacts-data ."
+        "map map map";
+    }
 
     .map {
-      width: 550px;
+      width: 100%;
       height: 400px;
+
+      @media screen and (max-width: 768px) {
+        grid-area: map;
+      }
     }
 
     .contacts-data {
-      width: 550px;
+      width: 100%;
+
+      @media screen and (max-width: 768px) {
+        grid-area: contacts-data;
+        display: grid;
+        grid-template-areas:
+          "address-info address-info"
+          "department-info department-info";
+
+        .address-info {
+          grid-area: address-info;
+        }
+      }
     }
   }
 }

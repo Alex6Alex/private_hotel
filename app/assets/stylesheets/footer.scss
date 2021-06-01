@@ -3,7 +3,7 @@ footer {
   display: grid;
   align-items: center;
   grid-template-rows: 130px 40px;
-  grid-template-columns: auto 1200px auto;
+  grid-template-columns: 1fr 10fr 1fr;
   grid-template-areas:
     ". footer-contacts ."
     ". footer-bottom .";
@@ -11,6 +11,13 @@ footer {
   color: #d5d6dd;
   text-transform: uppercase;
   font-size: 10pt;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: auto;
+    grid-template-areas:
+      "footer-contacts"
+      "footer-bottom";
+  }
 
   .footer-contacts {
     grid-area: footer-contacts;

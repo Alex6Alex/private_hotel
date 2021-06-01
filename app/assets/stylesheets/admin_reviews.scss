@@ -1,6 +1,6 @@
 .admin-reviews {
   display: grid;
-  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-columns: 1fr 10fr 1fr;
   grid-template-areas:
     ". page-description ."
     ". reviews-list .";
@@ -15,7 +15,7 @@
       border-radius: 5px;
       padding: 0 20px;
       margin: 10px 0;
-      width: 1150px;
+      width: 100%;
       background-color: #cbd3ff;
 
       &.not-approved {

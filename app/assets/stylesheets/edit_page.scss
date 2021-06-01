@@ -1,6 +1,6 @@
 .edit-page {
   display: grid;
-  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-columns: 1fr 10fr 1fr;
   grid-template-areas:
     ". page-description ."
     ". edit-form ."
@@ -25,7 +25,7 @@
         border-radius: 10px;
         font-size: 11pt;
         outline: none;
-        width: 500px;
+        width: 50%;
         box-sizing: border-box;
 
         &:valid {
