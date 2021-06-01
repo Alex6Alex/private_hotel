@@ -3,7 +3,7 @@ header {
   display: grid;
   align-items: center;
   grid-template-rows: 40px 70px;
-  grid-template-columns: auto 300px 600px 300px auto;
+  grid-template-columns: 1fr 2fr 4fr 2fr 1fr;
   grid-template-areas:
     ". logo address phone ."
     ". logo navigation navigation .";

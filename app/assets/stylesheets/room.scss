@@ -1,12 +1,23 @@
 .room {
   display: grid;
-  grid-template-columns: 1fr 600px 600px 1fr;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
   grid-template-areas:
     "slider slider slider slider"
     ". page-description page-description ."
     ". room-short-info room-services ."
     ". book-button book-button ."
     ". book-form book-form .";
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 10fr 1fr;
+    grid-template-areas:
+      "slider slider slider"
+      ". page-description ."
+      ". room-short-info ."
+      ". room-services ."
+      ". book-button ."
+      ". book-form .";
+  }
 
   .room-short-info {
     grid-area: room-short-info;
@@ -21,7 +32,7 @@
     .information,
     .services {
       display: grid;
-      grid-template-columns: 300px 300px;
+      grid-template-columns: 1fr 1fr;
       font-size: 11pt;
 
       p {

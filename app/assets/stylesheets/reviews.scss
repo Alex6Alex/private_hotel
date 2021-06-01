@@ -1,13 +1,22 @@
 .reviews {
   display: grid;
-  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
   grid-template-areas:
-    ". page-description ."
-    ". review-form ."
-    ". last-reviews .";
+    ". page-description page-description page-description ."
+    ". . review-form . ."
+    ". last-reviews last-reviews last-reviews .";
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 10fr 1fr;
+    grid-template-areas:
+      ". page-description ."
+      ". review-form ."
+      ". last-reviews .";
+  }
 
   .review-form {
     grid-area: review-form;
+    width: 100%;
     margin: 20px auto;
 
     label {
@@ -21,7 +30,7 @@
       border-radius: 10px;
       font-size: 13pt;
       outline: none;
-      width: 450px;
+      width: 100%;
       margin: 10px 0 20px 0;
 
       &:valid {
@@ -61,7 +70,7 @@
         border-radius: 5px;
         padding: 0 20px;
         margin: 10px 0;
-        width: 1150px;
+        width: 100%;
         background-color: #cbd3ff;
 
         .review-info {

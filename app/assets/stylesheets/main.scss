@@ -62,8 +62,8 @@ body {
     .content {
       display: grid;
       grid-template-areas:
-              "image"
-              "description";
+        "image"
+        "description";
 
       * {
         display: none;
@@ -73,6 +73,10 @@ body {
         &:first-child {
           display: block;
           grid-area: image;
+
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
         }
 
         &:nth-child(2) {
