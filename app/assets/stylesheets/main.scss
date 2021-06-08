@@ -4,7 +4,7 @@ body {
   height: 100vh;
   font-family: 'Open Sans', sans-serif;
   color: #303030;
-  background-color: #f2fffc;
+  background-color: #f9f9f9;
 
   & > div {
     min-height: 100%;
@@ -34,13 +34,14 @@ body {
     width: 150px;
     text-align: center;
     margin: 0 auto;
-    background-image: linear-gradient(#00087f, #1b407f, #00087f);
+    background-color: #f1f1f1;
     padding: 10px 40px;
-    border-radius: 7px;
-    color: #fff;
+    border: 1px #333 solid;
+    color: #333;
     text-transform: uppercase;
     text-decoration: none;
     font-size: 10pt;
+    font-weight: bold;
   }
 
   .detail {
@@ -50,7 +51,7 @@ body {
     margin: 10px;
     text-align: justify;
     padding: 20px;
-    background-color: #eef6ff;
+    background-color: #f1f1f1;
     border-radius: 5px;
 
     .title {
@@ -95,7 +96,7 @@ body {
       text-decoration: none;
 
       &:hover {
-        color: #3e3e3e;
+        color: #0543ef;
       }
     }
   }
