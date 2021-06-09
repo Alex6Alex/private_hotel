@@ -3,14 +3,13 @@ header {
   display: grid;
   align-items: center;
   grid-template-rows: 40px 70px;
-  grid-template-columns: 1fr 2fr 4fr 2fr 1fr;
+  grid-template-columns: 1fr 7fr 1fr 1fr;
   grid-template-areas:
-    ". logo address phone ."
-    ". logo navigation navigation .";
-  background-image: linear-gradient(#00087f, #2f567f);
-  color: #d5d6dd;
+    ". . phone ."
+    ". navigation . .";
   text-transform: uppercase;
   font-size: 10pt;
+  border-bottom: 1px #333 solid;
 
   .logo {
     grid-area: logo;
@@ -60,7 +59,7 @@ header {
 
   nav {
     grid-area: navigation;
-    justify-self: right;
+    justify-self: left;
 
     .menu {
       .menu-item {
@@ -70,30 +69,32 @@ header {
 
         a {
           text-decoration: none;
-          color: #cbccd3;
+          color: #333;
           font-size: 12pt;
+          font-weight: bold;
 
           &:hover {
-            color: #fff;
+            color: #0543ef;
           }
         }
 
         .dropdown-links {
           display: none;
           position: absolute;
-          background-color: #f1f1f1;
+          background-color: #efefef;
           z-index: 1;
 
           a {
             display: block;
-            color: black;
+            color: #696969;
             padding: 10px 15px;
             text-decoration: none;
             text-align: left;
             white-space: nowrap;
 
             &:hover {
-              background-color: #ddd;
+              color: #0543ef;
+              background-color: #e2e2e2;
             }
           }
         }

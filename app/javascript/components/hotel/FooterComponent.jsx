@@ -8,7 +8,7 @@ class FooterComponent extends React.Component {
       <footer>
         { this.renderContacts() }
         <div className='footer-bottom'>
-          <span>© 2020 официальный сайт отеля, г. севастополь, ул. ленина 14</span>
+          <span>© 2021 официальный сайт отеля, г. севастополь, ул. ленина 14</span>
         </div>
       </footer>
     )

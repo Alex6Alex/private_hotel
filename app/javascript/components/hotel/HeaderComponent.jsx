@@ -28,8 +28,8 @@ class HeaderComponent extends React.Component {
   render() {
     return(
       <header>
-        { this.renderLogo() }
-        { this.renderAddress() }
+        {/*{ this.renderLogo() }*/}
+        {/*{ this.renderAddress() }*/}
         { this.renderContactPhone() }
         { this.renderMenu() }
       </header>
