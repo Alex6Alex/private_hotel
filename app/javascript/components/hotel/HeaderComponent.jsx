@@ -7,6 +7,8 @@ class HeaderComponent extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = { navbarOpen: false };
+
     this.menuItems = [
       { name: 'главная', link: '/', sub_items: [
           { name: 'схема проезда', link: '/#how_to_find' }
@@ -23,6 +25,8 @@ class HeaderComponent extends React.Component {
       { name: 'конференц-сервис', link: '/conference-room' },
       { name: 'спецпредложения', link: '/special-offers' }
     ];
+
+    this.handleNavbarToggle = this.handleNavbarToggle.bind(this);
   }
 
   render() {
@@ -58,7 +62,7 @@ class HeaderComponent extends React.Component {
 
   renderMenu() {
     return(
-      <nav>
+      <nav className={`${(this.state.navbarOpen ? 'shown' : 'hidden')}`}>
         <div className='menu'>
           {
             this.menuItems.map((item, index) => {
@@ -107,9 +111,13 @@ class HeaderComponent extends React.Component {
   renderHamburgerButton() {
     return(
       <div className='hamburger-menu'>
-        <i className="fa fa-bars" aria-hidden="true"/>
+        <i className="fa fa-bars" aria-hidden="true" onClick={this.handleNavbarToggle}/>
       </div>
     )
+  }
+
+  handleNavbarToggle() {
+    this.setState({ navbarOpen: !this.state.navbarOpen })
   }
 }
 
