@@ -27,7 +27,7 @@ class HeaderComponent extends React.Component {
 
     return(
       <header>
-        { this.renderLogo() }
+        {/*{ this.renderLogo() }*/}
         { this.renderAdminInfo() }
         { this.renderMenu() }
       </header>

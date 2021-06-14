@@ -6,25 +6,31 @@ header {
   grid-template-columns: 1fr 7fr 1fr 1fr;
   grid-template-areas:
     ". . phone ."
-    ". navigation . .";
+    ". navigation navigation .";
   text-transform: uppercase;
   font-size: 10pt;
   border-bottom: 1px #333 solid;
 
-  .logo {
-    grid-area: logo;
-    justify-self: center;
-
-    img {
-      max-width: 85px;
-      max-height: 85px;
-    }
+  @media screen and (max-width: 990px) {
+    grid-template-rows: 70px;
+    grid-template-areas:
+      ". phone hamburger-menu .";
   }
 
-  .address {
-    grid-area: address;
-    justify-self: center;
-    font-weight: bold;
+  .hamburger-menu {
+    grid-area: hamburger-menu;
+    display: none;
+    justify-self: right;
+    z-index: 1;
+
+    @media screen and (max-width: 990px) {
+      display: block;
+    }
+
+    i {
+      font-size: 18pt;
+      cursor: pointer;
+    }
   }
 
   .phone {
@@ -35,6 +41,10 @@ header {
     grid-template-columns: repeat(3, 30px) auto;
     grid-column-gap: 10px;
     align-items: center;
+
+    @media screen and (max-width: 990px) {
+      justify-self: left;
+    }
 
     a {
       margin: 0;
@@ -60,6 +70,10 @@ header {
   nav {
     grid-area: navigation;
     justify-self: left;
+
+    @media screen and (max-width: 990px) {
+      display: none;
+    }
 
     .menu {
       .menu-item {

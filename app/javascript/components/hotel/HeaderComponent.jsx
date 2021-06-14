@@ -28,26 +28,11 @@ class HeaderComponent extends React.Component {
   render() {
     return(
       <header>
-        {/*{ this.renderLogo() }*/}
-        {/*{ this.renderAddress() }*/}
         { this.renderContactPhone() }
         { this.renderMenu() }
+        { this.renderHamburgerButton() }
       </header>
     )
-  }
-
-  renderLogo() {
-    return(
-      <div className='logo'><img src='/images/hotel_logo.png' alt='logo'/></div>
-    );
-  }
-
-  renderAddress() {
-    return(
-      <div className='address'>
-        <span>г. севастополь, ул. ленина 14</span>
-      </div>
-    );
   }
 
   renderContactPhone() {
@@ -115,6 +100,14 @@ class HeaderComponent extends React.Component {
             }
           })
         }
+      </div>
+    )
+  }
+
+  renderHamburgerButton() {
+    return(
+      <div className='hamburger-menu'>
+        <i className="fa fa-bars" aria-hidden="true"/>
       </div>
     )
   }
