@@ -8,6 +8,8 @@ class HeaderComponent extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = { navbarOpen: false };
+
     this.menuItems = [
       { name: 'новости', link: '/admin/news' },
       { name: 'услуги', link: '/admin/services-list' },
@@ -20,6 +22,8 @@ class HeaderComponent extends React.Component {
       { name: 'заявки на бронирование', link: '/admin/book-orders' },
       { name: 'контакты', link: '/admin/hotel-contacts' },
     ];
+
+    this.handleNavbarToggle = this.handleNavbarToggle.bind(this);
   }
 
   render() {
@@ -30,6 +34,7 @@ class HeaderComponent extends React.Component {
         {/*{ this.renderLogo() }*/}
         { this.renderAdminInfo() }
         { this.renderMenu() }
+        { this.renderHamburgerButton() }
       </header>
     )
   }
@@ -51,7 +56,7 @@ class HeaderComponent extends React.Component {
 
   renderMenu() {
     return(
-      <nav>
+      <nav className={`${(this.state.navbarOpen ? 'shown' : 'hidden')}`}>
         <div className='menu'>
           {
             this.menuItems.map((item, index) => {
@@ -65,6 +70,18 @@ class HeaderComponent extends React.Component {
         </div>
       </nav>
     );
+  }
+
+  renderHamburgerButton() {
+    return(
+      <div className='hamburger-menu'>
+        <i className="fa fa-bars" aria-hidden="true" onClick={this.handleNavbarToggle}/>
+      </div>
+    )
+  }
+
+  handleNavbarToggle() {
+    this.setState({ navbarOpen: !this.state.navbarOpen })
   }
 }
 

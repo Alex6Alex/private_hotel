@@ -46,16 +46,17 @@ class HeaderComponent extends React.Component {
 
     return(
       <div className='phone'>
-        <a className='direct-call' href={ `https://t-do.ru/${formattedPhone}` }>
-          <img alt='telegram' src='/images/tele_icon.png'/>
-        </a>
-        <a className='direct-call' href={ `viber://chat?number=${phone}` }>
-          <img alt='viber' src='/images/viber_icon.png'/>
-        </a>
-        <a className='direct-call' href={ `https://wa.me/${phone}` }>
-          <img alt='whatsapp' src='/images/whats_icon.png'/>
-        </a>
-        <span className='number'>{ phone }</span>
+        {/*<a className='direct-call' href={ `https://t-do.ru/${formattedPhone}` }>*/}
+        {/*  <img alt='telegram' src='/images/tele_icon.png'/>*/}
+        {/*</a>*/}
+        {/*<a className='direct-call' href={ `viber://chat?number=${phone}` }>*/}
+        {/*  <img alt='viber' src='/images/viber_icon.png'/>*/}
+        {/*</a>*/}
+        {/*<a className='direct-call' href={ `https://wa.me/${phone}` }>*/}
+        {/*  <img alt='whatsapp' src='/images/whats_icon.png'/>*/}
+        {/*</a>*/}
+        <a href={`tel:${phone}`}>{ phone }</a>
+        <span className='number'> - Бесплатно по всей России</span>
       </div>
     );
   }

@@ -35,6 +35,10 @@
       grid-template-columns: 1fr 1fr;
       font-size: 11pt;
 
+      @media screen and (max-width: 400px) {
+        display: block;
+      }
+
       p {
         margin: 10px 0;
         color: #696969;

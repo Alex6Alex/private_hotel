@@ -30,6 +30,7 @@
       font-size: 13pt;
       outline: none;
       width: 100%;
+      box-sizing: border-box;
       margin: 10px 0 20px 0;
 
       &:valid {
@@ -68,7 +69,12 @@
         padding: 0 20px;
         margin: 10px 0;
         width: 100%;
+        box-sizing: border-box;
         background-color: #f1f1f1;
+
+        @media screen and (max-width: 470px) {
+          font-size: 11pt;
+        }
 
         .review-info {
           p {
