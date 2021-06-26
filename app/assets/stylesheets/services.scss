@@ -22,18 +22,27 @@
       margin: 10px;
       width: 280px;
       height: 300px;
-      background-color: #eef6ff;
+      background-color: #f1f1f1;
       border-radius: 5px;
       font-size: 14pt;
+
+      @media screen and (max-width: 400px) {
+        width: 210px;
+      }
 
       .service-icon {
         margin: 20px;
         width: 180px;
         height: 180px;
+
+        @media screen and (max-width: 400px) {
+          width: 110px;
+          height: 110px;
+        }
       }
 
       &:hover {
-        background-color: #d4eaff;
+        background-color: #e2e2e2;
       }
     }
   }
