@@ -1,6 +1,6 @@
 .items-list {
   display: grid;
-  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-columns: 1fr 10fr 1fr;
   grid-template-areas:
     ". page-description ."
     ". control-panel ."
@@ -13,6 +13,10 @@
 
   .list {
     grid-area: list;
+
+    @media screen and (max-width: 550px) {
+      font-size: 10pt;
+    }
 
     .empty-list-message {
       font-size: 13pt;
@@ -54,6 +58,10 @@
       div {
         text-align: center;
         margin: 15px;
+
+        @media screen and (max-width: 550px) {
+          margin: 3px;
+        }
       }
     }
   }

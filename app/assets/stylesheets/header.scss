@@ -2,43 +2,51 @@ header {
   align-self: start;
   display: grid;
   align-items: center;
-  grid-template-rows: 40px 70px;
-  grid-template-columns: auto 300px 600px 300px auto;
+  grid-template-rows: 30px 70px;
+  grid-template-columns: 1fr 7fr 1fr 1fr;
   grid-template-areas:
-    ". logo address phone ."
-    ". logo navigation navigation .";
-  background-image: linear-gradient(#00087f, #2f567f);
-  color: #d5d6dd;
+    ". phone phone ."
+    ". navigation navigation .";
   text-transform: uppercase;
   font-size: 10pt;
+  border-bottom: 1px #333 solid;
 
-  .logo {
-    grid-area: logo;
-    justify-self: center;
-
-    img {
-      max-width: 85px;
-      max-height: 85px;
-    }
+  @media screen and (max-width: 990px) {
+    grid-template-rows: 70px auto;
+    grid-template-areas:
+      ". phone hamburger-menu ."
+      "navigation navigation navigation navigation";
   }
 
-  .address {
-    grid-area: address;
-    justify-self: center;
-    font-weight: bold;
+  .hamburger-menu {
+    grid-area: hamburger-menu;
+    display: none;
+    justify-self: right;
+    z-index: 1;
+
+    @media screen and (max-width: 990px) {
+      display: block;
+    }
+
+    i {
+      font-size: 18pt;
+      cursor: pointer;
+    }
   }
 
   .phone {
     grid-area: phone;
-    justify-self: right;
-    font-size: 11pt;
-    display: grid;
-    grid-template-columns: repeat(3, 30px) auto;
-    grid-column-gap: 10px;
-    align-items: center;
+    justify-self: center;
+    font-size: 10pt;
+
+    @media screen and (max-width: 990px) {
+      justify-self: left;
+    }
 
     a {
       margin: 0;
+      color: #696969;
+      text-decoration: none;
 
       img {
         max-height: 30px;
@@ -60,7 +68,16 @@ header {
 
   nav {
     grid-area: navigation;
-    justify-self: right;
+    justify-self: left;
+
+    @media screen and (max-width: 990px) {
+      display: none;
+      width: 100%;
+
+      &.shown {
+        display: block;
+      }
+    }
 
     .menu {
       .menu-item {
@@ -68,32 +85,59 @@ header {
         position: relative;
         display: inline-block;
 
+        @media screen and (max-width: 990px) {
+          margin: 5px 0;
+          display: block;
+          text-align: center;
+        }
+
         a {
           text-decoration: none;
-          color: #cbccd3;
+          color: #333;
           font-size: 12pt;
+          font-weight: bold;
+
+          @media screen and (max-width: 990px) {
+            display: block;
+            //font-weight: normal;
+          }
 
           &:hover {
-            color: #fff;
+            color: #0543ef;
           }
         }
 
         .dropdown-links {
           display: none;
           position: absolute;
-          background-color: #f1f1f1;
+          background-color: #efefef;
           z-index: 1;
+
+          @media screen and (max-width: 990px) {
+            position: inherit;
+            display: block;
+            background-color: inherit;
+          }
 
           a {
             display: block;
-            color: black;
+            color: #696969;
             padding: 10px 15px;
             text-decoration: none;
             text-align: left;
             white-space: nowrap;
 
+            @media screen and (max-width: 990px) {
+              padding: 0;
+              color: #333;
+              margin-top: 5px;
+              text-align: center;
+              font-weight: normal;
+            }
+
             &:hover {
-              background-color: #ddd;
+              color: #0543ef;
+              background-color: #e2e2e2;
             }
           }
         }

@@ -1,9 +1,16 @@
 .services {
   display: grid;
-  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-columns: 1fr 10fr 1fr;
   grid-template-areas:
     ". page-description ."
     ". service-list .";
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: auto;
+    grid-template-areas:
+      ". page-description ."
+      ". service-list .";
+  }
 
   .service-list {
     grid-area: service-list;
@@ -15,18 +22,27 @@
       margin: 10px;
       width: 280px;
       height: 300px;
-      background-color: #eef6ff;
+      background-color: #f1f1f1;
       border-radius: 5px;
       font-size: 14pt;
+
+      @media screen and (max-width: 400px) {
+        width: 210px;
+      }
 
       .service-icon {
         margin: 20px;
         width: 180px;
         height: 180px;
+
+        @media screen and (max-width: 400px) {
+          width: 110px;
+          height: 110px;
+        }
       }
 
       &:hover {
-        background-color: #d4eaff;
+        background-color: #e2e2e2;
       }
     }
   }

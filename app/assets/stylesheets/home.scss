@@ -1,12 +1,11 @@
 .home_page {
   display: grid;
-  grid-template-columns: 1fr 1200px 1fr;
+  grid-template-columns: 1fr 10fr 1fr;
   grid-template-areas:
     "slider slider slider"
     ". page-description ."
     ". details ."
     "map map map";
-  border-bottom: 5px #730e15 solid;
 
   .details {
     grid-area: details;

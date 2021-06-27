@@ -5,19 +5,25 @@
 
   form {
     display: inline-block;
-    padding: 25px 50px;
-    border: 1px solid #3e3e3e;
-    border-radius: 5px;
-    background-color: #eef6ff;
     text-align: center;
 
     div {
+      width: 100%;
+      box-sizing: border-box;
       text-align: justify;
       padding: 5px 25px;
+
+      @media screen and (max-width: 400px) {
+        padding: 5px;
+      }
 
       div {
         width: 300px;
         display: inline-block;
+
+        @media screen and (max-width: 990px) {
+          width: 100%;
+        }
       }
     }
 
@@ -29,10 +35,9 @@
       display: block;
       padding: 10px 15px;
       border: 1px solid #cccccc;
-      border-radius: 10px;
       font-size: 11pt;
       outline: none;
-      width: 300px;
+      width: 100%;
       box-sizing: border-box;
     }
 
@@ -41,10 +46,9 @@
       width: 250px;
       height: 40px;
       margin: 0 auto;
-      background-image: linear-gradient(#00087f, #1b407f, #00087f);
-      border: none;
-      border-radius: 7px;
-      color: #fff;
+      background-color: #f1f1f1;
+      border: 1px #333 solid !important;
+      color: #333;
       text-transform: uppercase;
       outline: none;
       cursor: pointer;
