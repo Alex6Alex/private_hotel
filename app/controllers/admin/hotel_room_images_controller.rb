@@ -3,12 +3,15 @@
 module Admin
   class HotelRoomImagesController < ApplicationController
     def index
-      render_success_result(
-        data: HotelRoom.preload(:hotel_room_images).as_json(
-          only:    %i[id name],
-          include: :hotel_room_images
-        )
-      )
+      rooms = HotelRoom.all.map do |room|
+        images = room.hotel_room_photos.map do |photo|
+          { id: photo.id, image_link: url_for(photo) }
+        end
+
+        room.as_json(only: %i[id name]).merge(hotel_room_images: images)
+      end
+
+      render_success_result(data: rooms)
     end
 
     def create
@@ -22,38 +25,24 @@ module Admin
         raise(Admin::InvalidFileExtensionError.build)
       end
 
-      file_name = FileUploader.new.upload(
-        tempfile: tmp_file.tempfile,
-        dir: '/images/hotel_room_images',
-        ext: 'jpeg'
-      )
+      room.hotel_room_photos.attach(tmp_file)
 
-      hotel_room_image = HotelRoomImage.create(
-        hotel_room_id: room.id,
-        image_link: file_name
-      )
-      check_validation_results!(hotel_room_image)
+      images = room.hotel_room_photos.map do |photo|
+        { id: photo.id, image_link: url_for(photo) }
+      end
 
       render_success_result(
-        data: room.as_json(only: %i[id name], include: :hotel_room_images),
+        data: room.as_json(only: %i[id name]).merge(hotel_room_images: images),
         status: :created
       )
     end
 
     def destroy
-      hotel_room_image = HotelRoomImage.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if hotel_room_image.nil?
+      image_attach = ActiveStorage::Attachment.find_by(id: params[:id])
+      raise(RecordNotFoundError.build) if image_attach.nil?
 
-      FileUtils.remove_file(
-        [Rails.public_path, hotel_room_image.image_link].join
-      )
-
-      room = HotelRoom.find_by(id: hotel_room_image.hotel_room_id)
-      hotel_room_image.delete
-
-      render_success_result(
-        data: room.as_json(only: %i[id name], include: :hotel_room_images)
-      )
+      image_attach.purge_later
+      render_success_result
     end
   end
 end

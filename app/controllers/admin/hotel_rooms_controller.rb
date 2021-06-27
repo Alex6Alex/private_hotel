@@ -2,9 +2,9 @@
 
 module Admin
   class HotelRoomsController < ApplicationController
-    def index
-      render_success_result(data: HotelRoom.all)
-    end
+    include Recordable
+
+    before_action :find_hotel_room, only: %i[show update destroy]
 
     def create
       hotel_room = HotelRoom.create(
@@ -21,18 +21,8 @@ module Admin
       render_success_result(data: hotel_room, status: :created)
     end
 
-    def show
-      hotel_room = HotelRoom.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if hotel_room.nil?
-
-      render_success_result(data: hotel_room)
-    end
-
     def update
-      hotel_room = HotelRoom.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if hotel_room.nil?
-
-      hotel_room.update(
+      @record.update(
         name:            params[:name],
         description:     params[:description],
         day_price:       params[:day_price],
@@ -41,17 +31,20 @@ module Admin
         room_area:       params[:room_area],
         count_of_rooms:  params[:count_of_rooms]
       )
-      check_validation_results!(hotel_room)
+      check_validation_results!(@record)
 
-      render_success_result(data: hotel_room)
+      render_success_result(data: @record)
     end
 
-    def destroy
-      hotel_room = HotelRoom.find_by(id: params[:id])
-      raise(RecordNotFoundError.build) if hotel_room.nil?
+    private
 
-      hotel_room.delete
-      render_success_result
+    def all_records
+      HotelRoom.all
+    end
+
+    def find_hotel_room
+      @record = HotelRoom.find_by(id: params[:id])
+      raise(RecordNotFoundError.build) if @record.nil?
     end
   end
 end

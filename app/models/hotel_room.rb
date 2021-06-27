@@ -20,6 +20,7 @@ class HotelRoom < ApplicationRecord
     numericality: { only_integer: true }
   )
 
-  has_many :hotel_room_images
   has_many :book_orders
+
+  has_many_attached :hotel_room_photos
 end
